@@ -1,0 +1,147 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/commerce-coinbase/refs/heads/main/json-schema/checkout.json",
+  "title": "Checkout",
+  "description": "A Coinbase Business hosted single-use payment checkout",
+  "type": "object",
+  "required": ["id", "url", "amount", "currency", "network", "address", "status", "createdAt", "updatedAt"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{24}$",
+      "description": "Unique 24-character hexadecimal checkout identifier",
+      "examples": ["68f7a946db0529ea9b6d3a12"]
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "description": "Hosted payment page URL presented to the customer",
+      "examples": ["https://payments.coinbase.com/payment-links/pl_01h8441j23abcd1234567890ef"]
+    },
+    "amount": {
+      "type": "string",
+      "pattern": "^\\d+(\\.\\d{1,2})?$",
+      "description": "Payment amount with up to 2 decimal places",
+      "examples": ["50.00", "100.50"]
+    },
+    "currency": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 10,
+      "description": "Currency code (USDC or fiat: USD, EUR, SGD, GBP)",
+      "examples": ["USDC", "USD"]
+    },
+    "network": {
+      "type": "string",
+      "description": "Blockchain network for payment settlement",
+      "examples": ["base"]
+    },
+    "address": {
+      "type": "string",
+      "description": "Blockchain address to which payment is sent",
+      "examples": ["0x742d35Cc6634C0532925a3b844Bc454e4438f44e"]
+    },
+    "tokenAddress": {
+      "type": "string",
+      "description": "ERC-20 token contract address when applicable"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["ACTIVE", "PROCESSING", "DEACTIVATED", "EXPIRED", "COMPLETED", "FAILED", "REFUNDED", "PARTIALLY_REFUNDED"],
+      "description": "Current payment lifecycle status"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 500,
+      "description": "Human-readable payment description"
+    },
+    "expiresAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Checkout expiration timestamp (RFC 3339 UTC)"
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Arbitrary key-value pairs supplied by the merchant",
+      "additionalProperties": {
+        "type": "string",
+        "maxLength": 100
+      },
+      "maxProperties": 20
+    },
+    "successRedirectUrl": {
+      "type": "string",
+      "format": "uri",
+      "maxLength": 2048,
+      "description": "HTTPS URL the customer is redirected to after successful payment"
+    },
+    "failRedirectUrl": {
+      "type": "string",
+      "format": "uri",
+      "maxLength": 2048,
+      "description": "HTTPS URL the customer is redirected to after a failed or cancelled payment"
+    },
+    "settlement": {
+      "type": "object",
+      "description": "Fee breakdown for a completed settlement",
+      "properties": {
+        "totalAmount": { "type": "string" },
+        "feeAmount": { "type": "string" },
+        "netAmount": { "type": "string" },
+        "currency": { "type": "string" }
+      }
+    },
+    "transactionHash": {
+      "type": "string",
+      "description": "Blockchain transaction hash once payment is confirmed"
+    },
+    "fiatAmount": {
+      "type": "string",
+      "description": "Original fiat-equivalent amount"
+    },
+    "fiatCurrency": {
+      "type": "string",
+      "description": "Original fiat currency code"
+    },
+    "refundedAmount": {
+      "type": "string",
+      "description": "Cumulative amount refunded"
+    },
+    "refunds": {
+      "type": "array",
+      "description": "Refund records associated with this checkout",
+      "items": {
+        "$ref": "#/$defs/Refund"
+      }
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "$defs": {
+    "Refund": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "checkoutId": { "type": "string" },
+        "amount": { "type": "string" },
+        "currency": { "type": "string" },
+        "status": {
+          "type": "string",
+          "enum": ["PENDING", "COMPLETED", "FAILED"]
+        },
+        "reason": { "type": "string", "maxLength": 500 },
+        "transactionHash": { "type": "string" },
+        "completedAt": { "type": "string", "format": "date-time" },
+        "fiatAmount": { "type": "string" },
+        "fiatCurrency": { "type": "string" },
+        "exchangeRate": { "type": "string" }
+      }
+    }
+  }
+}

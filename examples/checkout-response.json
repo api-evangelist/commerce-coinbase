@@ -1,0 +1,19 @@
+{
+  "id": "68f7a946db0529ea9b6d3a12",
+  "url": "https://payments.coinbase.com/payment-links/pl_01h8441j23abcd1234567890ef",
+  "amount": "50.00",
+  "currency": "USDC",
+  "network": "base",
+  "address": "0x742d35Cc6634C0532925a3b844Bc454e4438f44e",
+  "status": "ACTIVE",
+  "description": "Order #12345 - 2x Widget Pro",
+  "metadata": {
+    "customer_id": "cust_42",
+    "order_id": "ord_99"
+  },
+  "successRedirectUrl": "https://yourstore.com/success",
+  "failRedirectUrl": "https://yourstore.com/cancel",
+  "expiresAt": "2026-06-14T10:30:00Z",
+  "createdAt": "2026-06-13T10:30:00Z",
+  "updatedAt": "2026-06-13T10:30:00Z"
+}

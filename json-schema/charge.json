@@ -1,0 +1,154 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/commerce-coinbase/refs/heads/main/json-schema/charge.json",
+  "title": "Charge",
+  "description": "A Coinbase Commerce crypto payment charge (legacy API)",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique charge identifier"
+    },
+    "code": {
+      "type": "string",
+      "description": "Short 8-character alphanumeric charge code",
+      "pattern": "^[A-Z0-9]{8}$",
+      "examples": ["WZNDTFQK"]
+    },
+    "name": {
+      "type": "string",
+      "maxLength": 200,
+      "description": "Charge name shown to the customer"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 500,
+      "description": "Short description of what is being purchased"
+    },
+    "local_price": {
+      "$ref": "#/$defs/Money",
+      "description": "Fiat price of the charge"
+    },
+    "pricing_type": {
+      "type": "string",
+      "enum": ["fixed_price", "no_price"],
+      "description": "fixed_price charges a set amount; no_price accepts any amount"
+    },
+    "pricing": {
+      "type": "object",
+      "description": "Crypto prices in supported currencies",
+      "additionalProperties": { "$ref": "#/$defs/Money" }
+    },
+    "addresses": {
+      "type": "object",
+      "description": "Blockchain payment addresses keyed by currency ticker",
+      "additionalProperties": { "type": "string" }
+    },
+    "status": {
+      "type": "string",
+      "enum": ["NEW", "PENDING", "COMPLETED", "EXPIRED", "UNRESOLVED", "RESOLVED", "CANCELED", "CANCELATION_COMPLETE"],
+      "description": "Current charge lifecycle status"
+    },
+    "redirect_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "Post-payment success redirect URL"
+    },
+    "cancel_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "Post-cancellation redirect URL"
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Merchant-defined key-value metadata",
+      "additionalProperties": { "type": "string", "maxLength": 100 },
+      "maxProperties": 20
+    },
+    "hosted_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL to the Coinbase-hosted payment page"
+    },
+    "timeline": {
+      "type": "array",
+      "description": "Ordered list of status transition events",
+      "items": { "$ref": "#/$defs/TimelineEntry" }
+    },
+    "payments": {
+      "type": "array",
+      "description": "Payment attempts for this charge",
+      "items": { "$ref": "#/$defs/Payment" }
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Charge expiration (UTC)"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "$defs": {
+    "Money": {
+      "type": "object",
+      "required": ["amount", "currency"],
+      "properties": {
+        "amount": {
+          "type": "string",
+          "description": "Decimal amount string",
+          "examples": ["49.99"]
+        },
+        "currency": {
+          "type": "string",
+          "description": "ISO 4217 currency code or crypto ticker",
+          "examples": ["USD", "BTC", "ETH"]
+        }
+      }
+    },
+    "TimelineEntry": {
+      "type": "object",
+      "properties": {
+        "time": { "type": "string", "format": "date-time" },
+        "status": {
+          "type": "string",
+          "enum": ["NEW", "PENDING", "COMPLETED", "EXPIRED", "UNRESOLVED", "RESOLVED", "CANCELED", "CANCELATION_COMPLETE"]
+        },
+        "context": {
+          "type": "string",
+          "description": "Additional context, e.g. UNDERPAID or OVERPAID for UNRESOLVED charges"
+        }
+      }
+    },
+    "Payment": {
+      "type": "object",
+      "properties": {
+        "network": { "type": "string" },
+        "transaction_id": { "type": "string" },
+        "status": { "type": "string", "enum": ["PENDING", "CONFIRMED"] },
+        "value": {
+          "type": "object",
+          "properties": {
+            "local": { "$ref": "#/$defs/Money" },
+            "crypto": { "$ref": "#/$defs/Money" }
+          }
+        },
+        "block": {
+          "type": "object",
+          "properties": {
+            "height": { "type": "integer" },
+            "hash": { "type": "string" },
+            "confirmations_accumulated": { "type": "integer" },
+            "confirmations_required": { "type": "integer" }
+          }
+        }
+      }
+    }
+  }
+}

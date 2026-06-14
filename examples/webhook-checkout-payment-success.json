@@ -1,0 +1,25 @@
+{
+  "id": "68f7a946db0529ea9b6d3a12",
+  "url": "https://payments.coinbase.com/payment-links/pl_01h8441j23abcd1234567890ef",
+  "amount": "50.00",
+  "currency": "USDC",
+  "network": "base",
+  "address": "0x742d35Cc6634C0532925a3b844Bc454e4438f44e",
+  "status": "COMPLETED",
+  "description": "Order #12345 - 2x Widget Pro",
+  "eventType": "checkout.payment.success",
+  "metadata": {
+    "customer_id": "cust_42",
+    "order_id": "ord_99"
+  },
+  "transactionHash": "0xabc123def456abc123def456abc123def456abc123def456abc123def456abc1",
+  "settlement": {
+    "totalAmount": "50.00",
+    "feeAmount": "0.50",
+    "netAmount": "49.50",
+    "currency": "USDC"
+  },
+  "createdAt": "2026-06-13T10:30:00Z",
+  "updatedAt": "2026-06-13T10:35:42Z",
+  "expiresAt": "2026-06-14T10:30:00Z"
+}

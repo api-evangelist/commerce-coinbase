@@ -1,0 +1,176 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "coinbase": "https://commerce.coinbase.com/vocab#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "Checkout": "coinbase:Checkout",
+    "Charge": "coinbase:Charge",
+    "Refund": "coinbase:Refund",
+    "Settlement": "coinbase:Settlement",
+    "Payment": "coinbase:Payment",
+    "TimelineEntry": "coinbase:TimelineEntry",
+
+    "id": "@id",
+    "type": "@type",
+
+    "url": {
+      "@id": "schema:url",
+      "@type": "@id"
+    },
+    "amount": {
+      "@id": "schema:price",
+      "@type": "xsd:string"
+    },
+    "currency": {
+      "@id": "schema:priceCurrency",
+      "@type": "xsd:string"
+    },
+    "description": {
+      "@id": "schema:description",
+      "@type": "xsd:string"
+    },
+    "status": {
+      "@id": "coinbase:status",
+      "@type": "xsd:string"
+    },
+    "network": {
+      "@id": "coinbase:network",
+      "@type": "xsd:string"
+    },
+    "address": {
+      "@id": "coinbase:blockchainAddress",
+      "@type": "xsd:string"
+    },
+    "tokenAddress": {
+      "@id": "coinbase:tokenAddress",
+      "@type": "xsd:string"
+    },
+    "transactionHash": {
+      "@id": "coinbase:transactionHash",
+      "@type": "xsd:string"
+    },
+    "metadata": {
+      "@id": "coinbase:metadata",
+      "@container": "@index"
+    },
+    "successRedirectUrl": {
+      "@id": "coinbase:successRedirectUrl",
+      "@type": "@id"
+    },
+    "failRedirectUrl": {
+      "@id": "coinbase:failRedirectUrl",
+      "@type": "@id"
+    },
+    "expiresAt": {
+      "@id": "schema:expires",
+      "@type": "xsd:dateTime"
+    },
+    "createdAt": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:dateTime"
+    },
+    "updatedAt": {
+      "@id": "schema:dateModified",
+      "@type": "xsd:dateTime"
+    },
+    "settlement": {
+      "@id": "coinbase:settlement",
+      "@type": "coinbase:Settlement"
+    },
+    "refunds": {
+      "@id": "coinbase:refunds",
+      "@container": "@set",
+      "@type": "coinbase:Refund"
+    },
+    "refundedAmount": {
+      "@id": "coinbase:refundedAmount",
+      "@type": "xsd:string"
+    },
+    "fiatAmount": {
+      "@id": "coinbase:fiatAmount",
+      "@type": "xsd:string"
+    },
+    "fiatCurrency": {
+      "@id": "coinbase:fiatCurrency",
+      "@type": "xsd:string"
+    },
+    "totalAmount": {
+      "@id": "coinbase:totalAmount",
+      "@type": "xsd:string"
+    },
+    "feeAmount": {
+      "@id": "coinbase:feeAmount",
+      "@type": "xsd:string"
+    },
+    "netAmount": {
+      "@id": "coinbase:netAmount",
+      "@type": "xsd:string"
+    },
+    "code": {
+      "@id": "coinbase:chargeCode",
+      "@type": "xsd:string"
+    },
+    "name": {
+      "@id": "schema:name",
+      "@type": "xsd:string"
+    },
+    "pricing_type": {
+      "@id": "coinbase:pricingType",
+      "@type": "xsd:string"
+    },
+    "local_price": {
+      "@id": "coinbase:localPrice"
+    },
+    "pricing": {
+      "@id": "coinbase:cryptoPricing",
+      "@container": "@index"
+    },
+    "addresses": {
+      "@id": "coinbase:paymentAddresses",
+      "@container": "@index"
+    },
+    "hosted_url": {
+      "@id": "coinbase:hostedUrl",
+      "@type": "@id"
+    },
+    "timeline": {
+      "@id": "coinbase:timeline",
+      "@container": "@list",
+      "@type": "coinbase:TimelineEntry"
+    },
+    "payments": {
+      "@id": "coinbase:payments",
+      "@container": "@set",
+      "@type": "coinbase:Payment"
+    },
+    "expires_at": {
+      "@id": "schema:expires",
+      "@type": "xsd:dateTime"
+    },
+    "created_at": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:dateTime"
+    },
+    "updated_at": {
+      "@id": "schema:dateModified",
+      "@type": "xsd:dateTime"
+    },
+    "redirect_url": {
+      "@id": "coinbase:successRedirectUrl",
+      "@type": "@id"
+    },
+    "cancel_url": {
+      "@id": "coinbase:failRedirectUrl",
+      "@type": "@id"
+    },
+    "eventType": {
+      "@id": "coinbase:eventType",
+      "@type": "xsd:string"
+    },
+    "Merchant": "schema:Organization",
+    "PaymentService": "schema:Service",
+    "CryptoPayment": "schema:PayAction"
+  }
+}

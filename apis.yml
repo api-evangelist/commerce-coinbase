@@ -33,7 +33,7 @@ apis:
       - type: Documentation
         url: https://commerce.coinbase.com/docs/api
       - type: OpenAPI
-        url: https://raw.githubusercontent.com/api-evangelist/commerce-coinbase/refs/heads/main/openapi.yml
+        url: https://raw.githubusercontent.com/api-evangelist/commerce-coinbase/refs/heads/main/openapi/openapi-charges.yml
     contact:
       - FN: Coinbase Commerce Support
         url: https://help.coinbase.com/en/commerce
@@ -54,6 +54,8 @@ apis:
         url: https://docs.cdp.coinbase.com/coinbase-business/checkout-apis/overview
       - type: APIReference
         url: https://docs.cdp.coinbase.com/api-reference/business-api/rest-api/checkouts/list-checkouts
+      - type: OpenAPI
+        url: https://raw.githubusercontent.com/api-evangelist/commerce-coinbase/refs/heads/main/openapi/openapi-checkouts.yml
     contact:
       - FN: Coinbase Developer Platform Support
         url: https://docs.cdp.coinbase.com

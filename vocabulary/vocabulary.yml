@@ -1,0 +1,121 @@
+vocabulary:
+  - term: charge
+    definition: >
+      A payment request object in the legacy Coinbase Commerce Charges API. A
+      charge has a code, an optional fixed fiat price, and blockchain payment
+      addresses. Customers pay to the charge address and the API tracks the
+      lifecycle (NEW → PENDING → COMPLETED or EXPIRED).
+
+  - term: charge_code
+    definition: >
+      An 8-character uppercase alphanumeric string that uniquely identifies a
+      Commerce charge (e.g. WZNDTFQK). Used in hosted URLs and as a shorthand
+      reference alongside the UUID charge ID.
+
+  - term: checkout
+    definition: >
+      A single-use hosted payment page in the Coinbase Business Checkouts API.
+      Created by the merchant with a USDC amount on the Base network; customers
+      pay via the returned URL. Replaces the legacy Charges API.
+
+  - term: pricing_type
+    definition: >
+      Determines how the charge amount is set. `fixed_price` charges a specific
+      fiat amount converted to crypto. `no_price` accepts any customer-entered
+      amount (open-ended donation or pay-what-you-want).
+
+  - term: hosted_url
+    definition: >
+      A Coinbase-hosted payment page URL (e.g. https://commerce.coinbase.com/charges/WZNDTFQK)
+      where customers complete crypto payment for a legacy Commerce charge.
+
+  - term: local_price
+    definition: >
+      The fiat price of a Commerce charge expressed as amount + currency (e.g.
+      {"amount": "49.99", "currency": "USD"}). Coinbase converts this to crypto
+      at the time the customer opens the hosted page.
+
+  - term: timeline
+    definition: >
+      An ordered array of status-change entries on a Commerce charge, each with
+      a timestamp and the new status. Provides a full audit trail of the
+      charge lifecycle.
+
+  - term: status_charge
+    label: Charge Status
+    definition: >
+      The lifecycle state of a legacy Commerce charge. Values: NEW, PENDING,
+      COMPLETED, EXPIRED, UNRESOLVED, RESOLVED, CANCELED, CANCELATION_COMPLETE.
+      UNRESOLVED means payment was detected but the amount was wrong (UNDERPAID
+      or OVERPAID).
+
+  - term: status_checkout
+    label: Checkout Status
+    definition: >
+      The lifecycle state of a Coinbase Business checkout. Values: ACTIVE,
+      PROCESSING, DEACTIVATED, EXPIRED, COMPLETED, FAILED, REFUNDED,
+      PARTIALLY_REFUNDED.
+
+  - term: base_network
+    label: Base Network
+    definition: >
+      The Ethereum Layer-2 blockchain operated by Coinbase. The Coinbase Business
+      Checkouts API settles all payments in USDC on the Base network by default.
+
+  - term: settlement
+    definition: >
+      Fee breakdown object returned on completed checkouts. Contains totalAmount
+      (gross received), feeAmount (Coinbase 1% fee), and netAmount (merchant payout),
+      all in the settlement currency.
+
+  - term: idempotency_key
+    label: X-Idempotency-Key
+    definition: >
+      A UUID v4 header supplied by the merchant to safely retry Checkout API
+      POST requests without creating duplicate records. If a request with the
+      same key has already been processed, the API returns the original response.
+
+  - term: x_cc_api_key
+    label: X-CC-Api-Key
+    definition: >
+      The HTTP header used to authenticate requests to the legacy Coinbase Commerce
+      Charges API. The value is the merchant's Commerce API key.
+
+  - term: api_version_header
+    label: X-CC-Version
+    definition: >
+      Optional header specifying the Coinbase Commerce API version. The current
+      stable version is 2018-03-22.
+
+  - term: webhook_signature
+    label: X-Hook0-Signature
+    definition: >
+      HMAC-SHA256 signature header sent with Coinbase Business Checkouts webhooks.
+      Format: "t=<timestamp>,h=<headers>,v1=<signature>". Merchants should verify
+      using crypto.timingSafeEqual() and reject payloads older than 5 minutes.
+
+  - term: usdc
+    label: USDC
+    definition: >
+      USD Coin — a fiat-backed stablecoin pegged 1:1 to the US dollar, issued by
+      Circle. The Coinbase Business Checkouts API accepts and settles exclusively
+      in USDC on the Base network.
+
+  - term: refund
+    definition: >
+      A full or partial reversal of a completed checkout payment. Merchants
+      initiate refunds via POST /checkouts/{id}/refund specifying amount and
+      optional reason. Refunds are processed on-chain in USDC.
+
+  - term: deactivate
+    definition: >
+      An explicit action that cancels an ACTIVE checkout before it expires or
+      is paid. Merchants call POST /checkouts/{id}/deactivate to prevent further
+      payment attempts on the checkout.
+
+  - term: page_token
+    label: pageToken
+    definition: >
+      Opaque pagination cursor returned in list responses when additional records
+      exist. Pass the token as the `pageToken` query parameter to retrieve the
+      next page of results.

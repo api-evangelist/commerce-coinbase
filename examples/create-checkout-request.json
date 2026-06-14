@@ -1,0 +1,12 @@
+{
+  "amount": "50.00",
+  "currency": "USDC",
+  "description": "Order #12345 - 2x Widget Pro",
+  "metadata": {
+    "customer_id": "cust_42",
+    "order_id": "ord_99"
+  },
+  "successRedirectUrl": "https://yourstore.com/success",
+  "failRedirectUrl": "https://yourstore.com/cancel",
+  "expiresAt": "2026-06-14T10:30:00Z"
+}

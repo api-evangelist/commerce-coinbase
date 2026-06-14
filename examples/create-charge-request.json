@@ -1,0 +1,15 @@
+{
+  "name": "Widget Order",
+  "description": "Order for 2 Widget Pro units",
+  "local_price": {
+    "amount": "49.99",
+    "currency": "USD"
+  },
+  "pricing_type": "fixed_price",
+  "redirect_url": "https://yourstore.com/success",
+  "cancel_url": "https://yourstore.com/cancel",
+  "metadata": {
+    "customer_id": "cust_42",
+    "order_id": "ord_99"
+  }
+}
