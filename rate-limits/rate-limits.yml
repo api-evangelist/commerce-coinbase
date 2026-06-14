@@ -1,0 +1,57 @@
+rate_limits:
+  notes: >
+    Coinbase Commerce does not publish specific numeric rate limits for the
+    legacy Charges API (api.commerce.coinbase.com). The Coinbase Developer
+    Platform (CDP) v2 APIs document rate limits for shared infrastructure.
+    The Business Checkouts API (business.coinbase.com/api/v1) uses CDP
+    infrastructure with rolling 10-second window limits. HTTP 429 is returned
+    when limits are exceeded. Exponential backoff with retry is recommended.
+
+  cdp_shared_infrastructure:
+    description: Rate limits for CDP-backed APIs including the Checkouts API
+    write_apis:
+      limit: 500
+      window: "10 seconds"
+      methods: "POST, PUT, DELETE"
+    read_apis:
+      limit: 600
+      window: "10 seconds"
+      methods: "GET"
+    error_on_exceed:
+      http_status: 429
+      message: "Rate limit exceeded. Please try again later."
+      error_type: rate_limit_exceeded
+
+  legacy_charges_api:
+    base_url: "https://api.commerce.coinbase.com"
+    notes: >
+      Specific numeric limits not publicly documented. General Coinbase platform
+      guidance suggests 10,000 requests per hour for standard accounts.
+      Burst capacity of 100 requests per second has been referenced in
+      community documentation.
+    recommended_practice: exponential backoff on 429 responses
+
+  webhooks:
+    retry_policy: exponential backoff
+    max_retry_duration: "3 days"
+    max_retry_interval: "1 hour"
+    security_header: X-Cc-Webhook-Signature
+    signature_algorithm: HMAC-SHA256
+    delivery_guarantee: at-least-once
+
+  authentication:
+    charges_api:
+      header: X-CC-Api-Key
+      type: API key
+    checkouts_api:
+      header: Authorization
+      type: "Bearer JWT"
+      idempotency_header: X-Idempotency-Key
+      token_source: CDP API Key Secret (base64 encoded)
+
+  best_practices:
+    - Implement exponential backoff when receiving 429 responses
+    - Cache read responses where real-time data is not required
+    - Use idempotency keys on Checkouts API POST requests to prevent duplicate charges
+    - Distribute API requests evenly rather than sending in bursts
+    - Monitor webhook delivery and implement a reconciliation check for missed events

@@ -1,0 +1,93 @@
+name: Coinbase Commerce
+description: Coinbase Commerce is a merchant crypto payment solution enabling businesses to accept cryptocurrency payments natively. The platform provides a REST API for creating payment charges, managing hosted checkouts, accessing payment metadata, configuring webhooks, and tracking crypto payment status across charge lifecycle events. Supports Bitcoin, Ethereum, USDC, and other major cryptocurrencies with 1% per-transaction fees and no monthly or setup costs.
+image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/commerce-coinbase/refs/heads/main/apis.yml
+version: "0.19"
+created: "2026-06-13"
+modified: "2026-06-13"
+
+tags:
+  - Crypto Payments
+  - Cryptocurrency
+  - Payment Gateway
+  - Commerce
+  - Bitcoin
+  - Ethereum
+  - USDC
+  - Webhooks
+  - Charges
+  - Checkouts
+
+apis:
+  - name: Coinbase Commerce Charges API
+    description: Legacy REST API for creating and managing crypto payment charges. Merchants generate a charge object representing a payment request — customers pay to the charge address, and the API tracks status through the full lifecycle from created to confirmed or failed. Authentication uses the X-CC-Api-Key header.
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://commerce.coinbase.com/docs/api
+    baseURL: https://api.commerce.coinbase.com
+    tags:
+      - Charges
+      - Crypto Payments
+      - Payment Status
+      - Webhooks
+    properties:
+      - type: Documentation
+        url: https://commerce.coinbase.com/docs/api
+      - type: OpenAPI
+        url: https://raw.githubusercontent.com/api-evangelist/commerce-coinbase/refs/heads/main/openapi.yml
+    contact:
+      - FN: Coinbase Commerce Support
+        url: https://help.coinbase.com/en/commerce
+
+  - name: Coinbase Business Checkouts API
+    description: Current-generation REST API replacing the legacy Charges API for creating and managing single-use hosted payment checkouts. Merchants create a checkout object with a fixed USDC amount on the Base network; customers complete payment through a hosted URL. Uses JWT bearer token authentication and idempotency keys. Provides simplified status model and webhook events for payment lifecycle.
+    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://docs.cdp.coinbase.com/coinbase-business/checkout-apis/overview
+    baseURL: https://business.coinbase.com/api/v1
+    tags:
+      - Checkouts
+      - USDC
+      - Base Network
+      - Payment Links
+      - Webhooks
+    properties:
+      - type: Documentation
+        url: https://docs.cdp.coinbase.com/coinbase-business/checkout-apis/overview
+      - type: APIReference
+        url: https://docs.cdp.coinbase.com/api-reference/business-api/rest-api/checkouts/list-checkouts
+    contact:
+      - FN: Coinbase Developer Platform Support
+        url: https://docs.cdp.coinbase.com
+
+common:
+  - type: Website
+    url: https://commerce.coinbase.com
+  - type: Developer Portal
+    url: https://docs.cdp.coinbase.com/coinbase-business/checkout-apis/overview
+  - type: Documentation
+    url: https://commerce.coinbase.com/docs/api
+  - type: Blog
+    url: https://www.coinbase.com/blog
+  - type: Pricing
+    url: https://help.coinbase.com/en/commerce/getting-started/fees
+  - type: TermsOfService
+    url: https://commerce.coinbase.com/legal/user-agreement
+  - type: PrivacyPolicy
+    url: https://www.coinbase.com/legal/privacy
+  - type: StatusPage
+    url: https://status.coinbase.com
+  - type: Support
+    url: https://help.coinbase.com/en/commerce
+  - type: MigrationGuide
+    url: https://docs.cdp.coinbase.com/coinbase-business/checkout-apis/migrate-from-commerce/api-schema-mapping
+  - type: WebhooksDocumentation
+    url: https://docs.cdp.coinbase.com/commerce/docs/using-webhooks
+  - type: Plans
+    url: https://raw.githubusercontent.com/api-evangelist/commerce-coinbase/refs/heads/main/plans/plans.yml
+  - type: RateLimits
+    url: https://raw.githubusercontent.com/api-evangelist/commerce-coinbase/refs/heads/main/rate-limits/rate-limits.yml
+  - type: FinOps
+    url: https://raw.githubusercontent.com/api-evangelist/commerce-coinbase/refs/heads/main/finops/finops.yml
+
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

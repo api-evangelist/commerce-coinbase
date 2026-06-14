@@ -1,0 +1,76 @@
+finops:
+  model: transaction_fee
+  description: >
+    Coinbase Commerce operates on a pure transaction-fee model with no monthly
+    subscription, no setup fees, and no integration costs. The 1% fee applies
+    only to completed payment transactions and is automatically deducted from
+    the settled amount. Merchants are paid the net amount after the fee is
+    collected by Coinbase in the settlement currency.
+
+  fees:
+    standard_transaction:
+      rate: "1%"
+      applies_to: completed payments only
+      collected_in: settlement currency of the transaction
+      example: >
+        A $100 USDC payment results in a $1 fee collected by Coinbase and
+        $99 settled to the merchant wallet.
+
+    setup_fee:
+      rate: "$0"
+      description: No cost to create a Coinbase Commerce merchant account.
+
+    monthly_fee:
+      rate: "$0"
+      description: No recurring subscription fees.
+
+    network_fees:
+      description: >
+        Blockchain network (gas) fees are paid by the customer as part of
+        completing the on-chain payment transaction. These are not charged
+        by Coinbase Commerce and vary by network and congestion.
+
+  cost_comparison:
+    vs_traditional_processors: >
+      Standard card processors charge 2.9% + $0.30 per transaction. Coinbase
+      Commerce's 1% flat fee offers significant savings for higher-value
+      transactions, especially for merchants settling in stablecoins.
+    vs_stripe_crypto: >
+      Stripe charges 1.5% for crypto payments. Coinbase Commerce's 1% rate
+      is lower with no additional flat fee per transaction.
+
+  supported_settlement:
+    legacy_charges_api:
+      currencies:
+        - BTC
+        - ETH
+        - LTC
+        - BCH
+        - USDC
+        - DAI
+      notes: Multiple cryptocurrencies accepted; merchant receives funds in the customer's payment currency unless conversion is configured.
+    checkouts_api:
+      currencies:
+        - USDC
+      networks:
+        - Base
+      notes: Current API focuses on USDC stablecoin payments on the Base layer-2 network for predictable settlement values.
+
+  volume_discounts:
+    available: true
+    notes: High-volume merchants may negotiate custom fee structures. Contact Coinbase Commerce support for details.
+
+  free_tier:
+    available: false
+    notes: >
+      No free production tier. Sandbox/test environment is freely accessible
+      for development and integration testing with no real transactions or costs.
+
+  billing_transparency:
+    fee_visibility: fees visible in dashboard and webhook payload
+    settlement_timing: varies by blockchain confirmation times
+    reconciliation: charge timeline array (legacy API) or status field (Checkouts API) enables reconciliation
+
+  references:
+    - https://help.coinbase.com/en/commerce/getting-started/fees
+    - https://www.coinbase.com/commerce/faq

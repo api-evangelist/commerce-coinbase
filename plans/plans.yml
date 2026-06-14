@@ -1,0 +1,35 @@
+plans:
+  - name: Standard Merchant
+    description: Default Coinbase Commerce merchant plan with no monthly or setup fees. Access to the full REST API, hosted checkout pages, webhooks, and payment management dashboard. Charges 1% per completed transaction with fees collected in the settlement currency.
+    monthly_fee: "$0"
+    setup_fee: "$0"
+    transaction_fee: "1%"
+    features:
+      - Charges API (legacy)
+      - Checkouts API (current)
+      - Hosted payment pages
+      - Webhook notifications
+      - Multi-cryptocurrency support (BTC, ETH, USDC, and others)
+      - USDC on Base network (Checkouts API)
+      - Dashboard and reporting
+      - Charge lifecycle tracking
+      - Webhook retry with exponential backoff (up to 3 days)
+      - HMAC-SHA256 webhook signature verification
+      - API key authentication (Charges API)
+      - JWT bearer token authentication (Checkouts API)
+    notes: >
+      The 1% fee is deducted from the settlement amount. For example, a $100 USDC
+      payment results in a $1 fee collected by Coinbase, with $99 settled to the
+      merchant. No free tier for production; sandbox/test environment available at
+      no cost. Enterprise or high-volume rate negotiations may be available by
+      contacting Coinbase Commerce support.
+
+  - name: Enterprise
+    description: Custom arrangement for high-volume merchants. Negotiated fee structures and dedicated support available. Contact Coinbase Commerce for qualification and terms.
+    monthly_fee: negotiated
+    transaction_fee: negotiated
+    features:
+      - All Standard Merchant features
+      - Custom fee structure
+      - Dedicated account support
+    notes: Contact help.coinbase.com/en/commerce for enterprise inquiries.
