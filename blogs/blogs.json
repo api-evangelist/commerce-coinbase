@@ -2,13 +2,11 @@
   "repo": "commerce-coinbase",
   "feeds": [
     {
-      "source": "https://commerce.coinbase.com/docs/api",
-      "feed_url": "https://commerce.coinbase.com/docs/api",
-      "title": "",
+      "source": "https://www.coinbase.com/blog",
       "saved": 0,
-      "method": "none"
+      "error": "HTTP 403 Forbidden"
     }
   ],
   "post_count": 0,
-  "fetched": "2026-06-14T20:42:17Z"
+  "fetched": "2026-06-27T12:33:54Z"
 }

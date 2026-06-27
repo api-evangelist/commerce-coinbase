@@ -63,7 +63,7 @@ apis:
 common:
   - type: Website
     url: https://commerce.coinbase.com
-  - type: Developer Portal
+  - type: DeveloperPortal
     url: https://docs.cdp.coinbase.com/coinbase-business/checkout-apis/overview
   - type: Documentation
     url: https://commerce.coinbase.com/docs/api
