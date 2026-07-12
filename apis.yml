@@ -61,6 +61,12 @@ apis:
         url: https://docs.cdp.coinbase.com
 
 common:
+  - type: VulnerabilityDisclosure
+    url: security/commerce-coinbase-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/commerce-coinbase-domain-security.yml
+  - type: Authentication
+    url: authentication/commerce-coinbase-authentication.yml
   - type: Website
     url: https://commerce.coinbase.com
   - type: DeveloperPortal

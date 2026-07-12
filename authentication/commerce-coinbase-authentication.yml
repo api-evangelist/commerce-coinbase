@@ -1,0 +1,23 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/openapi-charges.yml, openapi/openapi-checkouts.yml
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - header
+schemes:
+- name: ApiKeyAuth
+  type: apiKey
+  in: header
+  parameter: X-CC-Api-Key
+  sources:
+  - openapi/openapi-charges.yml
+- name: BearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  description: JWT signed with your CDP API Key Secret. See https://docs.cdp.coinbase.com/coinbase-business/authentication-authorization/api-key-authentication
+  sources:
+  - openapi/openapi-checkouts.yml
