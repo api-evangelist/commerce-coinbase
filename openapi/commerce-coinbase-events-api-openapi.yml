@@ -1,0 +1,300 @@
+openapi: 3.1.0
+info:
+  title: Coinbase Commerce Charges Events API
+  description: 'Legacy REST API for creating and managing crypto payment charges. Merchants generate a charge object representing a payment request; customers pay to the charge address and the API tracks status through the full lifecycle from created → pending → confirmed or failed. Authentication uses the X-CC-Api-Key header and the API-Version header.
+
+    '
+  version: '2018-03-22'
+  termsOfService: https://commerce.coinbase.com/legal/user-agreement
+  contact:
+    name: Coinbase Commerce Support
+    url: https://help.coinbase.com/en/commerce
+  license:
+    name: Proprietary
+servers:
+- url: https://api.commerce.coinbase.com
+  description: Coinbase Commerce production server
+security:
+- ApiKeyAuth: []
+tags:
+- name: Events
+  description: Retrieve charge-related webhook events
+paths:
+  /events:
+    get:
+      operationId: listEvents
+      summary: List all events
+      description: Returns a paginated list of charge-related webhook events.
+      tags:
+      - Events
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 25
+      - name: starting_after
+        in: query
+        schema:
+          type: string
+      - name: ending_before
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of events
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /events/{event_id}:
+    get:
+      operationId: getEvent
+      summary: Retrieve an event
+      description: Returns the details of a specific event.
+      tags:
+      - Events
+      parameters:
+      - name: event_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The event ID
+      responses:
+        '200':
+          description: Event details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  schemas:
+    EventListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Event'
+    PricingType:
+      type: string
+      enum:
+      - fixed_price
+      - no_price
+      description: '`fixed_price` charges the customer a specific fiat amount converted to crypto. `no_price` lets the customer pay any amount.
+
+        '
+    Money:
+      type: object
+      description: A monetary amount with currency
+      required:
+      - amount
+      - currency
+      properties:
+        amount:
+          type: string
+          description: Decimal amount string (e.g. "49.99")
+          example: '49.99'
+        currency:
+          type: string
+          description: ISO 4217 currency code (fiat) or crypto ticker
+          example: USD
+    EventResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Event'
+    ChargeStatus:
+      type: string
+      description: The current lifecycle status of the charge
+      enum:
+      - NEW
+      - PENDING
+      - COMPLETED
+      - EXPIRED
+      - UNRESOLVED
+      - RESOLVED
+      - CANCELED
+      - CANCELATION_COMPLETE
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            type:
+              type: string
+              description: Error type identifier
+            message:
+              type: string
+              description: Human-readable error description
+    TimelineEntry:
+      type: object
+      properties:
+        time:
+          type: string
+          format: date-time
+        status:
+          $ref: '#/components/schemas/ChargeStatus'
+        context:
+          type: string
+          description: Additional context for UNRESOLVED statuses (e.g. UNDERPAID, OVERPAID)
+    Payment:
+      type: object
+      properties:
+        network:
+          type: string
+          description: Blockchain network (e.g. ethereum, bitcoin)
+        transaction_id:
+          type: string
+          description: Blockchain transaction hash
+        status:
+          type: string
+          enum:
+          - PENDING
+          - CONFIRMED
+        value:
+          type: object
+          properties:
+            local:
+              $ref: '#/components/schemas/Money'
+            crypto:
+              $ref: '#/components/schemas/Money'
+        block:
+          type: object
+          properties:
+            height:
+              type: integer
+            hash:
+              type: string
+            confirmations_accumulated:
+              type: integer
+            confirmations_required:
+              type: integer
+    Charge:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique charge identifier
+        code:
+          type: string
+          description: Short 8-character alphanumeric charge code
+          example: WZNDTFQK
+        name:
+          type: string
+        description:
+          type: string
+        local_price:
+          $ref: '#/components/schemas/Money'
+        pricing_type:
+          $ref: '#/components/schemas/PricingType'
+        pricing:
+          type: object
+          description: Crypto pricing in supported currencies (populated after creation)
+          additionalProperties:
+            $ref: '#/components/schemas/Money'
+        addresses:
+          type: object
+          description: Blockchain payment addresses keyed by crypto currency
+          additionalProperties:
+            type: string
+        status:
+          $ref: '#/components/schemas/ChargeStatus'
+        redirect_url:
+          type: string
+          format: uri
+        cancel_url:
+          type: string
+          format: uri
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+        hosted_url:
+          type: string
+          format: uri
+          description: URL to the hosted payment page
+        timeline:
+          type: array
+          description: Status history events for the charge
+          items:
+            $ref: '#/components/schemas/TimelineEntry'
+        payments:
+          type: array
+          description: Payment attempts associated with the charge
+          items:
+            $ref: '#/components/schemas/Payment'
+        expires_at:
+          type: string
+          format: date-time
+          description: When the charge expires (UTC, RFC 3339)
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    Event:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          type: string
+          description: Event type
+          enum:
+          - charge:created
+          - charge:pending
+          - charge:confirmed
+          - charge:failed
+          - charge:delayed
+          - charge:resolved
+        api_version:
+          type: string
+          example: '2018-03-22'
+        created_at:
+          type: string
+          format: date-time
+        data:
+          $ref: '#/components/schemas/Charge'
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Missing or invalid API key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-CC-Api-Key
