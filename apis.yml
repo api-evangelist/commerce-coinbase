@@ -1,6 +1,19 @@
 name: Coinbase Commerce
 description: Coinbase Commerce is a merchant crypto payment solution enabling businesses to accept cryptocurrency payments natively. The platform provides a REST API for creating payment charges, managing hosted checkouts, accessing payment metadata, configuring webhooks, and tracking crypto payment status across charge lifecycle events. Supports Bitcoin, Ethereum, USDC, and other major cryptocurrencies with 1% per-transaction fees and no monthly or setup costs.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/commerce-coinbase.png
 url: https://raw.githubusercontent.com/api-evangelist/commerce-coinbase/refs/heads/main/apis.yml
 version: "0.19"
 created: "2026-06-13"
@@ -19,47 +32,57 @@ tags:
   - Checkouts
 
 apis:
-  - name: Coinbase Commerce Charges API
-    description: Legacy REST API for creating and managing crypto payment charges. Merchants generate a charge object representing a payment request — customers pay to the charge address, and the API tracks status through the full lifecycle from created to confirmed or failed. Authentication uses the X-CC-Api-Key header.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://commerce.coinbase.com/docs/api
-    baseURL: https://api.commerce.coinbase.com
-    tags:
-      - Charges
-      - Crypto Payments
-      - Payment Status
-      - Webhooks
-    properties:
-      - type: Documentation
-        url: https://commerce.coinbase.com/docs/api
-      - type: OpenAPI
-        url: https://raw.githubusercontent.com/api-evangelist/commerce-coinbase/refs/heads/main/openapi/openapi-charges.yml
-    contact:
-      - FN: Coinbase Commerce Support
-        url: https://help.coinbase.com/en/commerce
-
-  - name: Coinbase Business Checkouts API
-    description: Current-generation REST API replacing the legacy Charges API for creating and managing single-use hosted payment checkouts. Merchants create a checkout object with a fixed USDC amount on the Base network; customers complete payment through a hosted URL. Uses JWT bearer token authentication and idempotency keys. Provides simplified status model and webhook events for payment lifecycle.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://docs.cdp.coinbase.com/coinbase-business/checkout-apis/overview
-    baseURL: https://business.coinbase.com/api/v1
-    tags:
-      - Checkouts
-      - USDC
-      - Base Network
-      - Payment Links
-      - Webhooks
-    properties:
-      - type: Documentation
-        url: https://docs.cdp.coinbase.com/coinbase-business/checkout-apis/overview
-      - type: APIReference
-        url: https://docs.cdp.coinbase.com/api-reference/business-api/rest-api/checkouts/list-checkouts
-      - type: OpenAPI
-        url: https://raw.githubusercontent.com/api-evangelist/commerce-coinbase/refs/heads/main/openapi/openapi-checkouts.yml
-    contact:
-      - FN: Coinbase Developer Platform Support
-        url: https://docs.cdp.coinbase.com
-
+- aid: commerce-coinbase:commerce-coinbase-charges-api
+  name: Coinbase Commerce Charges API
+  description: Create and retrieve crypto payment charges
+  humanURL: https://commerce.coinbase.com/docs/api
+  baseURL: https://api.commerce.coinbase.com
+  tags:
+  - Charges
+  properties:
+  - type: OpenAPI
+    url: openapi/commerce-coinbase-charges-api-openapi.yml
+  - type: Documentation
+    url: https://commerce.coinbase.com/docs/api
+  - type: Documentation
+    url: https://docs.cdp.coinbase.com/coinbase-business/checkout-apis/overview
+  - type: APIReference
+    url: >-
+      https://docs.cdp.coinbase.com/api-reference/business-api/rest-api/checkouts/list-checkouts
+- aid: commerce-coinbase:commerce-coinbase-checkouts-api
+  name: Coinbase Commerce Checkouts API
+  description: Create and manage single-use hosted payment checkouts
+  humanURL: https://commerce.coinbase.com/docs/api
+  baseURL: https://api.commerce.coinbase.com
+  tags:
+  - Checkouts
+  properties:
+  - type: OpenAPI
+    url: openapi/commerce-coinbase-checkouts-api-openapi.yml
+  - type: Documentation
+    url: https://commerce.coinbase.com/docs/api
+  - type: Documentation
+    url: https://docs.cdp.coinbase.com/coinbase-business/checkout-apis/overview
+  - type: APIReference
+    url: >-
+      https://docs.cdp.coinbase.com/api-reference/business-api/rest-api/checkouts/list-checkouts
+- aid: commerce-coinbase:commerce-coinbase-events-api
+  name: Coinbase Commerce Events API
+  description: Retrieve charge-related webhook events
+  humanURL: https://commerce.coinbase.com/docs/api
+  baseURL: https://api.commerce.coinbase.com
+  tags:
+  - Events
+  properties:
+  - type: OpenAPI
+    url: openapi/commerce-coinbase-events-api-openapi.yml
+  - type: Documentation
+    url: https://commerce.coinbase.com/docs/api
+  - type: Documentation
+    url: https://docs.cdp.coinbase.com/coinbase-business/checkout-apis/overview
+  - type: APIReference
+    url: >-
+      https://docs.cdp.coinbase.com/api-reference/business-api/rest-api/checkouts/list-checkouts
 common:
   - type: AgenticAccess
     url: agentic-access/commerce-coinbase-agentic-access.yml
