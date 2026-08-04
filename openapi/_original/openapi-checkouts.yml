@@ -1,0 +1,742 @@
+openapi: 3.1.0
+info:
+  title: Coinbase Business Checkouts API
+  description: >
+    Current-generation REST API replacing the legacy Charges API for creating
+    and managing single-use hosted payment checkouts. Merchants create a checkout
+    object with a fixed USDC amount on the Base network; customers complete
+    payment through a hosted URL. Uses JWT bearer token authentication and
+    idempotency keys. Provides simplified status model and webhook events for
+    the payment lifecycle.
+  version: "1"
+  termsOfService: https://commerce.coinbase.com/legal/user-agreement
+  contact:
+    name: Coinbase Developer Platform Support
+    url: https://docs.cdp.coinbase.com
+  license:
+    name: Proprietary
+
+servers:
+  - url: https://business.coinbase.com/api/v1
+    description: Coinbase Business production server
+
+security:
+  - BearerAuth: []
+
+tags:
+  - name: Checkouts
+    description: Create and manage single-use hosted payment checkouts
+  - name: Webhooks
+    description: Checkout lifecycle event notifications
+
+paths:
+  /checkouts:
+    post:
+      operationId: createCheckout
+      summary: Create a checkout
+      description: >
+        Creates a new single-use hosted payment checkout. Returns a unique
+        hosted URL that customers use to complete payment in USDC on the Base
+        network. Supports idempotency via X-Idempotency-Key header.
+      tags:
+        - Checkouts
+      parameters:
+        - name: X-Idempotency-Key
+          in: header
+          description: UUID v4 idempotency key for safe retries
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateCheckoutRequest"
+            example:
+              amount: "50.00"
+              currency: "USDC"
+              description: "Order #12345"
+              metadata:
+                customer_id: "cust_42"
+                order_id: "ord_99"
+              successRedirectUrl: "https://yourstore.com/success"
+              failRedirectUrl: "https://yourstore.com/cancel"
+      responses:
+        "201":
+          description: Checkout created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CheckoutResponse"
+              example:
+                id: "68f7a946db0529ea9b6d3a12"
+                url: "https://payments.coinbase.com/payment-links/pl_01h8441j23abcd1234567890ef"
+                amount: "50.00"
+                currency: "USDC"
+                network: "base"
+                address: "0x742d35Cc6634C0532925a3b844Bc454e4438f44e"
+                status: "ACTIVE"
+                createdAt: "2024-03-20T10:30:00Z"
+                updatedAt: "2024-03-20T10:30:00Z"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "429":
+          $ref: "#/components/responses/RateLimitExceeded"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+
+    get:
+      operationId: listCheckouts
+      summary: List checkouts
+      description: Retrieves a paginated list of checkout records with optional filtering.
+      tags:
+        - Checkouts
+      parameters:
+        - name: pageSize
+          in: query
+          description: Number of items per page (1–100, default 20)
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+        - name: pageToken
+          in: query
+          description: Pagination token from a previous response
+          schema:
+            type: string
+        - name: status
+          in: query
+          description: Filter by one or more payment statuses
+          explode: true
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/CheckoutStatus"
+        - name: startTime
+          in: query
+          description: Return checkouts created at or after this RFC 3339 timestamp
+          schema:
+            type: string
+            format: date-time
+        - name: endTime
+          in: query
+          description: Return checkouts created at or before this RFC 3339 timestamp
+          schema:
+            type: string
+            format: date-time
+        - name: descriptionQuery
+          in: query
+          description: Case-insensitive substring search on the description (max 500 chars)
+          schema:
+            type: string
+            maxLength: 500
+      responses:
+        "200":
+          description: Paginated list of checkouts
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CheckoutListResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "429":
+          $ref: "#/components/responses/RateLimitExceeded"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+
+  /checkouts/{id}:
+    get:
+      operationId: getCheckout
+      summary: Get a checkout
+      description: Retrieves the details of a specific checkout by its 24-character hex ID.
+      tags:
+        - Checkouts
+      parameters:
+        - $ref: "#/components/parameters/CheckoutId"
+      responses:
+        "200":
+          description: Checkout details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CheckoutResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "429":
+          $ref: "#/components/responses/RateLimitExceeded"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+
+  /checkouts/{id}/deactivate:
+    post:
+      operationId: deactivateCheckout
+      summary: Deactivate a checkout
+      description: >
+        Deactivates an ACTIVE checkout, preventing further payment. No request
+        body is required.
+      tags:
+        - Checkouts
+      parameters:
+        - $ref: "#/components/parameters/CheckoutId"
+      responses:
+        "200":
+          description: Checkout deactivated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CheckoutResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "429":
+          $ref: "#/components/responses/RateLimitExceeded"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+
+  /checkouts/{id}/refund:
+    post:
+      operationId: refundCheckout
+      summary: Refund a checkout
+      description: >
+        Initiates a full or partial refund for a COMPLETED or PARTIALLY_REFUNDED
+        checkout. Refunds are settled in USDC or the checkout's original fiat currency.
+      tags:
+        - Checkouts
+      parameters:
+        - $ref: "#/components/parameters/CheckoutId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RefundCheckoutRequest"
+            example:
+              amount: "25.00"
+              currency: "USDC"
+              reason: "Customer requested refund"
+      responses:
+        "200":
+          description: Refund initiated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RefundCheckoutResult"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "429":
+          $ref: "#/components/responses/RateLimitExceeded"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: >
+        JWT signed with your CDP API Key Secret. See
+        https://docs.cdp.coinbase.com/coinbase-business/authentication-authorization/api-key-authentication
+
+  parameters:
+    CheckoutId:
+      name: id
+      in: path
+      required: true
+      description: 24-character hexadecimal checkout identifier
+      schema:
+        type: string
+        pattern: "^[0-9a-f]{24}$"
+        example: "68f7a946db0529ea9b6d3a12"
+
+  responses:
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+    Unauthorized:
+      description: Not properly authenticated
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+    NotFound:
+      description: Requested resource not found
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+    RateLimitExceeded:
+      description: Rate limit exceeded
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+
+  schemas:
+    CheckoutStatus:
+      type: string
+      description: Payment lifecycle status of a checkout
+      enum:
+        - ACTIVE
+        - PROCESSING
+        - DEACTIVATED
+        - EXPIRED
+        - COMPLETED
+        - FAILED
+        - REFUNDED
+        - PARTIALLY_REFUNDED
+
+    Settlement:
+      type: object
+      description: Fee breakdown for a completed payment settlement
+      properties:
+        totalAmount:
+          type: string
+          description: Gross received amount
+          example: "50.00"
+        feeAmount:
+          type: string
+          description: Coinbase transaction fee
+          example: "0.50"
+        netAmount:
+          type: string
+          description: Net amount after fees
+          example: "49.50"
+        currency:
+          type: string
+          description: Settlement currency code
+          example: "USDC"
+
+    Refund:
+      type: object
+      description: An individual refund record associated with a checkout
+      properties:
+        id:
+          type: string
+          description: Unique refund identifier
+        checkoutId:
+          type: string
+          description: Parent checkout ID
+        amount:
+          type: string
+          description: Refunded amount
+          example: "25.00"
+        currency:
+          type: string
+          description: Refund currency
+          example: "USDC"
+        status:
+          type: string
+          description: Refund processing status
+          enum:
+            - PENDING
+            - COMPLETED
+            - FAILED
+        reason:
+          type: string
+          description: Optional merchant-supplied refund reason
+          maxLength: 500
+        transactionHash:
+          type: string
+          description: Blockchain transaction hash when the refund is completed
+        completedAt:
+          type: string
+          format: date-time
+        fiatAmount:
+          type: string
+          description: Fiat equivalent of the refund amount
+        fiatCurrency:
+          type: string
+          description: Fiat currency code (e.g. USD)
+        exchangeRate:
+          type: string
+          description: Exchange rate applied at time of refund
+
+    CheckoutObject:
+      type: object
+      description: A hosted single-use payment checkout
+      required:
+        - id
+        - url
+        - amount
+        - currency
+        - network
+        - address
+        - status
+        - createdAt
+        - updatedAt
+      properties:
+        id:
+          type: string
+          pattern: "^[0-9a-f]{24}$"
+          description: Unique 24-character hex identifier
+          example: "68f7a946db0529ea9b6d3a12"
+        url:
+          type: string
+          format: uri
+          description: Hosted payment page URL shown to the customer
+          example: "https://payments.coinbase.com/payment-links/pl_01h8441j23abcd1234567890ef"
+        amount:
+          type: string
+          pattern: '^\d+(\.\d{1,2})?$'
+          description: Payment amount (max 2 decimal places)
+          example: "50.00"
+        currency:
+          type: string
+          description: Currency code (USDC or fiat)
+          example: "USDC"
+        network:
+          type: string
+          description: Blockchain network for payment settlement
+          example: "base"
+        address:
+          type: string
+          description: Blockchain address to which payment is sent
+          example: "0x742d35Cc6634C0532925a3b844Bc454e4438f44e"
+        tokenAddress:
+          type: string
+          description: ERC-20 token contract address (when applicable)
+        status:
+          $ref: "#/components/schemas/CheckoutStatus"
+        description:
+          type: string
+          description: Human-readable payment description
+          maxLength: 500
+        expiresAt:
+          type: string
+          format: date-time
+          description: When the checkout expires (RFC 3339 UTC). Defaults to 24 hours after creation.
+        metadata:
+          type: object
+          description: Arbitrary key-value pairs (max 20 keys, 100 chars per value)
+          additionalProperties:
+            type: string
+            maxLength: 100
+          maxProperties: 20
+        successRedirectUrl:
+          type: string
+          format: uri
+          description: HTTPS redirect URL after successful payment (max 2048 chars)
+          maxLength: 2048
+        failRedirectUrl:
+          type: string
+          format: uri
+          description: HTTPS redirect URL after failed or cancelled payment (max 2048 chars)
+          maxLength: 2048
+        settlement:
+          $ref: "#/components/schemas/Settlement"
+        transactionHash:
+          type: string
+          description: Blockchain transaction hash for the completed payment
+        fiatAmount:
+          type: string
+          description: Original fiat equivalent of the checkout amount
+        fiatCurrency:
+          type: string
+          description: Original fiat currency code
+        refundedAmount:
+          type: string
+          description: Total amount refunded so far
+        refunds:
+          type: array
+          description: Refund records associated with this checkout
+          items:
+            $ref: "#/components/schemas/Refund"
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    CheckoutResponse:
+      type: object
+      description: Single checkout response wrapper
+      allOf:
+        - $ref: "#/components/schemas/CheckoutObject"
+
+    CheckoutListResponse:
+      type: object
+      description: Paginated list of checkouts
+      properties:
+        checkouts:
+          type: array
+          items:
+            $ref: "#/components/schemas/CheckoutObject"
+        nextPageToken:
+          type: string
+          description: Pagination token; present only when more records exist
+
+    CreateCheckoutRequest:
+      type: object
+      required:
+        - amount
+        - currency
+      properties:
+        amount:
+          type: string
+          pattern: '^\d+(\.\d{1,2})?$'
+          description: Payment amount between 0.01 and 100,000,000 (max 2 decimal places)
+          example: "50.00"
+        currency:
+          type: string
+          minLength: 1
+          maxLength: 10
+          description: Currency code (USDC or fiat such as USD, EUR, SGD, GBP)
+          example: "USDC"
+        description:
+          type: string
+          description: Human-readable payment description
+          maxLength: 500
+        metadata:
+          type: object
+          description: Arbitrary key-value metadata (max 20 keys, 100 chars per value)
+          additionalProperties:
+            type: string
+            maxLength: 100
+          maxProperties: 20
+        successRedirectUrl:
+          type: string
+          format: uri
+          description: HTTPS URL for post-payment success redirect (max 2048 chars)
+          maxLength: 2048
+        failRedirectUrl:
+          type: string
+          format: uri
+          description: HTTPS URL for post-payment failure/cancel redirect (max 2048 chars)
+          maxLength: 2048
+        expiresAt:
+          type: string
+          format: date-time
+          description: Future RFC 3339 timestamp; defaults to 24 hours after creation
+
+    RefundCheckoutRequest:
+      type: object
+      required:
+        - amount
+      properties:
+        amount:
+          type: string
+          pattern: '^\d+(\.\d{1,2})?$'
+          description: Refund amount; must be > 0 and not exceed remaining refundable balance
+          example: "25.00"
+        currency:
+          type: string
+          description: Refund currency; defaults to checkout's original currency
+          example: "USDC"
+        reason:
+          type: string
+          description: Optional reason for the refund
+          maxLength: 500
+          example: "Customer requested refund"
+
+    RefundCheckoutResult:
+      type: object
+      description: Result of a refund request
+      properties:
+        checkout:
+          $ref: "#/components/schemas/CheckoutObject"
+        refund:
+          $ref: "#/components/schemas/Refund"
+
+    CheckoutWebhookPayload:
+      type: object
+      description: Webhook event payload for checkout lifecycle events
+      properties:
+        id:
+          type: string
+          description: Checkout unique identifier
+        url:
+          type: string
+          format: uri
+          description: Hosted payment page URL
+        amount:
+          type: string
+          description: Checkout payment amount
+        currency:
+          type: string
+          description: Currency code
+        network:
+          type: string
+          description: Blockchain network
+        address:
+          type: string
+          description: Blockchain payment address
+        status:
+          $ref: "#/components/schemas/CheckoutStatus"
+        description:
+          type: string
+          description: Payment description
+        eventType:
+          type: string
+          description: The event type that triggered the webhook
+          enum:
+            - checkout.payment.success
+            - checkout.payment.failed
+            - checkout.payment.expired
+            - checkout.refund.success
+            - checkout.refund.failed
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+        successRedirectUrl:
+          type: string
+          format: uri
+        failRedirectUrl:
+          type: string
+          format: uri
+        transactionHash:
+          type: string
+          description: Blockchain transaction hash (present for payment.success and refund.success)
+        settlement:
+          $ref: "#/components/schemas/Settlement"
+        refundedAmount:
+          type: string
+          description: Total refunded amount
+        refunds:
+          type: array
+          items:
+            $ref: "#/components/schemas/Refund"
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        expiresAt:
+          type: string
+          format: date-time
+
+    ErrorResponse:
+      type: object
+      properties:
+        errorType:
+          type: string
+          description: Machine-readable error type
+        errorMessage:
+          type: string
+          description: Human-readable error description
+
+webhooks:
+  checkoutPaymentSuccess:
+    post:
+      summary: checkout.payment.success
+      description: Emitted when a checkout payment is successfully completed.
+      tags:
+        - Webhooks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CheckoutWebhookPayload"
+      responses:
+        "200":
+          description: Webhook received successfully
+
+  checkoutPaymentFailed:
+    post:
+      summary: checkout.payment.failed
+      description: Emitted when a checkout payment fails.
+      tags:
+        - Webhooks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CheckoutWebhookPayload"
+      responses:
+        "200":
+          description: Webhook received successfully
+
+  checkoutPaymentExpired:
+    post:
+      summary: checkout.payment.expired
+      description: Emitted when a checkout expires without a completed payment.
+      tags:
+        - Webhooks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CheckoutWebhookPayload"
+      responses:
+        "200":
+          description: Webhook received successfully
+
+  checkoutRefundSuccess:
+    post:
+      summary: checkout.refund.success
+      description: Emitted when a refund is completed successfully.
+      tags:
+        - Webhooks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CheckoutWebhookPayload"
+      responses:
+        "200":
+          description: Webhook received successfully
+
+  checkoutRefundFailed:
+    post:
+      summary: checkout.refund.failed
+      description: Emitted when a refund fails.
+      tags:
+        - Webhooks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CheckoutWebhookPayload"
+      responses:
+        "200":
+          description: Webhook received successfully

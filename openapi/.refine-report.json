@@ -1,0 +1,18 @@
+{
+  "provider": "commerce-coinbase",
+  "sources": [
+    "commerce-coinbase-charges-api-openapi.yml",
+    "commerce-coinbase-checkouts-api-openapi.yml",
+    "commerce-coinbase-events-api-openapi.yml"
+  ],
+  "outputs": [
+    "commerce-coinbase-charges-api-openapi.yml",
+    "commerce-coinbase-checkouts-api-openapi.yml",
+    "commerce-coinbase-events-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
