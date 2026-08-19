@@ -1,0 +1,157 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Coinbase Commerce Charges Checkouts API",
+    "version": "2018-03-22"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-CC-Api-Key",
+      "value": "{{X-CC-Api-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Checkouts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List checkouts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.commerce.coinbase.com/checkouts",
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page (1–100, default 20)"
+              },
+              {
+                "name": "pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Pagination token from a previous response"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by one or more payment statuses"
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "Return checkouts created at or after this RFC 3339 timestamp"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "Return checkouts created at or before this RFC 3339 timestamp"
+              },
+              {
+                "name": "descriptionQuery",
+                "value": "",
+                "type": "query",
+                "description": "Case-insensitive substring search on the description (max 500 chars)"
+              }
+            ]
+          },
+          "docs": "Retrieves a paginated list of checkout records with optional filtering."
+        },
+        {
+          "info": {
+            "name": "Create a checkout",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.commerce.coinbase.com/checkouts",
+            "headers": [
+              {
+                "name": "X-Idempotency-Key",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new single-use hosted payment checkout. Returns a unique hosted URL that customers use to complete payment in USDC on the Base network. Supports idempotency via X-Idempotency-Key header.\n"
+        },
+        {
+          "info": {
+            "name": "Get a checkout",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.commerce.coinbase.com/checkouts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "24-character hexadecimal checkout identifier"
+              }
+            ]
+          },
+          "docs": "Retrieves the details of a specific checkout by its 24-character hex ID."
+        },
+        {
+          "info": {
+            "name": "Deactivate a checkout",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.commerce.coinbase.com/checkouts/:id/deactivate",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "24-character hexadecimal checkout identifier"
+              }
+            ]
+          },
+          "docs": "Deactivates an ACTIVE checkout, preventing further payment. No request body is required.\n"
+        },
+        {
+          "info": {
+            "name": "Refund a checkout",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.commerce.coinbase.com/checkouts/:id/refund",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "24-character hexadecimal checkout identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiates a full or partial refund for a COMPLETED or PARTIALLY_REFUNDED checkout. Refunds are settled in USDC or the checkout's original fiat currency.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,129 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Coinbase Commerce Charges API",
+    "version": "2018-03-22"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-CC-Api-Key",
+      "value": "{{X-CC-Api-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Charges",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all charges",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.commerce.coinbase.com/charges",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page (1–100, default 25)"
+              },
+              {
+                "name": "starting_after",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for forward pagination (charge ID)"
+              },
+              {
+                "name": "ending_before",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for backward pagination (charge ID)"
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of all charges for the merchant account."
+        },
+        {
+          "info": {
+            "name": "Create a charge",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.commerce.coinbase.com/charges",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new crypto payment charge object. Returns a hosted payment URL and a charge code that the customer uses to complete payment.\n"
+        },
+        {
+          "info": {
+            "name": "Retrieve a charge",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.commerce.coinbase.com/charges/:charge_code_or_id",
+            "params": [
+              {
+                "name": "charge_code_or_id",
+                "value": "",
+                "type": "path",
+                "description": "The charge ID (UUID) or charge code (8-character alphanumeric)"
+              }
+            ]
+          },
+          "docs": "Returns the details of a specific charge by its ID or code."
+        },
+        {
+          "info": {
+            "name": "Cancel a charge",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.commerce.coinbase.com/charges/:charge_code_or_id/cancel",
+            "params": [
+              {
+                "name": "charge_code_or_id",
+                "value": "",
+                "type": "path",
+                "description": "The charge ID (UUID) or charge code (8-character alphanumeric)"
+              }
+            ]
+          },
+          "docs": "Cancels a charge that has not yet been confirmed. Only NEW charges can be cancelled; charges in PENDING or later states cannot be cancelled.\n"
+        },
+        {
+          "info": {
+            "name": "Resolve a charge",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.commerce.coinbase.com/charges/:charge_code_or_id/resolve",
+            "params": [
+              {
+                "name": "charge_code_or_id",
+                "value": "",
+                "type": "path",
+                "description": "The charge ID (UUID) or charge code (8-character alphanumeric)"
+              }
+            ]
+          },
+          "docs": "Resolves a charge that has been overpaid or underpaid, marking it as resolved. Only applicable to UNRESOLVED charges.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,1502 @@
+{
+  "item": [
+    {
+      "id": "ae529457-0b7e-43f3-a298-d34db1bd7610",
+      "name": "Charges",
+      "description": {
+        "content": "Create and retrieve crypto payment charges",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c9c8a003-3b95-4f0a-855b-30ffdd2c8581",
+          "name": "Create a charge",
+          "request": {
+            "name": "Create a charge",
+            "description": {
+              "content": "Creates a new crypto payment charge object. Returns a hosted payment URL and a charge code that the customer uses to complete payment.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "charges"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"pricing_type\": \"<string>\",\n  \"local_price\": {\n    \"amount\": \"<string>\",\n    \"currency\": \"<string>\"\n  },\n  \"redirect_url\": \"<uri>\",\n  \"cancel_url\": \"<uri>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7ac464fb-d2d2-46bd-b0ac-aab72fea3aae",
+              "name": "Charge created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "charges"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Widget Order\",\n  \"description\": \"Order for 2 widgets\",\n  \"local_price\": {\n    \"amount\": \"49.99\",\n    \"currency\": \"USD\"\n  },\n  \"pricing_type\": \"fixed_price\",\n  \"redirect_url\": \"https://yourstore.com/success\",\n  \"cancel_url\": \"https://yourstore.com/cancel\",\n  \"metadata\": {\n    \"customer_id\": \"cust_42\",\n    \"order_id\": \"ord_99\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"721504ca-3aac-9b82-7221-20e6e321b9e2\",\n    \"code\": \"WZNDTFQK\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"local_price\": {\n      \"amount\": \"49.99\",\n      \"currency\": \"USD\"\n    },\n    \"pricing_type\": \"fixed_price\",\n    \"pricing\": {\n      \"key_0\": {\n        \"amount\": \"49.99\",\n        \"currency\": \"USD\"\n      }\n    },\n    \"addresses\": {\n      \"key_0\": \"string\"\n    },\n    \"status\": \"CANCELATION_COMPLETE\",\n    \"redirect_url\": \"https://Jv.sstkD.bQwYi+HgzEdcMNyEUEL4A4,tPVFekLI,qDXYQ955Inh3xIcTRJbrWPIHiTeugpPqcT\",\n    \"cancel_url\": \"http://zRBBCsHm.asgaObFVfZxIUpeo6CC\",\n    \"metadata\": {\n      \"key_0\": \"string\"\n    },\n    \"hosted_url\": \"https://vpkjH.qekqWCdR.Xv5EAFqMe\",\n    \"timeline\": [\n      {\n        \"time\": \"2004-11-20T18:51:37.976Z\",\n        \"status\": \"COMPLETED\",\n        \"context\": \"string\"\n      },\n      {\n        \"time\": \"1990-03-23T01:42:25.579Z\",\n        \"status\": \"RESOLVED\",\n        \"context\": \"string\"\n      }\n    ],\n    \"payments\": [\n      {\n        \"network\": \"string\",\n        \"transaction_id\": \"string\",\n        \"status\": \"PENDING\",\n        \"value\": {\n          \"local\": {\n            \"amount\": \"49.99\",\n            \"currency\": \"USD\"\n          },\n          \"crypto\": {\n            \"amount\": \"49.99\",\n            \"currency\": \"USD\"\n          }\n        },\n        \"block\": {\n          \"height\": 611,\n          \"hash\": \"string\",\n          \"confirmations_accumulated\": 3408,\n          \"confirmations_required\": 8803\n        }\n      },\n      {\n        \"network\": \"string\",\n        \"transaction_id\": \"string\",\n        \"status\": \"CONFIRMED\",\n        \"value\": {\n          \"local\": {\n            \"amount\": \"49.99\",\n            \"currency\": \"USD\"\n          },\n          \"crypto\": {\n            \"amount\": \"49.99\",\n            \"currency\": \"USD\"\n          }\n        },\n        \"block\": {\n          \"height\": 3016,\n          \"hash\": \"string\",\n          \"confirmations_accumulated\": 4701,\n          \"confirmations_required\": 4470\n        }\n      }\n    ],\n    \"expires_at\": \"2022-11-02T19:22:37.210Z\",\n    \"created_at\": \"2020-02-09T11:25:52.739Z\",\n    \"updated_at\": \"1994-11-17T22:59:17.439Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "039dba8b-b012-4fe2-9b97-bec4bbec3d19",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "charges"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Widget Order\",\n  \"description\": \"Order for 2 widgets\",\n  \"local_price\": {\n    \"amount\": \"49.99\",\n    \"currency\": \"USD\"\n  },\n  \"pricing_type\": \"fixed_price\",\n  \"redirect_url\": \"https://yourstore.com/success\",\n  \"cancel_url\": \"https://yourstore.com/cancel\",\n  \"metadata\": {\n    \"customer_id\": \"cust_42\",\n    \"order_id\": \"ord_99\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0bb52d8b-a800-4f14-8240-8850b6df26f4",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "charges"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Widget Order\",\n  \"description\": \"Order for 2 widgets\",\n  \"local_price\": {\n    \"amount\": \"49.99\",\n    \"currency\": \"USD\"\n  },\n  \"pricing_type\": \"fixed_price\",\n  \"redirect_url\": \"https://yourstore.com/success\",\n  \"cancel_url\": \"https://yourstore.com/cancel\",\n  \"metadata\": {\n    \"customer_id\": \"cust_42\",\n    \"order_id\": \"ord_99\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0a4520e5-afda-4ed9-ada7-5175122cf373",
+              "name": "Rate limit exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "charges"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Widget Order\",\n  \"description\": \"Order for 2 widgets\",\n  \"local_price\": {\n    \"amount\": \"49.99\",\n    \"currency\": \"USD\"\n  },\n  \"pricing_type\": \"fixed_price\",\n  \"redirect_url\": \"https://yourstore.com/success\",\n  \"cancel_url\": \"https://yourstore.com/cancel\",\n  \"metadata\": {\n    \"customer_id\": \"cust_42\",\n    \"order_id\": \"ord_99\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "82aff2a2-ce7e-462a-a19f-00a0428c8e1f",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "charges"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Widget Order\",\n  \"description\": \"Order for 2 widgets\",\n  \"local_price\": {\n    \"amount\": \"49.99\",\n    \"currency\": \"USD\"\n  },\n  \"pricing_type\": \"fixed_price\",\n  \"redirect_url\": \"https://yourstore.com/success\",\n  \"cancel_url\": \"https://yourstore.com/cancel\",\n  \"metadata\": {\n    \"customer_id\": \"cust_42\",\n    \"order_id\": \"ord_99\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "584024ce-0c3f-460a-aacc-26009db02702",
+          "name": "List all charges",
+          "request": {
+            "name": "List all charges",
+            "description": {
+              "content": "Returns a paginated list of all charges for the merchant account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "charges"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "Number of results per page (1–100, default 25)"
+                },
+                {
+                  "disabled": false,
+                  "key": "starting_after",
+                  "value": "<string>",
+                  "description": "Cursor for forward pagination (charge ID)"
+                },
+                {
+                  "disabled": false,
+                  "key": "ending_before",
+                  "value": "<string>",
+                  "description": "Cursor for backward pagination (charge ID)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6611124c-5dc5-43bc-a23c-17cdfbcaf3a5",
+              "name": "List of charges",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "charges"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "starting_after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ending_before",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"c31c8f15-a41d-ed43-a4bc-fbf0b721e372\",\n      \"code\": \"WZNDTFQK\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"local_price\": {\n        \"amount\": \"49.99\",\n        \"currency\": \"USD\"\n      },\n      \"pricing_type\": \"no_price\",\n      \"pricing\": {\n        \"key_0\": {\n          \"amount\": \"49.99\",\n          \"currency\": \"USD\"\n        }\n      },\n      \"addresses\": {\n        \"key_0\": \"string\"\n      },\n      \"status\": \"CANCELED\",\n      \"redirect_url\": \"http://zJrGALe.pqJU3c\",\n      \"cancel_url\": \"https://aEEwxnCzUjglxuTXtlX.fniS0LJKW9dy-Hxi5kuY8rhHbYmpNGwiyJmgLXyljhQobh5,u\",\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      },\n      \"hosted_url\": \"https://lGxqwvcFLCnfLLUzCIZEbPOnle.svKE,7hAObRUZZPEcFhj9Qe.oOjmIvwSuca89\",\n      \"timeline\": [\n        {\n          \"time\": \"2012-06-23T18:00:36.878Z\",\n          \"status\": \"CANCELED\",\n          \"context\": \"string\"\n        },\n        {\n          \"time\": \"1968-03-23T21:07:25.551Z\",\n          \"status\": \"EXPIRED\",\n          \"context\": \"string\"\n        }\n      ],\n      \"payments\": [\n        {\n          \"network\": \"string\",\n          \"transaction_id\": \"string\",\n          \"status\": \"CONFIRMED\",\n          \"value\": {\n            \"local\": {\n              \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"currency\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"crypto\": {\n              \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"currency\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          },\n          \"block\": {\n            \"height\": 2064,\n            \"hash\": \"string\",\n            \"confirmations_accumulated\": 4467,\n            \"confirmations_required\": 665\n          }\n        },\n        {\n          \"network\": \"string\",\n          \"transaction_id\": \"string\",\n          \"status\": \"PENDING\",\n          \"value\": {\n            \"local\": {\n              \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"currency\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"crypto\": {\n              \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"currency\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          },\n          \"block\": {\n            \"height\": 5629,\n            \"hash\": \"string\",\n            \"confirmations_accumulated\": 6895,\n            \"confirmations_required\": 4617\n          }\n        }\n      ],\n      \"expires_at\": \"1962-05-02T14:19:33.174Z\",\n      \"created_at\": \"1983-04-21T02:06:59.522Z\",\n      \"updated_at\": \"2022-12-06T05:15:10.293Z\"\n    },\n    {\n      \"id\": \"2af4b9dc-9428-9f4d-3fb5-7cf2d3003b1d\",\n      \"code\": \"WZNDTFQK\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"local_price\": {\n        \"amount\": \"49.99\",\n        \"currency\": \"USD\"\n      },\n      \"pricing_type\": \"no_price\",\n      \"pricing\": {\n        \"key_0\": {\n          \"amount\": \"49.99\",\n          \"currency\": \"USD\"\n        }\n      },\n      \"addresses\": {\n        \"key_0\": \"string\"\n      },\n      \"status\": \"NEW\",\n      \"redirect_url\": \"https://kljvwTbmLmjHh.cbxU6J3.EZEMfg4CTouxeoXdIA.dhNnn801Wg2,0kWaeVpxedTmG\",\n      \"cancel_url\": \"http://EbSSyZYxaVkwpT.zoveBVFCtIh\",\n      \"metadata\": {\n        \"key_0\": \"string\"\n      },\n      \"hosted_url\": \"https://OzAxFSKrbDbHuCJcvRq.gauBttt6C5A6cVh76AiCMQdNL,s,fwr\",\n      \"timeline\": [\n        {\n          \"time\": \"1972-04-04T07:01:02.245Z\",\n          \"status\": \"NEW\",\n          \"context\": \"string\"\n        },\n        {\n          \"time\": \"1993-11-04T21:02:40.096Z\",\n          \"status\": \"EXPIRED\",\n          \"context\": \"string\"\n        }\n      ],\n      \"payments\": [\n        {\n          \"network\": \"string\",\n          \"transaction_id\": \"string\",\n          \"status\": \"PENDING\",\n          \"value\": {\n            \"local\": {\n              \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"currency\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"crypto\": {\n              \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"currency\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          },\n          \"block\": {\n            \"height\": 366,\n            \"hash\": \"string\",\n            \"confirmations_accumulated\": 256,\n            \"confirmations_required\": 6243\n          }\n        },\n        {\n          \"network\": \"string\",\n          \"transaction_id\": \"string\",\n          \"status\": \"CONFIRMED\",\n          \"value\": {\n            \"local\": {\n              \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"currency\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"crypto\": {\n              \"amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"currency\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          },\n          \"block\": {\n            \"height\": 5436,\n            \"hash\": \"string\",\n            \"confirmations_accumulated\": 6497,\n            \"confirmations_required\": 3759\n          }\n        }\n      ],\n      \"expires_at\": \"2022-09-04T06:27:58.742Z\",\n      \"created_at\": \"2009-11-13T08:43:44.376Z\",\n      \"updated_at\": \"2014-10-03T04:38:01.032Z\"\n    }\n  ],\n  \"cursor_range\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fb9653b1-1a9e-4c99-9e42-8c563eaa137d",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "charges"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "starting_after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ending_before",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5283d30d-8f52-4d2a-9bec-e5555514cac8",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "charges"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "starting_after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ending_before",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2be09ccb-2021-4d56-84e1-12f539f4ba44",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "charges"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "starting_after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ending_before",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3efb7fc8-e7dd-4e76-956e-2e5db69d009c",
+          "name": "Retrieve a charge",
+          "request": {
+            "name": "Retrieve a charge",
+            "description": {
+              "content": "Returns the details of a specific charge by its ID or code.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "charges",
+                ":charge_code_or_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "charge_code_or_id",
+                  "description": "(Required) The charge ID (UUID) or charge code (8-character alphanumeric)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8e7543a8-0ee4-472e-914e-8613ca1fabed",
+              "name": "Charge details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "charges",
+                    ":charge_code_or_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "charge_code_or_id",
+                      "description": "(Required) The charge ID (UUID) or charge code (8-character alphanumeric)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"721504ca-3aac-9b82-7221-20e6e321b9e2\",\n    \"code\": \"WZNDTFQK\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"local_price\": {\n      \"amount\": \"49.99\",\n      \"currency\": \"USD\"\n    },\n    \"pricing_type\": \"fixed_price\",\n    \"pricing\": {\n      \"key_0\": {\n        \"amount\": \"49.99\",\n        \"currency\": \"USD\"\n      }\n    },\n    \"addresses\": {\n      \"key_0\": \"string\"\n    },\n    \"status\": \"CANCELATION_COMPLETE\",\n    \"redirect_url\": \"https://Jv.sstkD.bQwYi+HgzEdcMNyEUEL4A4,tPVFekLI,qDXYQ955Inh3xIcTRJbrWPIHiTeugpPqcT\",\n    \"cancel_url\": \"http://zRBBCsHm.asgaObFVfZxIUpeo6CC\",\n    \"metadata\": {\n      \"key_0\": \"string\"\n    },\n    \"hosted_url\": \"https://vpkjH.qekqWCdR.Xv5EAFqMe\",\n    \"timeline\": [\n      {\n        \"time\": \"2004-11-20T18:51:37.976Z\",\n        \"status\": \"COMPLETED\",\n        \"context\": \"string\"\n      },\n      {\n        \"time\": \"1990-03-23T01:42:25.579Z\",\n        \"status\": \"RESOLVED\",\n        \"context\": \"string\"\n      }\n    ],\n    \"payments\": [\n      {\n        \"network\": \"string\",\n        \"transaction_id\": \"string\",\n        \"status\": \"PENDING\",\n        \"value\": {\n          \"local\": {\n            \"amount\": \"49.99\",\n            \"currency\": \"USD\"\n          },\n          \"crypto\": {\n            \"amount\": \"49.99\",\n            \"currency\": \"USD\"\n          }\n        },\n        \"block\": {\n          \"height\": 611,\n          \"hash\": \"string\",\n          \"confirmations_accumulated\": 3408,\n          \"confirmations_required\": 8803\n        }\n      },\n      {\n        \"network\": \"string\",\n        \"transaction_id\": \"string\",\n        \"status\": \"CONFIRMED\",\n        \"value\": {\n          \"local\": {\n            \"amount\": \"49.99\",\n            \"currency\": \"USD\"\n          },\n          \"crypto\": {\n            \"amount\": \"49.99\",\n            \"currency\": \"USD\"\n          }\n        },\n        \"block\": {\n          \"height\": 3016,\n          \"hash\": \"string\",\n          \"confirmations_accumulated\": 4701,\n          \"confirmations_required\": 4470\n        }\n      }\n    ],\n    \"expires_at\": \"2022-11-02T19:22:37.210Z\",\n    \"created_at\": \"2020-02-09T11:25:52.739Z\",\n    \"updated_at\": \"1994-11-17T22:59:17.439Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d1fcca33-4e85-400f-98ca-a124f78dfb46",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "charges",
+                    ":charge_code_or_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "charge_code_or_id",
+                      "description": "(Required) The charge ID (UUID) or charge code (8-character alphanumeric)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "14faf253-4fb4-4739-bc95-c7c8c5b290ad",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "charges",
+                    ":charge_code_or_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "charge_code_or_id",
+                      "description": "(Required) The charge ID (UUID) or charge code (8-character alphanumeric)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "23145aae-56f6-4285-8cc6-0eda4df5f037",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "charges",
+                    ":charge_code_or_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "charge_code_or_id",
+                      "description": "(Required) The charge ID (UUID) or charge code (8-character alphanumeric)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "75890403-c589-4c8b-9c3b-cd1d5dc974dd",
+          "name": "Cancel a charge",
+          "request": {
+            "name": "Cancel a charge",
+            "description": {
+              "content": "Cancels a charge that has not yet been confirmed. Only NEW charges can be cancelled; charges in PENDING or later states cannot be cancelled.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "charges",
+                ":charge_code_or_id",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "charge_code_or_id",
+                  "description": "(Required) The charge ID (UUID) or charge code (8-character alphanumeric)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ba9c20e4-908e-4b0d-b0ca-df9c0816fd71",
+              "name": "Cancelled charge",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "charges",
+                    ":charge_code_or_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "charge_code_or_id",
+                      "description": "(Required) The charge ID (UUID) or charge code (8-character alphanumeric)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"721504ca-3aac-9b82-7221-20e6e321b9e2\",\n    \"code\": \"WZNDTFQK\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"local_price\": {\n      \"amount\": \"49.99\",\n      \"currency\": \"USD\"\n    },\n    \"pricing_type\": \"fixed_price\",\n    \"pricing\": {\n      \"key_0\": {\n        \"amount\": \"49.99\",\n        \"currency\": \"USD\"\n      }\n    },\n    \"addresses\": {\n      \"key_0\": \"string\"\n    },\n    \"status\": \"CANCELATION_COMPLETE\",\n    \"redirect_url\": \"https://Jv.sstkD.bQwYi+HgzEdcMNyEUEL4A4,tPVFekLI,qDXYQ955Inh3xIcTRJbrWPIHiTeugpPqcT\",\n    \"cancel_url\": \"http://zRBBCsHm.asgaObFVfZxIUpeo6CC\",\n    \"metadata\": {\n      \"key_0\": \"string\"\n    },\n    \"hosted_url\": \"https://vpkjH.qekqWCdR.Xv5EAFqMe\",\n    \"timeline\": [\n      {\n        \"time\": \"2004-11-20T18:51:37.976Z\",\n        \"status\": \"COMPLETED\",\n        \"context\": \"string\"\n      },\n      {\n        \"time\": \"1990-03-23T01:42:25.579Z\",\n        \"status\": \"RESOLVED\",\n        \"context\": \"string\"\n      }\n    ],\n    \"payments\": [\n      {\n        \"network\": \"string\",\n        \"transaction_id\": \"string\",\n        \"status\": \"PENDING\",\n        \"value\": {\n          \"local\": {\n            \"amount\": \"49.99\",\n            \"currency\": \"USD\"\n          },\n          \"crypto\": {\n            \"amount\": \"49.99\",\n            \"currency\": \"USD\"\n          }\n        },\n        \"block\": {\n          \"height\": 611,\n          \"hash\": \"string\",\n          \"confirmations_accumulated\": 3408,\n          \"confirmations_required\": 8803\n        }\n      },\n      {\n        \"network\": \"string\",\n        \"transaction_id\": \"string\",\n        \"status\": \"CONFIRMED\",\n        \"value\": {\n          \"local\": {\n            \"amount\": \"49.99\",\n            \"currency\": \"USD\"\n          },\n          \"crypto\": {\n            \"amount\": \"49.99\",\n            \"currency\": \"USD\"\n          }\n        },\n        \"block\": {\n          \"height\": 3016,\n          \"hash\": \"string\",\n          \"confirmations_accumulated\": 4701,\n          \"confirmations_required\": 4470\n        }\n      }\n    ],\n    \"expires_at\": \"2022-11-02T19:22:37.210Z\",\n    \"created_at\": \"2020-02-09T11:25:52.739Z\",\n    \"updated_at\": \"1994-11-17T22:59:17.439Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "455c642e-eb7d-4233-9fab-1b5b5fc334a3",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "charges",
+                    ":charge_code_or_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "charge_code_or_id",
+                      "description": "(Required) The charge ID (UUID) or charge code (8-character alphanumeric)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "00af3b9b-f42a-4e0d-a701-9e26b7dbe739",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "charges",
+                    ":charge_code_or_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "charge_code_or_id",
+                      "description": "(Required) The charge ID (UUID) or charge code (8-character alphanumeric)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "21fc9fd1-e0da-4784-813a-3e9bdabc8929",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "charges",
+                    ":charge_code_or_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "charge_code_or_id",
+                      "description": "(Required) The charge ID (UUID) or charge code (8-character alphanumeric)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7210ddf7-a500-4efa-811c-2a0749b89ae1",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "charges",
+                    ":charge_code_or_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "charge_code_or_id",
+                      "description": "(Required) The charge ID (UUID) or charge code (8-character alphanumeric)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "aeb8f892-d2ca-4b3a-b60e-852edb6e1fa6",
+          "name": "Resolve a charge",
+          "request": {
+            "name": "Resolve a charge",
+            "description": {
+              "content": "Resolves a charge that has been overpaid or underpaid, marking it as resolved. Only applicable to UNRESOLVED charges.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "charges",
+                ":charge_code_or_id",
+                "resolve"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "charge_code_or_id",
+                  "description": "(Required) The charge ID (UUID) or charge code (8-character alphanumeric)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "886485f8-bcb8-4dcd-b5e0-cacf075bc8b7",
+              "name": "Resolved charge",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "charges",
+                    ":charge_code_or_id",
+                    "resolve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "charge_code_or_id",
+                      "description": "(Required) The charge ID (UUID) or charge code (8-character alphanumeric)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"721504ca-3aac-9b82-7221-20e6e321b9e2\",\n    \"code\": \"WZNDTFQK\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"local_price\": {\n      \"amount\": \"49.99\",\n      \"currency\": \"USD\"\n    },\n    \"pricing_type\": \"fixed_price\",\n    \"pricing\": {\n      \"key_0\": {\n        \"amount\": \"49.99\",\n        \"currency\": \"USD\"\n      }\n    },\n    \"addresses\": {\n      \"key_0\": \"string\"\n    },\n    \"status\": \"CANCELATION_COMPLETE\",\n    \"redirect_url\": \"https://Jv.sstkD.bQwYi+HgzEdcMNyEUEL4A4,tPVFekLI,qDXYQ955Inh3xIcTRJbrWPIHiTeugpPqcT\",\n    \"cancel_url\": \"http://zRBBCsHm.asgaObFVfZxIUpeo6CC\",\n    \"metadata\": {\n      \"key_0\": \"string\"\n    },\n    \"hosted_url\": \"https://vpkjH.qekqWCdR.Xv5EAFqMe\",\n    \"timeline\": [\n      {\n        \"time\": \"2004-11-20T18:51:37.976Z\",\n        \"status\": \"COMPLETED\",\n        \"context\": \"string\"\n      },\n      {\n        \"time\": \"1990-03-23T01:42:25.579Z\",\n        \"status\": \"RESOLVED\",\n        \"context\": \"string\"\n      }\n    ],\n    \"payments\": [\n      {\n        \"network\": \"string\",\n        \"transaction_id\": \"string\",\n        \"status\": \"PENDING\",\n        \"value\": {\n          \"local\": {\n            \"amount\": \"49.99\",\n            \"currency\": \"USD\"\n          },\n          \"crypto\": {\n            \"amount\": \"49.99\",\n            \"currency\": \"USD\"\n          }\n        },\n        \"block\": {\n          \"height\": 611,\n          \"hash\": \"string\",\n          \"confirmations_accumulated\": 3408,\n          \"confirmations_required\": 8803\n        }\n      },\n      {\n        \"network\": \"string\",\n        \"transaction_id\": \"string\",\n        \"status\": \"CONFIRMED\",\n        \"value\": {\n          \"local\": {\n            \"amount\": \"49.99\",\n            \"currency\": \"USD\"\n          },\n          \"crypto\": {\n            \"amount\": \"49.99\",\n            \"currency\": \"USD\"\n          }\n        },\n        \"block\": {\n          \"height\": 3016,\n          \"hash\": \"string\",\n          \"confirmations_accumulated\": 4701,\n          \"confirmations_required\": 4470\n        }\n      }\n    ],\n    \"expires_at\": \"2022-11-02T19:22:37.210Z\",\n    \"created_at\": \"2020-02-09T11:25:52.739Z\",\n    \"updated_at\": \"1994-11-17T22:59:17.439Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2fb88eec-64ac-4ebd-9c6e-b8cb328415f8",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "charges",
+                    ":charge_code_or_id",
+                    "resolve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "charge_code_or_id",
+                      "description": "(Required) The charge ID (UUID) or charge code (8-character alphanumeric)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "397a5b7c-308a-48a8-8b30-a5bc4801c1ba",
+              "name": "Missing or invalid API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "charges",
+                    ":charge_code_or_id",
+                    "resolve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "charge_code_or_id",
+                      "description": "(Required) The charge ID (UUID) or charge code (8-character alphanumeric)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "490d1c08-2818-4b52-8752-62d1e152cc30",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "charges",
+                    ":charge_code_or_id",
+                    "resolve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "charge_code_or_id",
+                      "description": "(Required) The charge ID (UUID) or charge code (8-character alphanumeric)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bdccb7de-f828-4aa4-bab4-abddb318bb54",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "charges",
+                    ":charge_code_or_id",
+                    "resolve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "charge_code_or_id",
+                      "description": "(Required) The charge ID (UUID) or charge code (8-character alphanumeric)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.commerce.coinbase.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-CC-Api-Key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "bc52a8fd-2f7a-421b-99b6-18ce751d84c3",
+    "name": "Coinbase Commerce Charges API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Legacy REST API for creating and managing crypto payment charges. Merchants generate a charge object representing a payment request; customers pay to the charge address and the API tracks status through the full lifecycle from created → pending → confirmed or failed. Authentication uses the X-CC-Api-Key header and the API-Version header.\n\n\nContact Support:\n Name: Coinbase Commerce Support",
+      "type": "text/plain"
+    }
+  }
+}

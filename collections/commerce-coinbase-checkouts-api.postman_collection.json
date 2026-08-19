@@ -1,0 +1,2264 @@
+{
+  "item": [
+    {
+      "id": "c215dcaf-db57-46dc-87d0-497c76d538cc",
+      "name": "Checkouts",
+      "description": {
+        "content": "Create and manage single-use hosted payment checkouts",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "37d71530-88a2-4b3f-ae4a-bd529254991a",
+          "name": "Create a checkout",
+          "request": {
+            "name": "Create a checkout",
+            "description": {
+              "content": "Creates a new single-use hosted payment checkout. Returns a unique hosted URL that customers use to complete payment in USDC on the Base network. Supports idempotency via X-Idempotency-Key header.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "checkouts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "UUID v4 idempotency key for safe retries",
+                "key": "X-Idempotency-Key",
+                "value": "<uuid>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"description\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"successRedirectUrl\": \"<uri>\",\n  \"failRedirectUrl\": \"<uri>\",\n  \"expiresAt\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0fe26b9a-0f4d-4a3c-a0d1-8fd2d0b97a86",
+              "name": "Checkout created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkouts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "UUID v4 idempotency key for safe retries",
+                    "key": "X-Idempotency-Key",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"50.00\",\n  \"currency\": \"USDC\",\n  \"description\": \"Order #12345\",\n  \"metadata\": {\n    \"customer_id\": \"cust_42\",\n    \"order_id\": \"ord_99\"\n  },\n  \"successRedirectUrl\": \"https://yourstore.com/success\",\n  \"failRedirectUrl\": \"https://yourstore.com/cancel\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"68f7a946db0529ea9b6d3a12\",\n  \"url\": \"https://payments.coinbase.com/payment-links/pl_01h8441j23abcd1234567890ef\",\n  \"amount\": \"50.00\",\n  \"currency\": \"USDC\",\n  \"network\": \"base\",\n  \"address\": \"0x742d35Cc6634C0532925a3b844Bc454e4438f44e\",\n  \"status\": \"ACTIVE\",\n  \"createdAt\": \"2024-03-20T10:30:00Z\",\n  \"updatedAt\": \"2024-03-20T10:30:00Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eed0e553-fcbf-4196-a531-6d9047cfa29d",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkouts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "UUID v4 idempotency key for safe retries",
+                    "key": "X-Idempotency-Key",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"50.00\",\n  \"currency\": \"USDC\",\n  \"description\": \"Order #12345\",\n  \"metadata\": {\n    \"customer_id\": \"cust_42\",\n    \"order_id\": \"ord_99\"\n  },\n  \"successRedirectUrl\": \"https://yourstore.com/success\",\n  \"failRedirectUrl\": \"https://yourstore.com/cancel\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorType\": \"string\",\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6b56e2e3-7cf2-4c24-be0b-db869a64afc6",
+              "name": "Not properly authenticated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkouts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "UUID v4 idempotency key for safe retries",
+                    "key": "X-Idempotency-Key",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"50.00\",\n  \"currency\": \"USDC\",\n  \"description\": \"Order #12345\",\n  \"metadata\": {\n    \"customer_id\": \"cust_42\",\n    \"order_id\": \"ord_99\"\n  },\n  \"successRedirectUrl\": \"https://yourstore.com/success\",\n  \"failRedirectUrl\": \"https://yourstore.com/cancel\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorType\": \"string\",\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "186feac4-d226-45b3-b317-0303939d7c26",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkouts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "UUID v4 idempotency key for safe retries",
+                    "key": "X-Idempotency-Key",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"50.00\",\n  \"currency\": \"USDC\",\n  \"description\": \"Order #12345\",\n  \"metadata\": {\n    \"customer_id\": \"cust_42\",\n    \"order_id\": \"ord_99\"\n  },\n  \"successRedirectUrl\": \"https://yourstore.com/success\",\n  \"failRedirectUrl\": \"https://yourstore.com/cancel\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorType\": \"string\",\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3752632c-1b42-4fd6-bc31-9f8b6d6ca494",
+              "name": "Rate limit exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkouts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "UUID v4 idempotency key for safe retries",
+                    "key": "X-Idempotency-Key",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"50.00\",\n  \"currency\": \"USDC\",\n  \"description\": \"Order #12345\",\n  \"metadata\": {\n    \"customer_id\": \"cust_42\",\n    \"order_id\": \"ord_99\"\n  },\n  \"successRedirectUrl\": \"https://yourstore.com/success\",\n  \"failRedirectUrl\": \"https://yourstore.com/cancel\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorType\": \"string\",\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "807e93cb-c41c-47c7-9eaf-a316949b7dbf",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkouts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "UUID v4 idempotency key for safe retries",
+                    "key": "X-Idempotency-Key",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"50.00\",\n  \"currency\": \"USDC\",\n  \"description\": \"Order #12345\",\n  \"metadata\": {\n    \"customer_id\": \"cust_42\",\n    \"order_id\": \"ord_99\"\n  },\n  \"successRedirectUrl\": \"https://yourstore.com/success\",\n  \"failRedirectUrl\": \"https://yourstore.com/cancel\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorType\": \"string\",\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "48a0ef1f-e59b-41a2-9e40-cc4acde364f5",
+          "name": "List checkouts",
+          "request": {
+            "name": "List checkouts",
+            "description": {
+              "content": "Retrieves a paginated list of checkout records with optional filtering.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "checkouts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "20",
+                  "description": "Number of items per page (1–100, default 20)"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageToken",
+                  "value": "<string>",
+                  "description": "Pagination token from a previous response"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter by one or more payment statuses"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter by one or more payment statuses"
+                },
+                {
+                  "disabled": false,
+                  "key": "startTime",
+                  "value": "<dateTime>",
+                  "description": "Return checkouts created at or after this RFC 3339 timestamp"
+                },
+                {
+                  "disabled": false,
+                  "key": "endTime",
+                  "value": "<dateTime>",
+                  "description": "Return checkouts created at or before this RFC 3339 timestamp"
+                },
+                {
+                  "disabled": false,
+                  "key": "descriptionQuery",
+                  "value": "<string>",
+                  "description": "Case-insensitive substring search on the description (max 500 chars)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f67788c9-eca5-4e94-ab2f-85e07e89670c",
+              "name": "Paginated list of checkouts",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkouts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "20"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "ACTIVE"
+                    },
+                    {
+                      "key": "status",
+                      "value": "REFUNDED"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "descriptionQuery",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"checkouts\": [\n    {\n      \"id\": \"68f7a946db0529ea9b6d3a12\",\n      \"url\": \"https://payments.coinbase.com/payment-links/pl_01h8441j23abcd1234567890ef\",\n      \"amount\": \"50.00\",\n      \"currency\": \"USDC\",\n      \"network\": \"base\",\n      \"address\": \"0x742d35Cc6634C0532925a3b844Bc454e4438f44e\",\n      \"status\": \"FAILED\",\n      \"createdAt\": \"1976-10-06T14:22:33.035Z\",\n      \"updatedAt\": \"1960-12-25T22:37:59.477Z\",\n      \"tokenAddress\": \"string\",\n      \"description\": \"string\",\n      \"expiresAt\": \"1983-11-01T19:17:29.551Z\",\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\",\n        \"key_3\": \"string\",\n        \"key_4\": \"string\",\n        \"key_5\": \"string\",\n        \"key_6\": \"string\",\n        \"key_7\": \"string\",\n        \"key_8\": \"string\",\n        \"key_9\": \"string\"\n      },\n      \"successRedirectUrl\": \"http://RGeyznMaojDJsRhKrnfpq.qbXKlNga9h7pMgC7AyoyGSscrpaPNb0nlH4FiZ8vsRQppD8baWgBnrBtx+b,s\",\n      \"failRedirectUrl\": \"http://ZCERAJDNbzPbsUGbQpC.dbmyKiMQmLX\",\n      \"settlement\": {\n        \"totalAmount\": \"50.00\",\n        \"feeAmount\": \"0.50\",\n        \"netAmount\": \"49.50\",\n        \"currency\": \"USDC\"\n      },\n      \"transactionHash\": \"string\",\n      \"fiatAmount\": \"string\",\n      \"fiatCurrency\": \"string\",\n      \"refundedAmount\": \"string\",\n      \"refunds\": [\n        {\n          \"id\": \"string\",\n          \"checkoutId\": \"string\",\n          \"amount\": \"25.00\",\n          \"currency\": \"USDC\",\n          \"status\": \"PENDING\",\n          \"reason\": \"string\",\n          \"transactionHash\": \"string\",\n          \"completedAt\": \"2012-05-27T19:25:41.101Z\",\n          \"fiatAmount\": \"string\",\n          \"fiatCurrency\": \"string\",\n          \"exchangeRate\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"checkoutId\": \"string\",\n          \"amount\": \"25.00\",\n          \"currency\": \"USDC\",\n          \"status\": \"FAILED\",\n          \"reason\": \"string\",\n          \"transactionHash\": \"string\",\n          \"completedAt\": \"1968-03-10T13:41:12.573Z\",\n          \"fiatAmount\": \"string\",\n          \"fiatCurrency\": \"string\",\n          \"exchangeRate\": \"string\"\n        }\n      ]\n    },\n    {\n      \"id\": \"68f7a946db0529ea9b6d3a12\",\n      \"url\": \"https://payments.coinbase.com/payment-links/pl_01h8441j23abcd1234567890ef\",\n      \"amount\": \"50.00\",\n      \"currency\": \"USDC\",\n      \"network\": \"base\",\n      \"address\": \"0x742d35Cc6634C0532925a3b844Bc454e4438f44e\",\n      \"status\": \"REFUNDED\",\n      \"createdAt\": \"1967-09-18T14:08:48.222Z\",\n      \"updatedAt\": \"1947-10-23T08:22:35.927Z\",\n      \"tokenAddress\": \"string\",\n      \"description\": \"string\",\n      \"expiresAt\": \"1987-11-17T22:09:37.828Z\",\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\",\n        \"key_3\": \"string\"\n      },\n      \"successRedirectUrl\": \"https://Dy.zlNnkru1zwg.xU2Qn02l3lwmr7FELRHttjEim5Bqe44V4V\",\n      \"failRedirectUrl\": \"https://iVdnPdKBaJiogCbhaPWFOdw.isDo,ERxdmJCPD1z4WjBxpm84eNeznobCDBfr+qp.lhD0099Uy-9KIJl7dF9F0iS\",\n      \"settlement\": {\n        \"totalAmount\": \"50.00\",\n        \"feeAmount\": \"0.50\",\n        \"netAmount\": \"49.50\",\n        \"currency\": \"USDC\"\n      },\n      \"transactionHash\": \"string\",\n      \"fiatAmount\": \"string\",\n      \"fiatCurrency\": \"string\",\n      \"refundedAmount\": \"string\",\n      \"refunds\": [\n        {\n          \"id\": \"string\",\n          \"checkoutId\": \"string\",\n          \"amount\": \"25.00\",\n          \"currency\": \"USDC\",\n          \"status\": \"FAILED\",\n          \"reason\": \"string\",\n          \"transactionHash\": \"string\",\n          \"completedAt\": \"1974-06-14T17:06:16.991Z\",\n          \"fiatAmount\": \"string\",\n          \"fiatCurrency\": \"string\",\n          \"exchangeRate\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"checkoutId\": \"string\",\n          \"amount\": \"25.00\",\n          \"currency\": \"USDC\",\n          \"status\": \"FAILED\",\n          \"reason\": \"string\",\n          \"transactionHash\": \"string\",\n          \"completedAt\": \"1998-06-14T23:55:56.717Z\",\n          \"fiatAmount\": \"string\",\n          \"fiatCurrency\": \"string\",\n          \"exchangeRate\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"nextPageToken\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4f5a828e-3891-44b1-b9b7-85130e583171",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkouts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "20"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "ACTIVE"
+                    },
+                    {
+                      "key": "status",
+                      "value": "REFUNDED"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "descriptionQuery",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorType\": \"string\",\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "215eee4b-0e41-4fc6-b23d-d94a07ed6dba",
+              "name": "Not properly authenticated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkouts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "20"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "ACTIVE"
+                    },
+                    {
+                      "key": "status",
+                      "value": "REFUNDED"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "descriptionQuery",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorType\": \"string\",\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "16779f17-814a-494b-aff3-a85e44f8e421",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkouts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "20"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "ACTIVE"
+                    },
+                    {
+                      "key": "status",
+                      "value": "REFUNDED"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "descriptionQuery",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorType\": \"string\",\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5b22913d-a1fb-485d-8bdc-799cab41a619",
+              "name": "Rate limit exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkouts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "20"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "ACTIVE"
+                    },
+                    {
+                      "key": "status",
+                      "value": "REFUNDED"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "descriptionQuery",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorType\": \"string\",\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6e512114-c65d-4c5f-95b2-ba981741f184",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkouts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "20"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "ACTIVE"
+                    },
+                    {
+                      "key": "status",
+                      "value": "REFUNDED"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "descriptionQuery",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorType\": \"string\",\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "906173b8-a0a5-43a2-8ffe-6034c2ed47ef",
+          "name": "Get a checkout",
+          "request": {
+            "name": "Get a checkout",
+            "description": {
+              "content": "Retrieves the details of a specific checkout by its 24-character hex ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "checkouts",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) 24-character hexadecimal checkout identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8839c0a9-f419-46b2-bded-f793b9326122",
+              "name": "Checkout details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkouts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) 24-character hexadecimal checkout identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"68f7a946db0529ea9b6d3a12\",\n  \"url\": \"https://payments.coinbase.com/payment-links/pl_01h8441j23abcd1234567890ef\",\n  \"amount\": \"50.00\",\n  \"currency\": \"USDC\",\n  \"network\": \"base\",\n  \"address\": \"0x742d35Cc6634C0532925a3b844Bc454e4438f44e\",\n  \"status\": \"FAILED\",\n  \"createdAt\": \"2003-11-06T08:16:04.771Z\",\n  \"updatedAt\": \"2006-10-06T05:37:49.193Z\",\n  \"tokenAddress\": \"string\",\n  \"description\": \"string\",\n  \"expiresAt\": \"1991-07-20T22:55:58.855Z\",\n  \"metadata\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\",\n    \"key_3\": \"string\",\n    \"key_4\": \"string\",\n    \"key_5\": \"string\",\n    \"key_6\": \"string\",\n    \"key_7\": \"string\",\n    \"key_8\": \"string\",\n    \"key_9\": \"string\",\n    \"key_10\": \"string\",\n    \"key_11\": \"string\",\n    \"key_12\": \"string\",\n    \"key_13\": \"string\",\n    \"key_14\": \"string\",\n    \"key_15\": \"string\",\n    \"key_16\": \"string\",\n    \"key_17\": \"string\"\n  },\n  \"successRedirectUrl\": \"https://eHBtRTSMawbfXuNrvcCMIPORYtF.ompOA-yuTpjAadJDVIec06w9NleW+YIrD\",\n  \"failRedirectUrl\": \"https://sA.bwsjAx6T7o8KYLAqbRuKrdld+HALxgMeHliB6KHmelZ+KT3x8\",\n  \"settlement\": {\n    \"totalAmount\": \"50.00\",\n    \"feeAmount\": \"0.50\",\n    \"netAmount\": \"49.50\",\n    \"currency\": \"USDC\"\n  },\n  \"transactionHash\": \"string\",\n  \"fiatAmount\": \"string\",\n  \"fiatCurrency\": \"string\",\n  \"refundedAmount\": \"string\",\n  \"refunds\": [\n    {\n      \"id\": \"string\",\n      \"checkoutId\": \"string\",\n      \"amount\": \"25.00\",\n      \"currency\": \"USDC\",\n      \"status\": \"PENDING\",\n      \"reason\": \"string\",\n      \"transactionHash\": \"string\",\n      \"completedAt\": \"1988-11-19T13:35:03.858Z\",\n      \"fiatAmount\": \"string\",\n      \"fiatCurrency\": \"string\",\n      \"exchangeRate\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"checkoutId\": \"string\",\n      \"amount\": \"25.00\",\n      \"currency\": \"USDC\",\n      \"status\": \"FAILED\",\n      \"reason\": \"string\",\n      \"transactionHash\": \"string\",\n      \"completedAt\": \"1978-04-29T17:23:40.573Z\",\n      \"fiatAmount\": \"string\",\n      \"fiatCurrency\": \"string\",\n      \"exchangeRate\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f89a2f98-643f-4d76-ae34-242c761e4ab4",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkouts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) 24-character hexadecimal checkout identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorType\": \"string\",\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0139ae71-4d77-4af5-bdd8-36a90e2fe2db",
+              "name": "Not properly authenticated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkouts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) 24-character hexadecimal checkout identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorType\": \"string\",\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "55e371b0-736f-42b9-9425-2033bc03ef00",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkouts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) 24-character hexadecimal checkout identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorType\": \"string\",\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ca04e0a5-ddb0-43bc-bfe2-a45c7ff8033c",
+              "name": "Requested resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkouts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) 24-character hexadecimal checkout identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorType\": \"string\",\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a8cc7f98-7845-4327-a807-5e5cf45665f9",
+              "name": "Rate limit exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkouts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) 24-character hexadecimal checkout identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorType\": \"string\",\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "635c2e3c-f513-4cb2-8c32-dcf046b3ec39",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkouts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) 24-character hexadecimal checkout identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorType\": \"string\",\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cd4e229d-e17b-47f9-9460-f91f8a5ac3eb",
+          "name": "Deactivate a checkout",
+          "request": {
+            "name": "Deactivate a checkout",
+            "description": {
+              "content": "Deactivates an ACTIVE checkout, preventing further payment. No request body is required.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "checkouts",
+                ":id",
+                "deactivate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) 24-character hexadecimal checkout identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e4ebe88c-2b7f-4b32-a087-32a0d91354a7",
+              "name": "Checkout deactivated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkouts",
+                    ":id",
+                    "deactivate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) 24-character hexadecimal checkout identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"68f7a946db0529ea9b6d3a12\",\n  \"url\": \"https://payments.coinbase.com/payment-links/pl_01h8441j23abcd1234567890ef\",\n  \"amount\": \"50.00\",\n  \"currency\": \"USDC\",\n  \"network\": \"base\",\n  \"address\": \"0x742d35Cc6634C0532925a3b844Bc454e4438f44e\",\n  \"status\": \"FAILED\",\n  \"createdAt\": \"2003-11-06T08:16:04.771Z\",\n  \"updatedAt\": \"2006-10-06T05:37:49.193Z\",\n  \"tokenAddress\": \"string\",\n  \"description\": \"string\",\n  \"expiresAt\": \"1991-07-20T22:55:58.855Z\",\n  \"metadata\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\",\n    \"key_3\": \"string\",\n    \"key_4\": \"string\",\n    \"key_5\": \"string\",\n    \"key_6\": \"string\",\n    \"key_7\": \"string\",\n    \"key_8\": \"string\",\n    \"key_9\": \"string\",\n    \"key_10\": \"string\",\n    \"key_11\": \"string\",\n    \"key_12\": \"string\",\n    \"key_13\": \"string\",\n    \"key_14\": \"string\",\n    \"key_15\": \"string\",\n    \"key_16\": \"string\",\n    \"key_17\": \"string\"\n  },\n  \"successRedirectUrl\": \"https://eHBtRTSMawbfXuNrvcCMIPORYtF.ompOA-yuTpjAadJDVIec06w9NleW+YIrD\",\n  \"failRedirectUrl\": \"https://sA.bwsjAx6T7o8KYLAqbRuKrdld+HALxgMeHliB6KHmelZ+KT3x8\",\n  \"settlement\": {\n    \"totalAmount\": \"50.00\",\n    \"feeAmount\": \"0.50\",\n    \"netAmount\": \"49.50\",\n    \"currency\": \"USDC\"\n  },\n  \"transactionHash\": \"string\",\n  \"fiatAmount\": \"string\",\n  \"fiatCurrency\": \"string\",\n  \"refundedAmount\": \"string\",\n  \"refunds\": [\n    {\n      \"id\": \"string\",\n      \"checkoutId\": \"string\",\n      \"amount\": \"25.00\",\n      \"currency\": \"USDC\",\n      \"status\": \"PENDING\",\n      \"reason\": \"string\",\n      \"transactionHash\": \"string\",\n      \"completedAt\": \"1988-11-19T13:35:03.858Z\",\n      \"fiatAmount\": \"string\",\n      \"fiatCurrency\": \"string\",\n      \"exchangeRate\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"checkoutId\": \"string\",\n      \"amount\": \"25.00\",\n      \"currency\": \"USDC\",\n      \"status\": \"FAILED\",\n      \"reason\": \"string\",\n      \"transactionHash\": \"string\",\n      \"completedAt\": \"1978-04-29T17:23:40.573Z\",\n      \"fiatAmount\": \"string\",\n      \"fiatCurrency\": \"string\",\n      \"exchangeRate\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "203e4898-97c3-4d2c-96d1-9d9c32529be0",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkouts",
+                    ":id",
+                    "deactivate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) 24-character hexadecimal checkout identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorType\": \"string\",\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "95482c3a-0580-41be-9168-27e7d81e60db",
+              "name": "Not properly authenticated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkouts",
+                    ":id",
+                    "deactivate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) 24-character hexadecimal checkout identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorType\": \"string\",\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3fbe5f25-8b54-4634-a147-d20ae6707fd5",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkouts",
+                    ":id",
+                    "deactivate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) 24-character hexadecimal checkout identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorType\": \"string\",\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "327e96f2-a0fa-4da4-b411-5066d4b6d8a1",
+              "name": "Requested resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkouts",
+                    ":id",
+                    "deactivate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) 24-character hexadecimal checkout identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorType\": \"string\",\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6ce20295-eb9e-4cca-a55a-9dff95728bf0",
+              "name": "Rate limit exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkouts",
+                    ":id",
+                    "deactivate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) 24-character hexadecimal checkout identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorType\": \"string\",\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d19813af-21a6-4e2c-8de0-3545a5856a39",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkouts",
+                    ":id",
+                    "deactivate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) 24-character hexadecimal checkout identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorType\": \"string\",\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b0e5fa74-db0f-4514-97c3-1f0f3fa935da",
+          "name": "Refund a checkout",
+          "request": {
+            "name": "Refund a checkout",
+            "description": {
+              "content": "Initiates a full or partial refund for a COMPLETED or PARTIALLY_REFUNDED checkout. Refunds are settled in USDC or the checkout's original fiat currency.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "checkouts",
+                ":id",
+                "refund"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) 24-character hexadecimal checkout identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"reason\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e04b2258-8050-4948-9245-1ed2c68fb908",
+              "name": "Refund initiated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkouts",
+                    ":id",
+                    "refund"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) 24-character hexadecimal checkout identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"25.00\",\n  \"currency\": \"USDC\",\n  \"reason\": \"Customer requested refund\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"checkout\": {\n    \"id\": \"68f7a946db0529ea9b6d3a12\",\n    \"url\": \"https://payments.coinbase.com/payment-links/pl_01h8441j23abcd1234567890ef\",\n    \"amount\": \"50.00\",\n    \"currency\": \"USDC\",\n    \"network\": \"base\",\n    \"address\": \"0x742d35Cc6634C0532925a3b844Bc454e4438f44e\",\n    \"status\": \"ACTIVE\",\n    \"createdAt\": \"1989-04-13T09:30:54.733Z\",\n    \"updatedAt\": \"1963-09-30T11:28:04.500Z\",\n    \"tokenAddress\": \"string\",\n    \"description\": \"string\",\n    \"expiresAt\": \"1994-06-13T07:04:20.736Z\",\n    \"metadata\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\",\n      \"key_3\": \"string\",\n      \"key_4\": \"string\",\n      \"key_5\": \"string\",\n      \"key_6\": \"string\",\n      \"key_7\": \"string\",\n      \"key_8\": \"string\",\n      \"key_9\": \"string\",\n      \"key_10\": \"string\"\n    },\n    \"successRedirectUrl\": \"https://TLDzPuDfEbkAXVSP.tyxkItI+e8c.tFk1iysXlnSWJuKi1aF-SBSNxhiywA9j4HoscJWj\",\n    \"failRedirectUrl\": \"https://tRXNNLnLvqc.veruzljyIXLxnRKwwkXYS.VLj5p,-C2iZxzEQAcx\",\n    \"settlement\": {\n      \"totalAmount\": \"50.00\",\n      \"feeAmount\": \"0.50\",\n      \"netAmount\": \"49.50\",\n      \"currency\": \"USDC\"\n    },\n    \"transactionHash\": \"string\",\n    \"fiatAmount\": \"string\",\n    \"fiatCurrency\": \"string\",\n    \"refundedAmount\": \"string\",\n    \"refunds\": [\n      {\n        \"id\": \"string\",\n        \"checkoutId\": \"string\",\n        \"amount\": \"25.00\",\n        \"currency\": \"USDC\",\n        \"status\": \"PENDING\",\n        \"reason\": \"string\",\n        \"transactionHash\": \"string\",\n        \"completedAt\": \"2020-08-30T17:31:13.658Z\",\n        \"fiatAmount\": \"string\",\n        \"fiatCurrency\": \"string\",\n        \"exchangeRate\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"checkoutId\": \"string\",\n        \"amount\": \"25.00\",\n        \"currency\": \"USDC\",\n        \"status\": \"PENDING\",\n        \"reason\": \"string\",\n        \"transactionHash\": \"string\",\n        \"completedAt\": \"1991-01-02T22:12:09.774Z\",\n        \"fiatAmount\": \"string\",\n        \"fiatCurrency\": \"string\",\n        \"exchangeRate\": \"string\"\n      }\n    ]\n  },\n  \"refund\": {\n    \"id\": \"string\",\n    \"checkoutId\": \"string\",\n    \"amount\": \"25.00\",\n    \"currency\": \"USDC\",\n    \"status\": \"FAILED\",\n    \"reason\": \"string\",\n    \"transactionHash\": \"string\",\n    \"completedAt\": \"2010-06-17T07:41:40.392Z\",\n    \"fiatAmount\": \"string\",\n    \"fiatCurrency\": \"string\",\n    \"exchangeRate\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5b209467-67d9-4df7-b16a-2a187e7393ea",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkouts",
+                    ":id",
+                    "refund"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) 24-character hexadecimal checkout identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"25.00\",\n  \"currency\": \"USDC\",\n  \"reason\": \"Customer requested refund\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorType\": \"string\",\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a343e3e8-4879-495d-8aaf-8a5fcdcb618f",
+              "name": "Not properly authenticated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkouts",
+                    ":id",
+                    "refund"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) 24-character hexadecimal checkout identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"25.00\",\n  \"currency\": \"USDC\",\n  \"reason\": \"Customer requested refund\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorType\": \"string\",\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0269e15a-5edb-4b2a-9d3c-b5b36c538c33",
+              "name": "Insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkouts",
+                    ":id",
+                    "refund"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) 24-character hexadecimal checkout identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"25.00\",\n  \"currency\": \"USDC\",\n  \"reason\": \"Customer requested refund\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorType\": \"string\",\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7a3b3910-8d39-496b-a827-2f6400cafd58",
+              "name": "Requested resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkouts",
+                    ":id",
+                    "refund"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) 24-character hexadecimal checkout identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"25.00\",\n  \"currency\": \"USDC\",\n  \"reason\": \"Customer requested refund\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorType\": \"string\",\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fd0e21cf-73ee-43f5-8d96-f69a03eb1450",
+              "name": "Rate limit exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkouts",
+                    ":id",
+                    "refund"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) 24-character hexadecimal checkout identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"25.00\",\n  \"currency\": \"USDC\",\n  \"reason\": \"Customer requested refund\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorType\": \"string\",\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d3be88a0-57c5-4055-b09d-4a81d7e93b23",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "checkouts",
+                    ":id",
+                    "refund"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) 24-character hexadecimal checkout identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"25.00\",\n  \"currency\": \"USDC\",\n  \"reason\": \"Customer requested refund\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorType\": \"string\",\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.commerce.coinbase.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-CC-Api-Key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "116cadbb-9d77-481e-b67a-6883843e240f",
+    "name": "Coinbase Commerce Charges Checkouts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Legacy REST API for creating and managing crypto payment charges. Merchants generate a charge object representing a payment request; customers pay to the charge address and the API tracks status through the full lifecycle from created → pending → confirmed or failed. Authentication uses the X-CC-Api-Key header and the API-Version header.\n\n\nContact Support:\n Name: Coinbase Commerce Support",
+      "type": "text/plain"
+    }
+  }
+}
