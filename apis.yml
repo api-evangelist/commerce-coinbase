@@ -28,6 +28,17 @@ tags:
   - Bitcoin
   - Ethereum
   - USDC
+  - Webhook
+  - Charges
+  - Checkouts
+tags_raw:
+  - Crypto Payments
+  - Cryptocurrency
+  - Payment Gateway
+  - Commerce
+  - Bitcoin
+  - Ethereum
+  - USDC
   - Webhooks
   - Charges
   - Checkouts
@@ -73,6 +84,8 @@ apis:
   humanURL: https://commerce.coinbase.com/docs/api
   baseURL: https://api.commerce.coinbase.com
   tags:
+  - Event
+  tags_raw:
   - Events
   properties:
   - type: OpenAPI
