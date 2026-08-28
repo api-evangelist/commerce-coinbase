@@ -1,5 +1,17 @@
 name: Coinbase Commerce
 description: Coinbase Commerce is a merchant crypto payment solution enabling businesses to accept cryptocurrency payments natively. The platform provides a REST API for creating payment charges, managing hosted checkouts, accessing payment metadata, configuring webhooks, and tracking crypto payment status across charge lifecycle events. Supports Bitcoin, Ethereum, USDC, and other major cryptocurrencies with 1% per-transaction fees and no monthly or setup costs.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 specificationVersion: '0.23'
 accessModel:
   pricing: paid
