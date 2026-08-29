@@ -1,0 +1,252 @@
+openapi: 3.2.0
+info:
+  title: Coinbase Business Checkouts Webhooks API
+  description: 'Current-generation REST API replacing the legacy Charges API for creating and managing single-use hosted payment checkouts. Merchants create a checkout object with a fixed USDC amount on the Base network; customers complete payment through a hosted URL. Uses JWT bearer token authentication and idempotency keys. Provides simplified status model and webhook events for the payment lifecycle.
+
+    '
+  version: '1'
+  termsOfService: https://commerce.coinbase.com/legal/user-agreement
+  contact:
+    name: Coinbase Developer Platform Support
+    url: https://docs.cdp.coinbase.com
+  license:
+    name: Proprietary
+servers:
+- url: https://business.coinbase.com/api/v1
+  description: Coinbase Business production server
+security:
+- BearerAuth: []
+tags:
+- name: Webhooks
+  description: Checkout lifecycle event notifications
+paths: {}
+webhooks:
+  checkoutPaymentSuccess:
+    post:
+      summary: checkout.payment.success
+      description: Emitted when a checkout payment is successfully completed.
+      tags:
+      - Webhooks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CheckoutWebhookPayload'
+      responses:
+        '200':
+          description: Webhook received successfully
+  checkoutPaymentFailed:
+    post:
+      summary: checkout.payment.failed
+      description: Emitted when a checkout payment fails.
+      tags:
+      - Webhooks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CheckoutWebhookPayload'
+      responses:
+        '200':
+          description: Webhook received successfully
+  checkoutPaymentExpired:
+    post:
+      summary: checkout.payment.expired
+      description: Emitted when a checkout expires without a completed payment.
+      tags:
+      - Webhooks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CheckoutWebhookPayload'
+      responses:
+        '200':
+          description: Webhook received successfully
+  checkoutRefundSuccess:
+    post:
+      summary: checkout.refund.success
+      description: Emitted when a refund is completed successfully.
+      tags:
+      - Webhooks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CheckoutWebhookPayload'
+      responses:
+        '200':
+          description: Webhook received successfully
+  checkoutRefundFailed:
+    post:
+      summary: checkout.refund.failed
+      description: Emitted when a refund fails.
+      tags:
+      - Webhooks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CheckoutWebhookPayload'
+      responses:
+        '200':
+          description: Webhook received successfully
+components:
+  schemas:
+    CheckoutStatus:
+      type: string
+      description: Payment lifecycle status of a checkout
+      enum:
+      - ACTIVE
+      - PROCESSING
+      - DEACTIVATED
+      - EXPIRED
+      - COMPLETED
+      - FAILED
+      - REFUNDED
+      - PARTIALLY_REFUNDED
+    CheckoutWebhookPayload:
+      type: object
+      description: Webhook event payload for checkout lifecycle events
+      properties:
+        id:
+          type: string
+          description: Checkout unique identifier
+        url:
+          type: string
+          format: uri
+          description: Hosted payment page URL
+        amount:
+          type: string
+          description: Checkout payment amount
+        currency:
+          type: string
+          description: Currency code
+        network:
+          type: string
+          description: Blockchain network
+        address:
+          type: string
+          description: Blockchain payment address
+        status:
+          $ref: '#/components/schemas/CheckoutStatus'
+        description:
+          type: string
+          description: Payment description
+        eventType:
+          type: string
+          description: The event type that triggered the webhook
+          enum:
+          - checkout.payment.success
+          - checkout.payment.failed
+          - checkout.payment.expired
+          - checkout.refund.success
+          - checkout.refund.failed
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+        successRedirectUrl:
+          type: string
+          format: uri
+        failRedirectUrl:
+          type: string
+          format: uri
+        transactionHash:
+          type: string
+          description: Blockchain transaction hash (present for payment.success and refund.success)
+        settlement:
+          $ref: '#/components/schemas/Settlement'
+        refundedAmount:
+          type: string
+          description: Total refunded amount
+        refunds:
+          type: array
+          items:
+            $ref: '#/components/schemas/Refund'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        expiresAt:
+          type: string
+          format: date-time
+    Settlement:
+      type: object
+      description: Fee breakdown for a completed payment settlement
+      properties:
+        totalAmount:
+          type: string
+          description: Gross received amount
+          example: '50.00'
+        feeAmount:
+          type: string
+          description: Coinbase transaction fee
+          example: '0.50'
+        netAmount:
+          type: string
+          description: Net amount after fees
+          example: '49.50'
+        currency:
+          type: string
+          description: Settlement currency code
+          example: USDC
+    Refund:
+      type: object
+      description: An individual refund record associated with a checkout
+      properties:
+        id:
+          type: string
+          description: Unique refund identifier
+        checkoutId:
+          type: string
+          description: Parent checkout ID
+        amount:
+          type: string
+          description: Refunded amount
+          example: '25.00'
+        currency:
+          type: string
+          description: Refund currency
+          example: USDC
+        status:
+          type: string
+          description: Refund processing status
+          enum:
+          - PENDING
+          - COMPLETED
+          - FAILED
+        reason:
+          type: string
+          description: Optional merchant-supplied refund reason
+          maxLength: 500
+        transactionHash:
+          type: string
+          description: Blockchain transaction hash when the refund is completed
+        completedAt:
+          type: string
+          format: date-time
+        fiatAmount:
+          type: string
+          description: Fiat equivalent of the refund amount
+        fiatCurrency:
+          type: string
+          description: Fiat currency code (e.g. USD)
+        exchangeRate:
+          type: string
+          description: Exchange rate applied at time of refund
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'JWT signed with your CDP API Key Secret. See https://docs.cdp.coinbase.com/coinbase-business/authentication-authorization/api-key-authentication
+
+        '

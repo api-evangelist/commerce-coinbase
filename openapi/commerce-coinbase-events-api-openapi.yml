@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Coinbase Commerce Charges Events API
   description: 'Legacy REST API for creating and managing crypto payment charges. Merchants generate a charge object representing a payment request; customers pay to the charge address and the API tracks status through the full lifecycle from created → pending → confirmed or failed. Authentication uses the X-CC-Api-Key header and the API-Version header.
@@ -90,58 +90,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Event'
-    PricingType:
-      type: string
-      enum:
-      - fixed_price
-      - no_price
-      description: '`fixed_price` charges the customer a specific fiat amount converted to crypto. `no_price` lets the customer pay any amount.
-
-        '
-    Money:
-      type: object
-      description: A monetary amount with currency
-      required:
-      - amount
-      - currency
-      properties:
-        amount:
-          type: string
-          description: Decimal amount string (e.g. "49.99")
-          example: '49.99'
-        currency:
-          type: string
-          description: ISO 4217 currency code (fiat) or crypto ticker
-          example: USD
-    EventResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/Event'
-    ChargeStatus:
-      type: string
-      description: The current lifecycle status of the charge
-      enum:
-      - NEW
-      - PENDING
-      - COMPLETED
-      - EXPIRED
-      - UNRESOLVED
-      - RESOLVED
-      - CANCELED
-      - CANCELATION_COMPLETE
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            type:
-              type: string
-              description: Error type identifier
-            message:
-              type: string
-              description: Human-readable error description
     TimelineEntry:
       type: object
       properties:
@@ -185,6 +133,42 @@ components:
               type: integer
             confirmations_required:
               type: integer
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            type:
+              type: string
+              description: Error type identifier
+            message:
+              type: string
+              description: Human-readable error description
+    Event:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          type: string
+          description: Event type
+          enum:
+          - charge:created
+          - charge:pending
+          - charge:confirmed
+          - charge:failed
+          - charge:delayed
+          - charge:resolved
+        api_version:
+          type: string
+          example: '2018-03-22'
+        created_at:
+          type: string
+          format: date-time
+        data:
+          $ref: '#/components/schemas/Charge'
     Charge:
       type: object
       properties:
@@ -250,30 +234,46 @@ components:
         updated_at:
           type: string
           format: date-time
-    Event:
+    Money:
+      type: object
+      description: A monetary amount with currency
+      required:
+      - amount
+      - currency
+      properties:
+        amount:
+          type: string
+          description: Decimal amount string (e.g. "49.99")
+          example: '49.99'
+        currency:
+          type: string
+          description: ISO 4217 currency code (fiat) or crypto ticker
+          example: USD
+    PricingType:
+      type: string
+      enum:
+      - fixed_price
+      - no_price
+      description: '`fixed_price` charges the customer a specific fiat amount converted to crypto. `no_price` lets the customer pay any amount.
+
+        '
+    EventResponse:
       type: object
       properties:
-        id:
-          type: string
-          format: uuid
-        type:
-          type: string
-          description: Event type
-          enum:
-          - charge:created
-          - charge:pending
-          - charge:confirmed
-          - charge:failed
-          - charge:delayed
-          - charge:resolved
-        api_version:
-          type: string
-          example: '2018-03-22'
-        created_at:
-          type: string
-          format: date-time
         data:
-          $ref: '#/components/schemas/Charge'
+          $ref: '#/components/schemas/Event'
+    ChargeStatus:
+      type: string
+      description: The current lifecycle status of the charge
+      enum:
+      - NEW
+      - PENDING
+      - COMPLETED
+      - EXPIRED
+      - UNRESOLVED
+      - RESOLVED
+      - CANCELED
+      - CANCELATION_COMPLETE
   responses:
     NotFound:
       description: Resource not found

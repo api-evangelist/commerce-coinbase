@@ -109,6 +109,16 @@ apis:
   - type: APIReference
     url: >-
       https://docs.cdp.coinbase.com/api-reference/business-api/rest-api/checkouts/list-checkouts
+- aid: commerce-coinbase:commerce-coinbase-webhooks-api
+  name: Coinbase Commerce Webhooks API
+  description: Checkout lifecycle event notifications
+  humanURL: https://commerce.coinbase.com/docs/api
+  baseURL: https://api.commerce.coinbase.com
+  tags:
+  - Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/commerce-coinbase-webhooks-api-openapi.yml
 common:
   - type: AgenticAccess
     url: agentic-access/commerce-coinbase-agentic-access.yml
