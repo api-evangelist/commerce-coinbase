@@ -1,9 +1,7 @@
 openapi: 3.2.0
 info:
   title: Coinbase Business Checkouts API
-  description: 'Current-generation REST API replacing the legacy Charges API for creating and managing single-use hosted payment checkouts. Merchants create a checkout object with a fixed USDC amount on the Base network; customers complete payment through a hosted URL. Uses JWT bearer token authentication and idempotency keys. Provides simplified status model and webhook events for the payment lifecycle.
-
-    '
+  description: Current-generation REST API replacing the legacy Charges API for creating and managing single-use hosted payment checkouts. Merchants create a checkout object with a fixed USDC amount on the Base network; customers complete payment through a hosted URL. Uses JWT bearer token authentication and idempotency keys. Provides simplified status model and webhook events for the payment lifecycle.
   version: '1'
   termsOfService: https://commerce.coinbase.com/legal/user-agreement
   contact:
@@ -24,9 +22,7 @@ paths:
     post:
       operationId: createCheckout
       summary: Create a checkout
-      description: 'Creates a new single-use hosted payment checkout. Returns a unique hosted URL that customers use to complete payment in USDC on the Base network. Supports idempotency via X-Idempotency-Key header.
-
-        '
+      description: Creates a new single-use hosted payment checkout. Returns a unique hosted URL that customers use to complete payment in USDC on the Base network. Supports idempotency via X-Idempotency-Key header.
       tags:
       - Checkouts
       parameters:
@@ -173,9 +169,7 @@ paths:
     post:
       operationId: deactivateCheckout
       summary: Deactivate a checkout
-      description: 'Deactivates an ACTIVE checkout, preventing further payment. No request body is required.
-
-        '
+      description: Deactivates an ACTIVE checkout, preventing further payment. No request body is required.
       tags:
       - Checkouts
       parameters:
@@ -203,9 +197,7 @@ paths:
     post:
       operationId: refundCheckout
       summary: Refund a checkout
-      description: 'Initiates a full or partial refund for a COMPLETED or PARTIALLY_REFUNDED checkout. Refunds are settled in USDC or the checkout''s original fiat currency.
-
-        '
+      description: Initiates a full or partial refund for a COMPLETED or PARTIALLY_REFUNDED checkout. Refunds are settled in USDC or the checkout's original fiat currency.
       tags:
       - Checkouts
       parameters:
@@ -240,63 +232,12 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
 components:
-  responses:
-    BadRequest:
-      description: Invalid request parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Requested resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Not properly authenticated
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    InternalServerError:
-      description: Internal server error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Insufficient permissions
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    RateLimitExceeded:
-      description: Rate limit exceeded
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-  parameters:
-    CheckoutId:
-      name: id
-      in: path
-      required: true
-      description: 24-character hexadecimal checkout identifier
-      schema:
-        type: string
-        pattern: ^[0-9a-f]{24}$
-        example: 68f7a946db0529ea9b6d3a12
   schemas:
-    ErrorResponse:
+    CheckoutResponse:
       type: object
-      properties:
-        errorType:
-          type: string
-          description: Machine-readable error type
-        errorMessage:
-          type: string
-          description: Human-readable error description
+      description: Single checkout response wrapper
+      allOf:
+      - $ref: '#/components/schemas/CheckoutObject'
     CheckoutListResponse:
       type: object
       description: Paginated list of checkouts
@@ -308,94 +249,48 @@ components:
         nextPageToken:
           type: string
           description: Pagination token; present only when more records exist
-    Refund:
-      type: object
-      description: An individual refund record associated with a checkout
-      properties:
-        id:
-          type: string
-          description: Unique refund identifier
-        checkoutId:
-          type: string
-          description: Parent checkout ID
-        amount:
-          type: string
-          description: Refunded amount
-          example: '25.00'
-        currency:
-          type: string
-          description: Refund currency
-          example: USDC
-        status:
-          type: string
-          description: Refund processing status
-          enum:
-          - PENDING
-          - COMPLETED
-          - FAILED
-        reason:
-          type: string
-          description: Optional merchant-supplied refund reason
-          maxLength: 500
-        transactionHash:
-          type: string
-          description: Blockchain transaction hash when the refund is completed
-        completedAt:
-          type: string
-          format: date-time
-        fiatAmount:
-          type: string
-          description: Fiat equivalent of the refund amount
-        fiatCurrency:
-          type: string
-          description: Fiat currency code (e.g. USD)
-        exchangeRate:
-          type: string
-          description: Exchange rate applied at time of refund
-    CheckoutStatus:
-      type: string
-      description: Payment lifecycle status of a checkout
-      enum:
-      - ACTIVE
-      - PROCESSING
-      - DEACTIVATED
-      - EXPIRED
-      - COMPLETED
-      - FAILED
-      - REFUNDED
-      - PARTIALLY_REFUNDED
-    RefundCheckoutResult:
-      type: object
-      description: Result of a refund request
-      properties:
-        checkout:
-          $ref: '#/components/schemas/CheckoutObject'
-        refund:
-          $ref: '#/components/schemas/Refund'
-    RefundCheckoutRequest:
+    CreateCheckoutRequest:
       type: object
       required:
       - amount
+      - currency
       properties:
         amount:
           type: string
           pattern: ^\d+(\.\d{1,2})?$
-          description: Refund amount; must be > 0 and not exceed remaining refundable balance
-          example: '25.00'
+          description: Payment amount between 0.01 and 100,000,000 (max 2 decimal places)
+          example: '50.00'
         currency:
           type: string
-          description: Refund currency; defaults to checkout's original currency
+          minLength: 1
+          maxLength: 10
+          description: Currency code (USDC or fiat such as USD, EUR, SGD, GBP)
           example: USDC
-        reason:
+        description:
           type: string
-          description: Optional reason for the refund
+          description: Human-readable payment description
           maxLength: 500
-          example: Customer requested refund
-    CheckoutResponse:
-      type: object
-      description: Single checkout response wrapper
-      allOf:
-      - $ref: '#/components/schemas/CheckoutObject'
+        metadata:
+          type: object
+          description: Arbitrary key-value metadata (max 20 keys, 100 chars per value)
+          additionalProperties:
+            type: string
+            maxLength: 100
+          maxProperties: 20
+        successRedirectUrl:
+          type: string
+          format: uri
+          description: HTTPS URL for post-payment success redirect (max 2048 chars)
+          maxLength: 2048
+        failRedirectUrl:
+          type: string
+          format: uri
+          description: HTTPS URL for post-payment failure/cancel redirect (max 2048 chars)
+          maxLength: 2048
+        expiresAt:
+          type: string
+          format: date-time
+          description: Future RFC 3339 timestamp; defaults to 24 hours after creation
     CheckoutObject:
       type: object
       description: A hosted single-use payment checkout
@@ -492,48 +387,45 @@ components:
         updatedAt:
           type: string
           format: date-time
-    CreateCheckoutRequest:
+    CheckoutStatus:
+      type: string
+      description: Payment lifecycle status of a checkout
+      enum:
+      - ACTIVE
+      - PROCESSING
+      - DEACTIVATED
+      - EXPIRED
+      - COMPLETED
+      - FAILED
+      - REFUNDED
+      - PARTIALLY_REFUNDED
+    RefundCheckoutRequest:
       type: object
       required:
       - amount
-      - currency
       properties:
         amount:
           type: string
           pattern: ^\d+(\.\d{1,2})?$
-          description: Payment amount between 0.01 and 100,000,000 (max 2 decimal places)
-          example: '50.00'
+          description: Refund amount; must be > 0 and not exceed remaining refundable balance
+          example: '25.00'
         currency:
           type: string
-          minLength: 1
-          maxLength: 10
-          description: Currency code (USDC or fiat such as USD, EUR, SGD, GBP)
+          description: Refund currency; defaults to checkout's original currency
           example: USDC
-        description:
+        reason:
           type: string
-          description: Human-readable payment description
+          description: Optional reason for the refund
           maxLength: 500
-        metadata:
-          type: object
-          description: Arbitrary key-value metadata (max 20 keys, 100 chars per value)
-          additionalProperties:
-            type: string
-            maxLength: 100
-          maxProperties: 20
-        successRedirectUrl:
-          type: string
-          format: uri
-          description: HTTPS URL for post-payment success redirect (max 2048 chars)
-          maxLength: 2048
-        failRedirectUrl:
-          type: string
-          format: uri
-          description: HTTPS URL for post-payment failure/cancel redirect (max 2048 chars)
-          maxLength: 2048
-        expiresAt:
-          type: string
-          format: date-time
-          description: Future RFC 3339 timestamp; defaults to 24 hours after creation
+          example: Customer requested refund
+    RefundCheckoutResult:
+      type: object
+      description: Result of a refund request
+      properties:
+        checkout:
+          $ref: '#/components/schemas/CheckoutObject'
+        refund:
+          $ref: '#/components/schemas/Refund'
     Settlement:
       type: object
       description: Fee breakdown for a completed payment settlement
@@ -554,6 +446,106 @@ components:
           type: string
           description: Settlement currency code
           example: USDC
+    ErrorResponse:
+      type: object
+      properties:
+        errorType:
+          type: string
+          description: Machine-readable error type
+        errorMessage:
+          type: string
+          description: Human-readable error description
+    Refund:
+      type: object
+      description: An individual refund record associated with a checkout
+      properties:
+        id:
+          type: string
+          description: Unique refund identifier
+        checkoutId:
+          type: string
+          description: Parent checkout ID
+        amount:
+          type: string
+          description: Refunded amount
+          example: '25.00'
+        currency:
+          type: string
+          description: Refund currency
+          example: USDC
+        status:
+          type: string
+          description: Refund processing status
+          enum:
+          - PENDING
+          - COMPLETED
+          - FAILED
+        reason:
+          type: string
+          description: Optional merchant-supplied refund reason
+          maxLength: 500
+        transactionHash:
+          type: string
+          description: Blockchain transaction hash when the refund is completed
+        completedAt:
+          type: string
+          format: date-time
+        fiatAmount:
+          type: string
+          description: Fiat equivalent of the refund amount
+        fiatCurrency:
+          type: string
+          description: Fiat currency code (e.g. USD)
+        exchangeRate:
+          type: string
+          description: Exchange rate applied at time of refund
+  responses:
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    RateLimitExceeded:
+      description: Rate limit exceeded
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Not properly authenticated
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Requested resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    CheckoutId:
+      name: id
+      in: path
+      required: true
+      description: 24-character hexadecimal checkout identifier
+      schema:
+        type: string
+        pattern: ^[0-9a-f]{24}$
+        example: 68f7a946db0529ea9b6d3a12
   securitySchemes:
     BearerAuth:
       type: http

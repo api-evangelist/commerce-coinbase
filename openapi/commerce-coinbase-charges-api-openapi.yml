@@ -1,9 +1,7 @@
 openapi: 3.2.0
 info:
   title: Coinbase Commerce Charges API
-  description: 'Legacy REST API for creating and managing crypto payment charges. Merchants generate a charge object representing a payment request; customers pay to the charge address and the API tracks status through the full lifecycle from created → pending → confirmed or failed. Authentication uses the X-CC-Api-Key header and the API-Version header.
-
-    '
+  description: Legacy REST API for creating and managing crypto payment charges. Merchants generate a charge object representing a payment request; customers pay to the charge address and the API tracks status through the full lifecycle from created → pending → confirmed or failed. Authentication uses the X-CC-Api-Key header and the API-Version header.
   version: '2018-03-22'
   termsOfService: https://commerce.coinbase.com/legal/user-agreement
   contact:
@@ -24,9 +22,7 @@ paths:
     post:
       operationId: createCharge
       summary: Create a charge
-      description: 'Creates a new crypto payment charge object. Returns a hosted payment URL and a charge code that the customer uses to complete payment.
-
-        '
+      description: Creates a new crypto payment charge object. Returns a hosted payment URL and a charge code that the customer uses to complete payment.
       tags:
       - Charges
       requestBody:
@@ -126,9 +122,7 @@ paths:
     post:
       operationId: cancelCharge
       summary: Cancel a charge
-      description: 'Cancels a charge that has not yet been confirmed. Only NEW charges can be cancelled; charges in PENDING or later states cannot be cancelled.
-
-        '
+      description: Cancels a charge that has not yet been confirmed. Only NEW charges can be cancelled; charges in PENDING or later states cannot be cancelled.
       tags:
       - Charges
       parameters:
@@ -152,9 +146,7 @@ paths:
     post:
       operationId: resolveCharge
       summary: Resolve a charge
-      description: 'Resolves a charge that has been overpaid or underpaid, marking it as resolved. Only applicable to UNRESOLVED charges.
-
-        '
+      description: Resolves a charge that has been overpaid or underpaid, marking it as resolved. Only applicable to UNRESOLVED charges.
       tags:
       - Charges
       parameters:
@@ -176,14 +168,14 @@ paths:
           $ref: '#/components/responses/InternalServerError'
 components:
   responses:
-    BadRequest:
-      description: Invalid request parameters
+    RateLimitExceeded:
+      description: Rate limit exceeded
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Resource not found
+    BadRequest:
+      description: Invalid request parameters
       content:
         application/json:
           schema:
@@ -194,74 +186,27 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
     InternalServerError:
       description: Internal server error
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    RateLimitExceeded:
-      description: Rate limit exceeded
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    ChargeCodeOrId:
+      name: charge_code_or_id
+      in: path
+      required: true
+      description: The charge ID (UUID) or charge code (8-character alphanumeric)
+      schema:
+        type: string
   schemas:
-    TimelineEntry:
-      type: object
-      properties:
-        time:
-          type: string
-          format: date-time
-        status:
-          $ref: '#/components/schemas/ChargeStatus'
-        context:
-          type: string
-          description: Additional context for UNRESOLVED statuses (e.g. UNDERPAID, OVERPAID)
-    Payment:
-      type: object
-      properties:
-        network:
-          type: string
-          description: Blockchain network (e.g. ethereum, bitcoin)
-        transaction_id:
-          type: string
-          description: Blockchain transaction hash
-        status:
-          type: string
-          enum:
-          - PENDING
-          - CONFIRMED
-        value:
-          type: object
-          properties:
-            local:
-              $ref: '#/components/schemas/Money'
-            crypto:
-              $ref: '#/components/schemas/Money'
-        block:
-          type: object
-          properties:
-            height:
-              type: integer
-            hash:
-              type: string
-            confirmations_accumulated:
-              type: integer
-            confirmations_required:
-              type: integer
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            type:
-              type: string
-              description: Error type identifier
-            message:
-              type: string
-              description: Human-readable error description
     ChargeListResponse:
       type: object
       properties:
@@ -274,39 +219,6 @@ components:
           items:
             type: string
           description: Pagination cursors [start, end]
-    CreateChargeRequest:
-      type: object
-      required:
-      - name
-      - description
-      - pricing_type
-      properties:
-        name:
-          type: string
-          description: Charge name shown to the customer
-          maxLength: 200
-        description:
-          type: string
-          description: Short description of what is being purchased
-          maxLength: 500
-        local_price:
-          $ref: '#/components/schemas/Money'
-          description: Required when pricing_type is fixed_price
-        pricing_type:
-          $ref: '#/components/schemas/PricingType'
-        redirect_url:
-          type: string
-          format: uri
-          description: URL to redirect the customer after a successful payment
-        cancel_url:
-          type: string
-          format: uri
-          description: URL to redirect the customer if they cancel the payment
-        metadata:
-          type: object
-          description: Arbitrary key-value metadata (max 20 keys, 100 chars per value)
-          additionalProperties:
-            type: string
     Charge:
       type: object
       properties:
@@ -372,6 +284,11 @@ components:
         updated_at:
           type: string
           format: date-time
+    ChargeResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Charge'
     Money:
       type: object
       description: A monetary amount with currency
@@ -387,19 +304,82 @@ components:
           type: string
           description: ISO 4217 currency code (fiat) or crypto ticker
           example: USD
-    PricingType:
-      type: string
-      enum:
-      - fixed_price
-      - no_price
-      description: '`fixed_price` charges the customer a specific fiat amount converted to crypto. `no_price` lets the customer pay any amount.
-
-        '
-    ChargeResponse:
+    Payment:
       type: object
       properties:
-        data:
-          $ref: '#/components/schemas/Charge'
+        network:
+          type: string
+          description: Blockchain network (e.g. ethereum, bitcoin)
+        transaction_id:
+          type: string
+          description: Blockchain transaction hash
+        status:
+          type: string
+          enum:
+          - PENDING
+          - CONFIRMED
+        value:
+          type: object
+          properties:
+            local:
+              $ref: '#/components/schemas/Money'
+            crypto:
+              $ref: '#/components/schemas/Money'
+        block:
+          type: object
+          properties:
+            height:
+              type: integer
+            hash:
+              type: string
+            confirmations_accumulated:
+              type: integer
+            confirmations_required:
+              type: integer
+    TimelineEntry:
+      type: object
+      properties:
+        time:
+          type: string
+          format: date-time
+        status:
+          $ref: '#/components/schemas/ChargeStatus'
+        context:
+          type: string
+          description: Additional context for UNRESOLVED statuses (e.g. UNDERPAID, OVERPAID)
+    CreateChargeRequest:
+      type: object
+      required:
+      - name
+      - description
+      - pricing_type
+      properties:
+        name:
+          type: string
+          description: Charge name shown to the customer
+          maxLength: 200
+        description:
+          type: string
+          description: Short description of what is being purchased
+          maxLength: 500
+        local_price:
+          $ref: '#/components/schemas/Money'
+          description: Required when pricing_type is fixed_price
+        pricing_type:
+          $ref: '#/components/schemas/PricingType'
+        redirect_url:
+          type: string
+          format: uri
+          description: URL to redirect the customer after a successful payment
+        cancel_url:
+          type: string
+          format: uri
+          description: URL to redirect the customer if they cancel the payment
+        metadata:
+          type: object
+          description: Arbitrary key-value metadata (max 20 keys, 100 chars per value)
+          additionalProperties:
+            type: string
     ChargeStatus:
       type: string
       description: The current lifecycle status of the charge
@@ -412,14 +392,26 @@ components:
       - RESOLVED
       - CANCELED
       - CANCELATION_COMPLETE
-  parameters:
-    ChargeCodeOrId:
-      name: charge_code_or_id
-      in: path
-      required: true
-      description: The charge ID (UUID) or charge code (8-character alphanumeric)
-      schema:
-        type: string
+    PricingType:
+      type: string
+      enum:
+      - fixed_price
+      - no_price
+      description: '`fixed_price` charges the customer a specific fiat amount converted to crypto. `no_price` lets the customer pay any amount.
+
+        '
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            type:
+              type: string
+              description: Error type identifier
+            message:
+              type: string
+              description: Human-readable error description
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

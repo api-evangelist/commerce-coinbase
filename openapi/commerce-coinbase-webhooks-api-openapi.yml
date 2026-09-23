@@ -1,9 +1,7 @@
 openapi: 3.2.0
 info:
   title: Coinbase Business Checkouts Webhooks API
-  description: 'Current-generation REST API replacing the legacy Charges API for creating and managing single-use hosted payment checkouts. Merchants create a checkout object with a fixed USDC amount on the Base network; customers complete payment through a hosted URL. Uses JWT bearer token authentication and idempotency keys. Provides simplified status model and webhook events for the payment lifecycle.
-
-    '
+  description: Current-generation REST API replacing the legacy Charges API for creating and managing single-use hosted payment checkouts. Merchants create a checkout object with a fixed USDC amount on the Base network; customers complete payment through a hosted URL. Uses JWT bearer token authentication and idempotency keys. Provides simplified status model and webhook events for the payment lifecycle.
   version: '1'
   termsOfService: https://commerce.coinbase.com/legal/user-agreement
   contact:
@@ -98,18 +96,26 @@ webhooks:
           description: Webhook received successfully
 components:
   schemas:
-    CheckoutStatus:
-      type: string
-      description: Payment lifecycle status of a checkout
-      enum:
-      - ACTIVE
-      - PROCESSING
-      - DEACTIVATED
-      - EXPIRED
-      - COMPLETED
-      - FAILED
-      - REFUNDED
-      - PARTIALLY_REFUNDED
+    Settlement:
+      type: object
+      description: Fee breakdown for a completed payment settlement
+      properties:
+        totalAmount:
+          type: string
+          description: Gross received amount
+          example: '50.00'
+        feeAmount:
+          type: string
+          description: Coinbase transaction fee
+          example: '0.50'
+        netAmount:
+          type: string
+          description: Net amount after fees
+          example: '49.50'
+        currency:
+          type: string
+          description: Settlement currency code
+          example: USDC
     CheckoutWebhookPayload:
       type: object
       description: Webhook event payload for checkout lifecycle events
@@ -178,26 +184,6 @@ components:
         expiresAt:
           type: string
           format: date-time
-    Settlement:
-      type: object
-      description: Fee breakdown for a completed payment settlement
-      properties:
-        totalAmount:
-          type: string
-          description: Gross received amount
-          example: '50.00'
-        feeAmount:
-          type: string
-          description: Coinbase transaction fee
-          example: '0.50'
-        netAmount:
-          type: string
-          description: Net amount after fees
-          example: '49.50'
-        currency:
-          type: string
-          description: Settlement currency code
-          example: USDC
     Refund:
       type: object
       description: An individual refund record associated with a checkout
@@ -242,6 +228,18 @@ components:
         exchangeRate:
           type: string
           description: Exchange rate applied at time of refund
+    CheckoutStatus:
+      type: string
+      description: Payment lifecycle status of a checkout
+      enum:
+      - ACTIVE
+      - PROCESSING
+      - DEACTIVATED
+      - EXPIRED
+      - COMPLETED
+      - FAILED
+      - REFUNDED
+      - PARTIALLY_REFUNDED
   securitySchemes:
     BearerAuth:
       type: http

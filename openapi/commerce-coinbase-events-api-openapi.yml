@@ -1,9 +1,7 @@
 openapi: 3.2.0
 info:
   title: Coinbase Commerce Charges Events API
-  description: 'Legacy REST API for creating and managing crypto payment charges. Merchants generate a charge object representing a payment request; customers pay to the charge address and the API tracks status through the full lifecycle from created → pending → confirmed or failed. Authentication uses the X-CC-Api-Key header and the API-Version header.
-
-    '
+  description: Legacy REST API for creating and managing crypto payment charges. Merchants generate a charge object representing a payment request; customers pay to the charge address and the API tracks status through the full lifecycle from created → pending → confirmed or failed. Authentication uses the X-CC-Api-Key header and the API-Version header.
   version: '2018-03-22'
   termsOfService: https://commerce.coinbase.com/legal/user-agreement
   contact:
@@ -83,92 +81,6 @@ paths:
           $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
-    EventListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Event'
-    TimelineEntry:
-      type: object
-      properties:
-        time:
-          type: string
-          format: date-time
-        status:
-          $ref: '#/components/schemas/ChargeStatus'
-        context:
-          type: string
-          description: Additional context for UNRESOLVED statuses (e.g. UNDERPAID, OVERPAID)
-    Payment:
-      type: object
-      properties:
-        network:
-          type: string
-          description: Blockchain network (e.g. ethereum, bitcoin)
-        transaction_id:
-          type: string
-          description: Blockchain transaction hash
-        status:
-          type: string
-          enum:
-          - PENDING
-          - CONFIRMED
-        value:
-          type: object
-          properties:
-            local:
-              $ref: '#/components/schemas/Money'
-            crypto:
-              $ref: '#/components/schemas/Money'
-        block:
-          type: object
-          properties:
-            height:
-              type: integer
-            hash:
-              type: string
-            confirmations_accumulated:
-              type: integer
-            confirmations_required:
-              type: integer
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            type:
-              type: string
-              description: Error type identifier
-            message:
-              type: string
-              description: Human-readable error description
-    Event:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        type:
-          type: string
-          description: Event type
-          enum:
-          - charge:created
-          - charge:pending
-          - charge:confirmed
-          - charge:failed
-          - charge:delayed
-          - charge:resolved
-        api_version:
-          type: string
-          example: '2018-03-22'
-        created_at:
-          type: string
-          format: date-time
-        data:
-          $ref: '#/components/schemas/Charge'
     Charge:
       type: object
       properties:
@@ -249,19 +161,80 @@ components:
           type: string
           description: ISO 4217 currency code (fiat) or crypto ticker
           example: USD
-    PricingType:
-      type: string
-      enum:
-      - fixed_price
-      - no_price
-      description: '`fixed_price` charges the customer a specific fiat amount converted to crypto. `no_price` lets the customer pay any amount.
-
-        '
-    EventResponse:
+    Payment:
+      type: object
+      properties:
+        network:
+          type: string
+          description: Blockchain network (e.g. ethereum, bitcoin)
+        transaction_id:
+          type: string
+          description: Blockchain transaction hash
+        status:
+          type: string
+          enum:
+          - PENDING
+          - CONFIRMED
+        value:
+          type: object
+          properties:
+            local:
+              $ref: '#/components/schemas/Money'
+            crypto:
+              $ref: '#/components/schemas/Money'
+        block:
+          type: object
+          properties:
+            height:
+              type: integer
+            hash:
+              type: string
+            confirmations_accumulated:
+              type: integer
+            confirmations_required:
+              type: integer
+    TimelineEntry:
+      type: object
+      properties:
+        time:
+          type: string
+          format: date-time
+        status:
+          $ref: '#/components/schemas/ChargeStatus'
+        context:
+          type: string
+          description: Additional context for UNRESOLVED statuses (e.g. UNDERPAID, OVERPAID)
+    Event:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        type:
+          type: string
+          description: Event type
+          enum:
+          - charge:created
+          - charge:pending
+          - charge:confirmed
+          - charge:failed
+          - charge:delayed
+          - charge:resolved
+        api_version:
+          type: string
+          example: '2018-03-22'
+        created_at:
+          type: string
+          format: date-time
+        data:
+          $ref: '#/components/schemas/Charge'
+    EventListResponse:
       type: object
       properties:
         data:
-          $ref: '#/components/schemas/Event'
+          type: array
+          items:
+            $ref: '#/components/schemas/Event'
     ChargeStatus:
       type: string
       description: The current lifecycle status of the charge
@@ -274,15 +247,40 @@ components:
       - RESOLVED
       - CANCELED
       - CANCELATION_COMPLETE
+    PricingType:
+      type: string
+      enum:
+      - fixed_price
+      - no_price
+      description: '`fixed_price` charges the customer a specific fiat amount converted to crypto. `no_price` lets the customer pay any amount.
+
+        '
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            type:
+              type: string
+              description: Error type identifier
+            message:
+              type: string
+              description: Human-readable error description
+    EventResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Event'
   responses:
-    NotFound:
-      description: Resource not found
+    Unauthorized:
+      description: Missing or invalid API key
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Missing or invalid API key
+    NotFound:
+      description: Resource not found
       content:
         application/json:
           schema:

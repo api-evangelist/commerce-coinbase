@@ -16,11 +16,13 @@
   "notes": [
     "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
     "openapi-charges.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "openapi-checkouts.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0"
+    "openapi-checkouts.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "commerce-coinbase-charges-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "commerce-coinbase-checkouts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "commerce-coinbase-events-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+    "commerce-coinbase-events-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "commerce-coinbase-webhooks-api-openapi.yml: previously refined output, superseded by openapi/_original/"
   ]
 }
