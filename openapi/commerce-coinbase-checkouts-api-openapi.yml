@@ -233,11 +233,58 @@ paths:
           $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
-    CheckoutResponse:
+    Refund:
       type: object
-      description: Single checkout response wrapper
-      allOf:
-      - $ref: '#/components/schemas/CheckoutObject'
+      description: An individual refund record associated with a checkout
+      properties:
+        id:
+          type: string
+          description: Unique refund identifier
+        checkoutId:
+          type: string
+          description: Parent checkout ID
+        amount:
+          type: string
+          description: Refunded amount
+          example: '25.00'
+        currency:
+          type: string
+          description: Refund currency
+          example: USDC
+        status:
+          type: string
+          description: Refund processing status
+          enum:
+          - PENDING
+          - COMPLETED
+          - FAILED
+        reason:
+          type: string
+          description: Optional merchant-supplied refund reason
+          maxLength: 500
+        transactionHash:
+          type: string
+          description: Blockchain transaction hash when the refund is completed
+        completedAt:
+          type: string
+          format: date-time
+        fiatAmount:
+          type: string
+          description: Fiat equivalent of the refund amount
+        fiatCurrency:
+          type: string
+          description: Fiat currency code (e.g. USD)
+        exchangeRate:
+          type: string
+          description: Exchange rate applied at time of refund
+    RefundCheckoutResult:
+      type: object
+      description: Result of a refund request
+      properties:
+        checkout:
+          $ref: '#/components/schemas/CheckoutObject'
+        refund:
+          $ref: '#/components/schemas/Refund'
     CheckoutListResponse:
       type: object
       description: Paginated list of checkouts
@@ -249,6 +296,66 @@ components:
         nextPageToken:
           type: string
           description: Pagination token; present only when more records exist
+    ErrorResponse:
+      type: object
+      properties:
+        errorType:
+          type: string
+          description: Machine-readable error type
+        errorMessage:
+          type: string
+          description: Human-readable error description
+    CheckoutStatus:
+      type: string
+      description: Payment lifecycle status of a checkout
+      enum:
+      - ACTIVE
+      - PROCESSING
+      - DEACTIVATED
+      - EXPIRED
+      - COMPLETED
+      - FAILED
+      - REFUNDED
+      - PARTIALLY_REFUNDED
+    Settlement:
+      type: object
+      description: Fee breakdown for a completed payment settlement
+      properties:
+        totalAmount:
+          type: string
+          description: Gross received amount
+          example: '50.00'
+        feeAmount:
+          type: string
+          description: Coinbase transaction fee
+          example: '0.50'
+        netAmount:
+          type: string
+          description: Net amount after fees
+          example: '49.50'
+        currency:
+          type: string
+          description: Settlement currency code
+          example: USDC
+    RefundCheckoutRequest:
+      type: object
+      required:
+      - amount
+      properties:
+        amount:
+          type: string
+          pattern: ^\d+(\.\d{1,2})?$
+          description: Refund amount; must be > 0 and not exceed remaining refundable balance
+          example: '25.00'
+        currency:
+          type: string
+          description: Refund currency; defaults to checkout's original currency
+          example: USDC
+        reason:
+          type: string
+          description: Optional reason for the refund
+          maxLength: 500
+          example: Customer requested refund
     CreateCheckoutRequest:
       type: object
       required:
@@ -387,133 +494,14 @@ components:
         updatedAt:
           type: string
           format: date-time
-    CheckoutStatus:
-      type: string
-      description: Payment lifecycle status of a checkout
-      enum:
-      - ACTIVE
-      - PROCESSING
-      - DEACTIVATED
-      - EXPIRED
-      - COMPLETED
-      - FAILED
-      - REFUNDED
-      - PARTIALLY_REFUNDED
-    RefundCheckoutRequest:
+    CheckoutResponse:
       type: object
-      required:
-      - amount
-      properties:
-        amount:
-          type: string
-          pattern: ^\d+(\.\d{1,2})?$
-          description: Refund amount; must be > 0 and not exceed remaining refundable balance
-          example: '25.00'
-        currency:
-          type: string
-          description: Refund currency; defaults to checkout's original currency
-          example: USDC
-        reason:
-          type: string
-          description: Optional reason for the refund
-          maxLength: 500
-          example: Customer requested refund
-    RefundCheckoutResult:
-      type: object
-      description: Result of a refund request
-      properties:
-        checkout:
-          $ref: '#/components/schemas/CheckoutObject'
-        refund:
-          $ref: '#/components/schemas/Refund'
-    Settlement:
-      type: object
-      description: Fee breakdown for a completed payment settlement
-      properties:
-        totalAmount:
-          type: string
-          description: Gross received amount
-          example: '50.00'
-        feeAmount:
-          type: string
-          description: Coinbase transaction fee
-          example: '0.50'
-        netAmount:
-          type: string
-          description: Net amount after fees
-          example: '49.50'
-        currency:
-          type: string
-          description: Settlement currency code
-          example: USDC
-    ErrorResponse:
-      type: object
-      properties:
-        errorType:
-          type: string
-          description: Machine-readable error type
-        errorMessage:
-          type: string
-          description: Human-readable error description
-    Refund:
-      type: object
-      description: An individual refund record associated with a checkout
-      properties:
-        id:
-          type: string
-          description: Unique refund identifier
-        checkoutId:
-          type: string
-          description: Parent checkout ID
-        amount:
-          type: string
-          description: Refunded amount
-          example: '25.00'
-        currency:
-          type: string
-          description: Refund currency
-          example: USDC
-        status:
-          type: string
-          description: Refund processing status
-          enum:
-          - PENDING
-          - COMPLETED
-          - FAILED
-        reason:
-          type: string
-          description: Optional merchant-supplied refund reason
-          maxLength: 500
-        transactionHash:
-          type: string
-          description: Blockchain transaction hash when the refund is completed
-        completedAt:
-          type: string
-          format: date-time
-        fiatAmount:
-          type: string
-          description: Fiat equivalent of the refund amount
-        fiatCurrency:
-          type: string
-          description: Fiat currency code (e.g. USD)
-        exchangeRate:
-          type: string
-          description: Exchange rate applied at time of refund
+      description: Single checkout response wrapper
+      allOf:
+      - $ref: '#/components/schemas/CheckoutObject'
   responses:
-    Forbidden:
-      description: Insufficient permissions
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
     RateLimitExceeded:
       description: Rate limit exceeded
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Invalid request parameters
       content:
         application/json:
           schema:
@@ -526,6 +514,18 @@ components:
             $ref: '#/components/schemas/ErrorResponse'
     NotFound:
       description: Requested resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Invalid request parameters
       content:
         application/json:
           schema:

@@ -116,6 +116,50 @@ components:
           type: string
           description: Settlement currency code
           example: USDC
+    Refund:
+      type: object
+      description: An individual refund record associated with a checkout
+      properties:
+        id:
+          type: string
+          description: Unique refund identifier
+        checkoutId:
+          type: string
+          description: Parent checkout ID
+        amount:
+          type: string
+          description: Refunded amount
+          example: '25.00'
+        currency:
+          type: string
+          description: Refund currency
+          example: USDC
+        status:
+          type: string
+          description: Refund processing status
+          enum:
+          - PENDING
+          - COMPLETED
+          - FAILED
+        reason:
+          type: string
+          description: Optional merchant-supplied refund reason
+          maxLength: 500
+        transactionHash:
+          type: string
+          description: Blockchain transaction hash when the refund is completed
+        completedAt:
+          type: string
+          format: date-time
+        fiatAmount:
+          type: string
+          description: Fiat equivalent of the refund amount
+        fiatCurrency:
+          type: string
+          description: Fiat currency code (e.g. USD)
+        exchangeRate:
+          type: string
+          description: Exchange rate applied at time of refund
     CheckoutWebhookPayload:
       type: object
       description: Webhook event payload for checkout lifecycle events
@@ -184,50 +228,6 @@ components:
         expiresAt:
           type: string
           format: date-time
-    Refund:
-      type: object
-      description: An individual refund record associated with a checkout
-      properties:
-        id:
-          type: string
-          description: Unique refund identifier
-        checkoutId:
-          type: string
-          description: Parent checkout ID
-        amount:
-          type: string
-          description: Refunded amount
-          example: '25.00'
-        currency:
-          type: string
-          description: Refund currency
-          example: USDC
-        status:
-          type: string
-          description: Refund processing status
-          enum:
-          - PENDING
-          - COMPLETED
-          - FAILED
-        reason:
-          type: string
-          description: Optional merchant-supplied refund reason
-          maxLength: 500
-        transactionHash:
-          type: string
-          description: Blockchain transaction hash when the refund is completed
-        completedAt:
-          type: string
-          format: date-time
-        fiatAmount:
-          type: string
-          description: Fiat equivalent of the refund amount
-        fiatCurrency:
-          type: string
-          description: Fiat currency code (e.g. USD)
-        exchangeRate:
-          type: string
-          description: Exchange rate applied at time of refund
     CheckoutStatus:
       type: string
       description: Payment lifecycle status of a checkout
