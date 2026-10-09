@@ -1,3 +1,7 @@
+# Provenance stamped 2026-10-07 (roadmap#943): written by an API Evangelist sweep (undated — the file carries no date and git cannot supply one), not
+# harvested from the provider. `method: generated` so the economics campaign may replace it with a
+# dated, verbatim transcription; every figure below is unverified until it does.
+method: generated
 plans:
   - name: Standard Merchant
     description: Default Coinbase Commerce merchant plan with no monthly or setup fees. Access to the full REST API, hosted checkout pages, webhooks, and payment management dashboard. Charges 1% per completed transaction with fees collected in the settlement currency.
@@ -33,3 +37,21 @@ plans:
       - Custom fee structure
       - Dedicated account support
     notes: Contact help.coinbase.com/en/commerce for enterprise inquiries.
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models: []
+  units: []
+  plans:
+  - name: Standard Merchant
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Enterprise
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
