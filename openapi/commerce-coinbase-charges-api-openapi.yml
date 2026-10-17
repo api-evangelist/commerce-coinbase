@@ -168,11 +168,85 @@ paths:
           $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
-    ChargeResponse:
+    Money:
+      type: object
+      description: A monetary amount with currency
+      required:
+      - amount
+      - currency
+      properties:
+        amount:
+          type: string
+          description: Decimal amount string (e.g. "49.99")
+          example: '49.99'
+        currency:
+          type: string
+          description: ISO 4217 currency code (fiat) or crypto ticker
+          example: USD
+    ErrorResponse:
       type: object
       properties:
-        data:
-          $ref: '#/components/schemas/Charge'
+        error:
+          type: object
+          properties:
+            type:
+              type: string
+              description: Error type identifier
+            message:
+              type: string
+              description: Human-readable error description
+    Payment:
+      type: object
+      properties:
+        network:
+          type: string
+          description: Blockchain network (e.g. ethereum, bitcoin)
+        transaction_id:
+          type: string
+          description: Blockchain transaction hash
+        status:
+          type: string
+          enum:
+          - PENDING
+          - CONFIRMED
+        value:
+          type: object
+          properties:
+            local:
+              $ref: '#/components/schemas/Money'
+            crypto:
+              $ref: '#/components/schemas/Money'
+        block:
+          type: object
+          properties:
+            height:
+              type: integer
+            hash:
+              type: string
+            confirmations_accumulated:
+              type: integer
+            confirmations_required:
+              type: integer
+    ChargeStatus:
+      type: string
+      description: The current lifecycle status of the charge
+      enum:
+      - NEW
+      - PENDING
+      - COMPLETED
+      - EXPIRED
+      - UNRESOLVED
+      - RESOLVED
+      - CANCELED
+      - CANCELATION_COMPLETE
+    PricingType:
+      type: string
+      enum:
+      - fixed_price
+      - no_price
+      description: '`fixed_price` charges the customer a specific fiat amount converted to crypto. `no_price` lets the customer pay any amount.
+
+        '
     Charge:
       type: object
       properties:
@@ -238,30 +312,11 @@ components:
         updated_at:
           type: string
           format: date-time
-    ChargeStatus:
-      type: string
-      description: The current lifecycle status of the charge
-      enum:
-      - NEW
-      - PENDING
-      - COMPLETED
-      - EXPIRED
-      - UNRESOLVED
-      - RESOLVED
-      - CANCELED
-      - CANCELATION_COMPLETE
-    ChargeListResponse:
+    ChargeResponse:
       type: object
       properties:
         data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Charge'
-        cursor_range:
-          type: array
-          items:
-            type: string
-          description: Pagination cursors [start, end]
+          $ref: '#/components/schemas/Charge'
     CreateChargeRequest:
       type: object
       required:
@@ -295,50 +350,18 @@ components:
           description: Arbitrary key-value metadata (max 20 keys, 100 chars per value)
           additionalProperties:
             type: string
-    ErrorResponse:
+    ChargeListResponse:
       type: object
       properties:
-        error:
-          type: object
-          properties:
-            type:
-              type: string
-              description: Error type identifier
-            message:
-              type: string
-              description: Human-readable error description
-    Payment:
-      type: object
-      properties:
-        network:
-          type: string
-          description: Blockchain network (e.g. ethereum, bitcoin)
-        transaction_id:
-          type: string
-          description: Blockchain transaction hash
-        status:
-          type: string
-          enum:
-          - PENDING
-          - CONFIRMED
-        value:
-          type: object
-          properties:
-            local:
-              $ref: '#/components/schemas/Money'
-            crypto:
-              $ref: '#/components/schemas/Money'
-        block:
-          type: object
-          properties:
-            height:
-              type: integer
-            hash:
-              type: string
-            confirmations_accumulated:
-              type: integer
-            confirmations_required:
-              type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Charge'
+        cursor_range:
+          type: array
+          items:
+            type: string
+          description: Pagination cursors [start, end]
     TimelineEntry:
       type: object
       properties:
@@ -350,40 +373,21 @@ components:
         context:
           type: string
           description: Additional context for UNRESOLVED statuses (e.g. UNDERPAID, OVERPAID)
-    PricingType:
-      type: string
-      enum:
-      - fixed_price
-      - no_price
-      description: '`fixed_price` charges the customer a specific fiat amount converted to crypto. `no_price` lets the customer pay any amount.
-
-        '
-    Money:
-      type: object
-      description: A monetary amount with currency
-      required:
-      - amount
-      - currency
-      properties:
-        amount:
-          type: string
-          description: Decimal amount string (e.g. "49.99")
-          example: '49.99'
-        currency:
-          type: string
-          description: ISO 4217 currency code (fiat) or crypto ticker
-          example: USD
-  parameters:
-    ChargeCodeOrId:
-      name: charge_code_or_id
-      in: path
-      required: true
-      description: The charge ID (UUID) or charge code (8-character alphanumeric)
-      schema:
-        type: string
   responses:
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
     Unauthorized:
       description: Missing or invalid API key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    RateLimitExceeded:
+      description: Rate limit exceeded
       content:
         application/json:
           schema:
@@ -400,18 +404,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    InternalServerError:
-      description: Internal server error
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    RateLimitExceeded:
-      description: Rate limit exceeded
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    ChargeCodeOrId:
+      name: charge_code_or_id
+      in: path
+      required: true
+      description: The charge ID (UUID) or charge code (8-character alphanumeric)
+      schema:
+        type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

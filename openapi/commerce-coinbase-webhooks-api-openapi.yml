@@ -96,18 +96,6 @@ webhooks:
           description: Webhook received successfully
 components:
   schemas:
-    CheckoutStatus:
-      type: string
-      description: Payment lifecycle status of a checkout
-      enum:
-      - ACTIVE
-      - PROCESSING
-      - DEACTIVATED
-      - EXPIRED
-      - COMPLETED
-      - FAILED
-      - REFUNDED
-      - PARTIALLY_REFUNDED
     Refund:
       type: object
       description: An individual refund record associated with a checkout
@@ -152,6 +140,18 @@ components:
         exchangeRate:
           type: string
           description: Exchange rate applied at time of refund
+    CheckoutStatus:
+      type: string
+      description: Payment lifecycle status of a checkout
+      enum:
+      - ACTIVE
+      - PROCESSING
+      - DEACTIVATED
+      - EXPIRED
+      - COMPLETED
+      - FAILED
+      - REFUNDED
+      - PARTIALLY_REFUNDED
     CheckoutWebhookPayload:
       type: object
       description: Webhook event payload for checkout lifecycle events
