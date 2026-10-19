@@ -1,10 +1,20 @@
 {
   "provider": "commerce-coinbase",
   "sources": [
+    "_original/commerce-coinbase-openapi.json",
     "_original/openapi-charges.yml",
     "_original/openapi-checkouts.yml"
   ],
   "outputs": [
+    "commerce-coinbase-account-management-api-openapi.yml",
+    "commerce-coinbase-authentication-api-openapi.yml",
+    "commerce-coinbase-combo-books-api-openapi.yml",
+    "commerce-coinbase-market-data-api-openapi.yml",
+    "commerce-coinbase-session-management-api-openapi.yml",
+    "commerce-coinbase-subscription-management-api-openapi.yml",
+    "commerce-coinbase-supporting-api-openapi.yml",
+    "commerce-coinbase-trading-api-openapi.yml",
+    "commerce-coinbase-wallet-api-openapi.yml",
     "commerce-coinbase-charges-api-openapi.yml",
     "commerce-coinbase-events-api-openapi.yml",
     "commerce-coinbase-checkouts-api-openapi.yml",
@@ -14,10 +24,16 @@
   "errors": [],
   "warnings": [],
   "notes": [
-    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "sourced from openapi/_original/ (3 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "commerce-coinbase-openapi.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "commerce-coinbase-openapi.json: declared missing tag: Combo Books",
+    "commerce-coinbase-openapi.json: declared missing tag: Mark Price",
+    "commerce-coinbase-openapi.json: declared missing tag: Matching Engine",
+    "commerce-coinbase-openapi.json: declared missing tag: Supporting",
+    "commerce-coinbase-openapi.json: multi-axis tagging (14 tags, 9 first tags, 2.23x duplication over 102 operations) \u2014 split on first tag, 101 operations narrowed",
     "openapi-charges.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "openapi-checkouts.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "apis.yml register: already-registered"
+    "apis.yml register: written (+9 apis, 13 total)"
   ],
   "skipped": [
     "commerce-coinbase-charges-api-openapi.yml: previously refined output, superseded by openapi/_original/",

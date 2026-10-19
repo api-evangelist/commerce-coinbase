@@ -1,0 +1,323 @@
+openapi: 3.2.0
+info:
+  description: Coinbase Retail Advanced Trade API for derivatives trading.
+  title: Coinbase Retail Advanced Trade (Deribit) Supporting API
+  version: 2.1.1
+servers:
+- url: https://drb.coinbase.com/api/v2
+tags:
+- name: Supporting
+paths:
+  /public/get_time:
+    get:
+      description: 'Retrieves the current time (in milliseconds). This API endpoint can be used to check the clock skew between your software and Deribit''s systems.
+
+
+        Try in API console'
+      parameters: []
+      requestBody:
+        description: JSON-RPC request body
+        content:
+          application/json:
+            examples:
+              request:
+                description: JSON-RPC Request Example
+                value:
+                  id: 7365
+                  jsonrpc: '2.0'
+                  method: public/get_time
+                  params: {}
+      responses:
+        '200':
+          $ref: '#/components/responses/PublicGetTimeResponse'
+      security: []
+      tags:
+      - Supporting
+      x-mint:
+        href: /api-reference/supporting/public-get_time
+        metadata:
+          keywords:
+          - public/get_time
+          og:title: public/get_time
+          title: public/get_time
+      summary: Get public get time
+      x-summary-source: derived
+      operationId: getPublicGetTime
+      x-operation-id-source: derived
+  /public/hello:
+    get:
+      description: 'Method used to introduce the client software connected to Deribit platform over websocket. Provided data may have an impact on the maintained connection and will be collected for internal statistical purposes. In response, Deribit will also introduce itself.
+
+
+        Try in API console'
+      parameters:
+      - name: client_name
+        in: query
+        description: Client software name
+        required: true
+        schema:
+          type: string
+          example: My Trading Software
+      - name: client_version
+        in: query
+        description: Client software version
+        required: true
+        schema:
+          type: string
+          example: 1.0.2
+      requestBody:
+        description: JSON-RPC request body
+        content:
+          application/json:
+            examples:
+              request:
+                description: JSON-RPC Request Example
+                value:
+                  id: 2841
+                  jsonrpc: '2.0'
+                  method: public/hello
+                  params:
+                    client_name: My Trading Software
+                    client_version: 1.0.2
+      responses:
+        '200':
+          $ref: '#/components/responses/PublicTestResponse'
+      security: []
+      tags:
+      - Supporting
+      x-mint:
+        href: /api-reference/supporting/public-hello
+        metadata:
+          keywords:
+          - public/hello
+          - client_name
+          - client_version
+          - version
+          og:title: public/hello
+          title: public/hello
+      summary: Get public hello
+      x-summary-source: derived
+      operationId: getPublicHello
+      x-operation-id-source: derived
+  /public/status:
+    get:
+      description: 'Method used to get information about locked currencies
+
+
+        Try in API console'
+      parameters: []
+      requestBody:
+        description: JSON-RPC request body
+        content:
+          application/json:
+            examples:
+              request:
+                description: JSON-RPC Request Example
+                value:
+                  id: 55
+                  jsonrpc: '2.0'
+                  method: public/status
+                  params: {}
+      responses:
+        '200':
+          $ref: '#/components/responses/PublicStatusResponse'
+      security: []
+      tags:
+      - Supporting
+      x-mint:
+        href: /api-reference/supporting/public-status
+        metadata:
+          keywords:
+          - public/status
+          - locked
+          - locked_indices
+          og:title: public/status
+          title: public/status
+      summary: Get public status
+      x-summary-source: derived
+      operationId: getPublicStatus
+      x-operation-id-source: derived
+  /public/test:
+    get:
+      description: 'Tests the connection to the API server, and returns its version. You can use this to make sure the API is reachable, and matches the expected version.
+
+
+        Try in API console'
+      parameters:
+      - name: expected_result
+        in: query
+        description: The value "exception" will trigger an error response. This may be useful for testing wrapper libraries.
+        required: false
+        schema:
+          type: string
+          enum:
+          - exception
+      requestBody:
+        description: JSON-RPC request body
+        content:
+          application/json:
+            examples:
+              request:
+                description: JSON-RPC Request Example
+                value:
+                  id: 8212
+                  jsonrpc: '2.0'
+                  method: public/test
+                  params: {}
+      responses:
+        '200':
+          $ref: '#/components/responses/PublicTestResponse'
+      security: []
+      tags:
+      - Supporting
+      x-mint:
+        href: /api-reference/supporting/public-test
+        metadata:
+          keywords:
+          - public/test
+          - expected_result
+          - version
+          og:title: public/test
+          title: public/test
+      summary: Get public test
+      x-summary-source: derived
+      operationId: getPublicTest
+      x-operation-id-source: derived
+components:
+  responses:
+    PublicStatusResponse:
+      description: Success response
+      content:
+        application/json:
+          examples:
+            response:
+              description: Response example
+              value:
+                id: 55
+                jsonrpc: '2.0'
+                result:
+                  locked: true
+                  locked_currencies:
+                  - BTC
+                  - ETH
+          schema:
+            $ref: '#/components/schemas/PublicStatusResponse'
+    PublicTestResponse:
+      description: Success response
+      content:
+        application/json:
+          examples:
+            response:
+              description: Response example
+              value:
+                id: 8212
+                jsonrpc: '2.0'
+                result:
+                  version: 1.2.26
+          schema:
+            $ref: '#/components/schemas/PublicTestResponse'
+    PublicGetTimeResponse:
+      description: Success response
+      content:
+        application/json:
+          examples:
+            response:
+              description: Response example
+              value:
+                id: 7365
+                jsonrpc: '2.0'
+                result: 1550147385946
+          schema:
+            $ref: '#/components/schemas/PublicGetTimeResponse'
+  schemas:
+    PublicStatusResponse:
+      type: object
+      properties:
+        id:
+          description: The id that was sent in the request
+          type: integer
+        jsonrpc:
+          description: The JSON-RPC version (2.0)
+          type: string
+          enum:
+          - '2.0'
+        result:
+          type: object
+          properties:
+            locked:
+              description: '`true` when platform is locked in all currencies, `partial` when some currencies are locked, `false` - when there are not currencies locked'
+              type: string
+            locked_indices:
+              description: List of currency indices locked platform-wise
+              type: array
+              items:
+                type: string
+          required:
+          - locked
+      required:
+      - result
+      - jsonrpc
+    PublicTestResponse:
+      type: object
+      properties:
+        id:
+          description: The id that was sent in the request
+          type: integer
+        jsonrpc:
+          description: The JSON-RPC version (2.0)
+          type: string
+          enum:
+          - '2.0'
+        result:
+          type: object
+          properties:
+            version:
+              description: The API version
+              type: string
+              example: 2.1.26
+          required:
+          - version
+      required:
+      - result
+      - jsonrpc
+    PublicGetTimeResponse:
+      type: object
+      properties:
+        id:
+          description: The id that was sent in the request
+          type: integer
+        jsonrpc:
+          description: The JSON-RPC version (2.0)
+          type: string
+          enum:
+          - '2.0'
+        result:
+          description: Current timestamp (milliseconds since the UNIX epoch)
+          type: integer
+          example: 1517329113791
+      required:
+      - result
+      - jsonrpc
+  securitySchemes:
+    ApiKey:
+      description: 'Call `public/auth` with `grant_type: coinbase_cdp` and a CDP JWT. Send the returned `access_token` as `Authorization: Bearer`.'
+      scheme: bearer
+      type: http
+    OAuth2:
+      description: 'Call `public/auth` with `grant_type: coinbase_oauth2` and an OAuth access token. Send the returned `access_token` as `Authorization: Bearer`.'
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.coinbase.com/oauth2/auth
+          scopes:
+            wallet:accounts:read: View your accounts.
+            wallet:accounts:update: Authorize `wallet:accounts:update` operations.
+            wallet:buys:create: Place, edit, and cancel orders.
+            wallet:payment-methods:read: View your payment methods.
+            wallet:trades:create: Convert cryptocurrencies.
+            wallet:trades:read: View your cryptocurrency conversions.
+            wallet:transactions:read: View your transactions.
+            wallet:transactions:transfer: Transfer funds between accounts.
+            wallet:user:read: View your account information.
+            wallet:user:update: Update your account information.
+          tokenUrl: https://login.coinbase.com/oauth2/token
+      type: oauth2

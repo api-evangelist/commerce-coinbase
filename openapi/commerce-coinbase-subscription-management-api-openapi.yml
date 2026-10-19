@@ -1,0 +1,501 @@
+openapi: 3.2.0
+info:
+  description: Coinbase Retail Advanced Trade API for derivatives trading.
+  title: Coinbase Retail Advanced Trade (Deribit) Subscription…
+  version: 2.1.1
+servers:
+- url: https://drb.coinbase.com/api/v2
+tags:
+- description: Subscription works as notifications, so users will automatically (after subscribing) receive messages from the server. Overview for each channel response format is described in subscriptions section.
+  name: Subscription Management
+paths:
+  /private/subscribe:
+    get:
+      description: 'Subscribe to one or more channels. The name of the channel determines what information will be provided, and in what form.
+
+
+        For a complete list of available subscription channels and their notification formats, see Notifications and Subscriptions.
+
+
+        **Note - This method has distinct API rate limiting requirements:** Sustained rate: ~3.3 requests/second. For more information, see Rate Limits.
+
+
+        **📖 Related Article:** Market Data Collection Best Practices
+
+
+        Try in API console'
+      parameters:
+      - name: channels
+        in: query
+        description: A list of channels to subscribe to. See [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications) for all available channels.
+        required: true
+        schema:
+          type: array
+          items:
+            example: deribit_price_index.btc_usd
+            type: string
+          example:
+          - deribit_price_index.btc_usd
+        explode: true
+        style: form
+      - name: label
+        in: query
+        description: Optional label which will be added to notifications of private channels (max 16 characters).
+        required: false
+        schema:
+          type: string
+          example: TestLabel1
+      requestBody:
+        description: JSON-RPC request body
+        content:
+          application/json:
+            examples:
+              request:
+                description: JSON-RPC Request Example
+                value:
+                  id: 4235
+                  jsonrpc: '2.0'
+                  method: private/subscribe
+                  params:
+                    channels:
+                    - deribit_price_index.btc_usd
+      responses:
+        '200':
+          $ref: '#/components/responses/PrivateSubscribeResponse'
+        '401':
+          $ref: '#/components/responses/ErrorMessageResponse'
+      security:
+      - ApiKey:
+        - view
+      - OAuth2:
+        - wallet:user:read
+      tags:
+      - Subscription Management
+      x-mint:
+        href: /api-reference/subscription-management/private-subscribe
+        metadata:
+          keywords:
+          - private/subscribe
+          - channels
+          - label
+          og:title: private/subscribe
+          title: private/subscribe
+      summary: Get private subscribe
+      x-summary-source: derived
+      operationId: getPrivateSubscribe
+      x-operation-id-source: derived
+  /private/unsubscribe:
+    get:
+      description: 'Unsubscribe from one or more channels. The response contains only the channels that were successfully unsubscribed in this request.
+
+
+        For a complete list of available subscription channels and their notification formats, see Notifications and Subscriptions.
+
+
+        **Note:** The `result` field in the response contains only the channels that were successfully processed and unsubscribed from this specific request. It does not include all previously subscribed topics. If a channel in the request is invalid, not subscribed, or fails validation, it will not appear in the result.
+
+
+        Try in API console'
+      parameters:
+      - name: channels
+        in: query
+        description: A list of channels to unsubscribe from. Only successfully unsubscribed channels will be returned in the result. See [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications) for all available channels.
+        required: true
+        schema:
+          type: array
+          items:
+            example: deribit_price_index.btc_usd
+            type: string
+          example:
+          - deribit_price_index.btc_usd
+        explode: true
+        style: form
+      requestBody:
+        description: JSON-RPC request body
+        content:
+          application/json:
+            examples:
+              request:
+                description: JSON-RPC Request Example
+                value:
+                  id: 3370
+                  jsonrpc: '2.0'
+                  method: private/unsubscribe
+                  params:
+                    channels:
+                    - deribit_price_index.btc_usd
+      responses:
+        '200':
+          $ref: '#/components/responses/Getunsubscribe200response'
+        '401':
+          $ref: '#/components/responses/ErrorMessageResponse'
+      security:
+      - ApiKey:
+        - view
+      - OAuth2:
+        - wallet:user:read
+      tags:
+      - Subscription Management
+      x-mint:
+        href: /api-reference/subscription-management/private-unsubscribe
+        metadata:
+          keywords:
+          - private/unsubscribe
+          - channels
+          og:title: private/unsubscribe
+          title: private/unsubscribe
+      summary: Get private unsubscribe
+      x-summary-source: derived
+      operationId: getPrivateUnsubscribe
+      x-operation-id-source: derived
+  /private/unsubscribe_all:
+    get:
+      description: 'Unsubscribe from all the channels subscribed so far. This method takes no parameters.
+
+
+        Try in API console'
+      requestBody:
+        description: JSON-RPC request body
+        content:
+          application/json:
+            examples:
+              request:
+                description: JSON-RPC Request Example
+                value:
+                  id: 154
+                  jsonrpc: '2.0'
+                  method: private/unsubscribe_all
+                  params: {}
+      responses:
+        '200':
+          $ref: '#/components/responses/OkResponse'
+      security:
+      - ApiKey:
+        - view
+      - OAuth2:
+        - wallet:user:read
+      tags:
+      - Subscription Management
+      x-mint:
+        href: /api-reference/subscription-management/private-unsubscribe_all
+        metadata:
+          keywords:
+          - private/unsubscribe_all
+          og:title: private/unsubscribe_all
+          title: private/unsubscribe_all
+      summary: Get private unsubscribe all
+      x-summary-source: derived
+      operationId: getPrivateUnsubscribeAll
+      x-operation-id-source: derived
+  /public/subscribe:
+    get:
+      description: 'Subscribe to one or more channels. This is the same method as `/private/subscribe`, but it can only be used for ''public'' channels.
+
+
+        For a complete list of available subscription channels and their notification formats, see Notifications and Subscriptions.
+
+
+        **Note - This method has distinct API rate limiting requirements:** Sustained rate: ~3.3 requests/second. For more information, see Rate Limits.
+
+
+        **📖 Related Article:** Market Data Collection Best Practices
+
+
+        Try in API console'
+      parameters:
+      - name: channels
+        in: query
+        description: A list of channels to subscribe to. See [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications) for all available channels.
+        required: true
+        schema:
+          type: array
+          items:
+            example: deribit_price_index.btc_usd
+            type: string
+          example:
+          - deribit_price_index.btc_usd
+        explode: true
+        style: form
+      requestBody:
+        description: JSON-RPC request body
+        content:
+          application/json:
+            examples:
+              request:
+                description: JSON-RPC Request Example
+                value:
+                  id: 3600
+                  jsonrpc: '2.0'
+                  method: public/subscribe
+                  params:
+                    channels:
+                    - deribit_price_index.btc_usd
+      responses:
+        '200':
+          $ref: '#/components/responses/PrivateSubscribeResponse'
+        '401':
+          $ref: '#/components/responses/ErrorMessageResponse'
+      security: []
+      tags:
+      - Subscription Management
+      x-mint:
+        href: /api-reference/subscription-management/public-subscribe
+        metadata:
+          keywords:
+          - public/subscribe
+          - channels
+          og:title: public/subscribe
+          title: public/subscribe
+      summary: Get public subscribe
+      x-summary-source: derived
+      operationId: getPublicSubscribe
+      x-operation-id-source: derived
+  /public/unsubscribe:
+    get:
+      description: 'Unsubscribe from one or more channels. The response contains only the channels that were successfully unsubscribed in this request.
+
+
+        For a complete list of available subscription channels and their notification formats, see Notifications and Subscriptions.
+
+
+        **Note:** The `result` field in the response contains only the channels that were successfully processed and unsubscribed from this specific request. It does not include all previously subscribed topics. If a channel in the request is invalid, not subscribed, or fails validation, it will not appear in the result.
+
+
+        Try in API console'
+      parameters:
+      - name: channels
+        in: query
+        description: A list of channels to unsubscribe from. Only successfully unsubscribed channels will be returned in the result. See [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications) for all available channels.
+        required: true
+        schema:
+          type: array
+          items:
+            example: deribit_price_index.btc_usd
+            type: string
+          example:
+          - deribit_price_index.btc_usd
+        explode: true
+        style: form
+      requestBody:
+        description: JSON-RPC request body
+        content:
+          application/json:
+            examples:
+              request:
+                description: JSON-RPC Request Example
+                value:
+                  id: 8691
+                  jsonrpc: '2.0'
+                  method: public/unsubscribe
+                  params:
+                    channels:
+                    - deribit_price_index.btc_usd
+      responses:
+        '200':
+          $ref: '#/components/responses/Getunsubscribe200response'
+        '401':
+          $ref: '#/components/responses/ErrorMessageResponse'
+      security: []
+      tags:
+      - Subscription Management
+      x-mint:
+        href: /api-reference/subscription-management/public-unsubscribe
+        metadata:
+          keywords:
+          - public/unsubscribe
+          - channels
+          og:title: public/unsubscribe
+          title: public/unsubscribe
+      summary: Get public unsubscribe
+      x-summary-source: derived
+      operationId: getPublicUnsubscribe
+      x-operation-id-source: derived
+  /public/unsubscribe_all:
+    get:
+      description: 'Unsubscribe from all the channels subscribed so far. This method takes no parameters.
+
+
+        Try in API console'
+      requestBody:
+        description: JSON-RPC request body
+        content:
+          application/json:
+            examples:
+              request:
+                description: JSON-RPC Request Example
+                value:
+                  id: 153
+                  jsonrpc: '2.0'
+                  method: public/unsubscribe_all
+                  params: {}
+      responses:
+        '200':
+          $ref: '#/components/responses/OkResponse'
+      security: []
+      tags:
+      - Subscription Management
+      x-mint:
+        href: /api-reference/subscription-management/public-unsubscribe_all
+        metadata:
+          keywords:
+          - public/unsubscribe_all
+          og:title: public/unsubscribe_all
+          title: public/unsubscribe_all
+      summary: Get public unsubscribe all
+      x-summary-source: derived
+      operationId: getPublicUnsubscribeAll
+      x-operation-id-source: derived
+components:
+  schemas:
+    PrivateSubscribeResponse:
+      type: object
+      properties:
+        id:
+          description: The id that was sent in the request
+          type: integer
+        jsonrpc:
+          description: The JSON-RPC version (2.0)
+          type: string
+          enum:
+          - '2.0'
+        result:
+          description: A list of subscribed channels.
+          type: array
+          items:
+            example: deribit_price_index.btc_usd
+            type: string
+      required:
+      - result
+      - jsonrpc
+    OkResponse:
+      type: object
+      properties:
+        id:
+          description: The id that was sent in the request
+          type: integer
+        jsonrpc:
+          description: The JSON-RPC version (2.0)
+          type: string
+          enum:
+          - '2.0'
+        result:
+          description: Result of method execution. `ok` in case of success
+          type: string
+          enum:
+          - ok
+      required:
+      - result
+      - jsonrpc
+    ErrorMessageResponse:
+      type: object
+      properties:
+        error:
+          type: integer
+        id:
+          description: The id that was sent in the request
+          type: integer
+        jsonrpc:
+          description: The JSON-RPC version (2.0)
+          type: string
+          enum:
+          - '2.0'
+        message:
+          type: string
+      required:
+      - message
+      - error
+      - jsonrpc
+    Getunsubscribe200response:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 8691
+        jsonrpc:
+          type: string
+          example: '2.0'
+        result:
+          description: List of channels that were successfully unsubscribed in this request
+          type: array
+          items:
+            type: string
+            x-deribit-type: channel
+          example:
+          - deribit_price_index.btc_usd
+  responses:
+    PrivateSubscribeResponse:
+      description: Success response
+      content:
+        application/json:
+          examples:
+            response:
+              description: Response example
+              value:
+                id: 4235
+                jsonrpc: '2.0'
+                result:
+                - deribit_price_index.btc_usd
+          schema:
+            $ref: '#/components/schemas/PrivateSubscribeResponse'
+    OkResponse:
+      description: Success response
+      content:
+        application/json:
+          examples:
+            response:
+              description: Response example
+              value:
+                id: 1569
+                jsonrpc: '2.0'
+                result: ok
+          schema:
+            $ref: '#/components/schemas/OkResponse'
+    Getunsubscribe200response:
+      description: Successfully unsubscribed from channels
+      content:
+        application/json:
+          examples:
+            jsonObject:
+              value:
+                id: 3370
+                jsonrpc: '2.0'
+                result:
+                - deribit_price_index.btc_usd
+            response:
+              description: Response example
+              value:
+                id: 3370
+                jsonrpc: '2.0'
+                result:
+                - deribit_price_index.btc_usd
+          schema:
+            $ref: '#/components/schemas/Getunsubscribe200response'
+    ErrorMessageResponse:
+      description: Success response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessageResponse'
+  securitySchemes:
+    ApiKey:
+      description: 'Call `public/auth` with `grant_type: coinbase_cdp` and a CDP JWT. Send the returned `access_token` as `Authorization: Bearer`.'
+      scheme: bearer
+      type: http
+    OAuth2:
+      description: 'Call `public/auth` with `grant_type: coinbase_oauth2` and an OAuth access token. Send the returned `access_token` as `Authorization: Bearer`.'
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.coinbase.com/oauth2/auth
+          scopes:
+            wallet:accounts:read: View your accounts.
+            wallet:accounts:update: Authorize `wallet:accounts:update` operations.
+            wallet:buys:create: Place, edit, and cancel orders.
+            wallet:payment-methods:read: View your payment methods.
+            wallet:trades:create: Convert cryptocurrencies.
+            wallet:trades:read: View your cryptocurrency conversions.
+            wallet:transactions:read: View your transactions.
+            wallet:transactions:transfer: Transfer funds between accounts.
+            wallet:user:read: View your account information.
+            wallet:user:update: Update your account information.
+          tokenUrl: https://login.coinbase.com/oauth2/token
+      type: oauth2

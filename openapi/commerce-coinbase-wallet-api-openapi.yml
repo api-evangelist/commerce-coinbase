@@ -1,0 +1,241 @@
+openapi: 3.2.0
+info:
+  description: Coinbase Retail Advanced Trade API for derivatives trading.
+  title: Coinbase Retail Advanced Trade (Deribit) Wallet API
+  version: 2.1.1
+servers:
+- url: https://drb.coinbase.com/api/v2
+tags:
+- name: Wallet
+paths:
+  /private/submit_transfer_between_subaccounts:
+    get:
+      description: 'Transfer funds between two subaccounts or between a subaccount and the main account.
+
+
+        **📖 Related Article:** Managing Transfers
+
+
+        Try in API console'
+      parameters:
+      - name: currency
+        in: query
+        description: The currency symbol
+        required: true
+        schema:
+          $ref: '#/components/schemas/currency'
+      - name: amount
+        in: query
+        description: Amount of funds to be transferred
+        required: true
+        schema:
+          type: number
+      - name: destination
+        in: query
+        description: Id of destination subaccount. Can be found in `My Account >> Subaccounts` tab
+        required: true
+        schema:
+          type: integer
+          example: 1
+      - name: source
+        in: query
+        description: Id of the source (sub)account. Can be found in `My Account >> Subaccounts` tab. By default, it is the Id of the account which made the request. However, if a different "source" is specified, the user must possess the mainaccount scope, and only other subaccounts can be designated as the source.
+        required: false
+        schema:
+          type: integer
+          example: 1
+      - name: nonce
+        in: query
+        description: Optional idempotency nonce. If provided, subsequent requests with the same nonce will return the previously created transaction instead of creating a new one. Must be 8-128 characters. The nonce is persisted on the resulting transaction and returned in the response.
+        required: false
+        schema:
+          $ref: '#/components/schemas/nonce'
+      requestBody:
+        description: JSON-RPC request body
+        content:
+          application/json:
+            examples:
+              request:
+                description: JSON-RPC Request Example
+                value:
+                  id: 210
+                  jsonrpc: '2.0'
+                  method: private/submit_transfer_between_subaccounts
+                  params:
+                    amount: 12.1234
+                    currency: ETH
+                    destination: 20
+                    source: 10
+      responses:
+        '200':
+          $ref: '#/components/responses/PrivateSubmitTransferResponse'
+      security:
+      - ApiKey:
+        - trade
+      - OAuth2:
+        - wallet:buys:create
+      tags:
+      - Wallet
+      x-mint:
+        href: /api-reference/wallet/private-submit_transfer_between_subaccounts
+        metadata:
+          keywords:
+          - private/submit_transfer_between_subaccounts
+          - currency
+          - amount
+          - destination
+          - source
+          - nonce
+          - created_timestamp
+          - type
+          - other_side
+          - state
+          - direction
+          - updated_timestamp
+          og:title: private/submit_transfer_between_subaccounts
+          title: private/submit_transfer_between_subaccounts
+      summary: Get private submit transfer between subaccounts
+      x-summary-source: derived
+      operationId: getPrivateSubmitTransferBetweenSubaccounts
+      x-operation-id-source: derived
+components:
+  schemas:
+    transfer_state:
+      description: 'Transfer state, allowed values : `prepared`, `confirmed`, `cancelled`, `waiting_for_admin`, `insufficient_funds`,  `withdrawal_limit` otherwise rejection reason'
+      type: string
+    transfer_item:
+      type: object
+      properties:
+        amount:
+          $ref: '#/components/schemas/currency_amount'
+        created_timestamp:
+          $ref: '#/components/schemas/timestamp'
+        currency:
+          $ref: '#/components/schemas/currency'
+        direction:
+          $ref: '#/components/schemas/transfer_direction'
+        id:
+          $ref: '#/components/schemas/transfer_id'
+        nonce:
+          description: Optional idempotency nonce if provided in the request
+          type: string
+        other_side:
+          $ref: '#/components/schemas/transfer_other_side'
+        state:
+          $ref: '#/components/schemas/transfer_state'
+        type:
+          $ref: '#/components/schemas/transfer_type'
+        updated_timestamp:
+          $ref: '#/components/schemas/timestamp'
+      required:
+      - currency
+      - id
+      - type
+      - amount
+      - state
+      - other_side
+      - updated_timestamp
+      - created_timestamp
+    currency_amount:
+      description: Amount of funds in given currency
+      type: number
+      example: 1
+    timestamp:
+      description: The timestamp (milliseconds since the Unix epoch)
+      type: integer
+      example: 1536569522277
+    transfer_id:
+      description: Id of transfer
+      type: integer
+      example: 12
+    nonce:
+      description: Nonce
+      type: string
+      example: bF1_gfgcsd
+    transfer_other_side:
+      description: For transfer from/to subaccount returns this subaccount name, for transfer to other account returns address, for transfer from other account returns that accounts username.
+      type: string
+      example: Smith
+    transfer_direction:
+      description: Transfer direction
+      type: string
+      enum:
+      - payment
+      - income
+    currency:
+      description: Currency, i.e `"BTC"`, `"ETH"`, `"USDC"`
+      type: string
+      enum:
+      - BTC
+      - ETH
+      - USDC
+      - USDT
+      - EURR
+    PrivateSubmitTransferResponse:
+      type: object
+      properties:
+        id:
+          description: The id that was sent in the request
+          type: integer
+        jsonrpc:
+          description: The JSON-RPC version (2.0)
+          type: string
+          enum:
+          - '2.0'
+        result:
+          $ref: '#/components/schemas/transfer_item'
+      required:
+      - result
+      - jsonrpc
+    transfer_type:
+      description: 'Type of transfer: `user` - sent to user, `subaccount` - sent to subaccount'
+      type: string
+      enum:
+      - user
+      - subaccount
+  responses:
+    PrivateSubmitTransferResponse:
+      description: Success response
+      content:
+        application/json:
+          examples:
+            response:
+              description: Response example
+              value:
+                id: 9187
+                jsonrpc: '2.0'
+                result:
+                  amount: 0.2
+                  created_timestamp: 1550579457727
+                  currency: BTC
+                  direction: payment
+                  id: 2
+                  other_side: 2MzyQc5Tkik61kJbEpJV5D5H9VfWHZK9Sgy
+                  state: cancelled
+                  type: user
+                  updated_timestamp: 1550579457727
+          schema:
+            $ref: '#/components/schemas/PrivateSubmitTransferResponse'
+  securitySchemes:
+    ApiKey:
+      description: 'Call `public/auth` with `grant_type: coinbase_cdp` and a CDP JWT. Send the returned `access_token` as `Authorization: Bearer`.'
+      scheme: bearer
+      type: http
+    OAuth2:
+      description: 'Call `public/auth` with `grant_type: coinbase_oauth2` and an OAuth access token. Send the returned `access_token` as `Authorization: Bearer`.'
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.coinbase.com/oauth2/auth
+          scopes:
+            wallet:accounts:read: View your accounts.
+            wallet:accounts:update: Authorize `wallet:accounts:update` operations.
+            wallet:buys:create: Place, edit, and cancel orders.
+            wallet:payment-methods:read: View your payment methods.
+            wallet:trades:create: Convert cryptocurrencies.
+            wallet:trades:read: View your cryptocurrency conversions.
+            wallet:transactions:read: View your transactions.
+            wallet:transactions:transfer: Transfer funds between accounts.
+            wallet:user:read: View your account information.
+            wallet:user:update: Update your account information.
+          tokenUrl: https://login.coinbase.com/oauth2/token
+      type: oauth2

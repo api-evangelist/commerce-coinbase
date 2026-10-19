@@ -1,0 +1,662 @@
+openapi: 3.2.0
+info:
+  description: Coinbase Retail Advanced Trade API for derivatives trading.
+  title: Coinbase Retail Advanced Trade (Deribit) Combo Books API
+  version: 2.1.1
+servers:
+- url: https://drb.coinbase.com/api/v2
+tags:
+- name: Combo Books
+paths:
+  /private/create_combo:
+    get:
+      description: 'Verifies and creates a combo book or returns an existing combo matching the given trades. Combos allow trading on multiple instruments (futures and options) simultaneously as a single strategy.
+
+
+        If a combo matching the provided trades already exists, this method returns the existing combo. Otherwise, it creates a new combo book with the specified leg structure.
+
+
+        Try in API console'
+      parameters:
+      - name: trades
+        in: query
+        description: List of trades used to create a combo
+        required: true
+        schema:
+          type: array
+          items:
+            properties:
+              amount:
+                $ref: '#/components/schemas/amount'
+              direction:
+                $ref: '#/components/schemas/direction'
+              instrument_name:
+                $ref: '#/components/schemas/instrument_name'
+            type: object
+        explode: true
+        style: form
+      requestBody:
+        description: JSON-RPC request body
+        content:
+          application/json:
+            examples:
+              request:
+                description: JSON-RPC Request Example
+                value:
+                  id: 6
+                  jsonrpc: '2.0'
+                  method: private/create_combo
+                  params:
+                    trades:
+                    - amount: '1'
+                      direction: buy
+                      instrument_name: BTC-29APR22-37500-C
+                    - amount: '1'
+                      direction: sell
+                      instrument_name: BTC-29APR22-37500-P
+      responses:
+        '200':
+          $ref: '#/components/responses/PrivateCreateComboResponse'
+      security:
+      - ApiKey:
+        - trade
+      - OAuth2:
+        - wallet:buys:create
+      tags:
+      - Combo Books
+      x-mint:
+        href: /api-reference/combo-books/private-create_combo
+        metadata:
+          keywords:
+          - private/create_combo
+          - trades
+          - instrument_id
+          - state
+          - state_timestamp
+          - creation_timestamp
+          - legs
+          - instrument_name
+          - amount
+          og:title: private/create_combo
+          title: private/create_combo
+      summary: Get private create combo
+      x-summary-source: derived
+      operationId: getPrivateCreateCombo
+      x-operation-id-source: derived
+  /private/get_leg_prices:
+    get:
+      description: 'Returns individual leg prices for a given combo structure based on an aggregated price of the strategy and the mark prices of the individual legs.
+
+
+        **Note:** Leg prices change dynamically with mark price fluctuations, and the algorithm is calibrated only for conventional option structures and future spreads. This method supports both inverse strategies and known linear structures within a single currency pair.
+
+
+        Try in API console'
+      parameters:
+      - name: legs
+        in: query
+        description: List of legs for which the prices will be calculated
+        required: true
+        schema:
+          type: array
+          items:
+            properties:
+              amount:
+                description: It represents the requested trade size. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin.
+                $ref: '#/components/schemas/amount'
+              direction:
+                description: Direction of selected leg
+                $ref: '#/components/schemas/direction'
+              instrument_name:
+                description: Instrument name
+                $ref: '#/components/schemas/instrument_name'
+            type: object
+        explode: true
+        style: form
+      - name: price
+        in: query
+        description: Price for the whole leg structure
+        required: true
+        schema:
+          type: number
+      requestBody:
+        description: JSON-RPC request body
+        content:
+          application/json:
+            examples:
+              request:
+                description: JSON-RPC Request Example
+                value:
+                  id: 1
+                  jsonrpc: '2.0'
+                  method: private/get_leg_prices
+                  params:
+                    legs:
+                    - amount: 2
+                      direction: buy
+                      instrument_name: BTC-1NOV24-67000-C
+                    - amount: 2
+                      direction: sell
+                      instrument_name: BTC-1NOV24-66000-C
+                    price: 0.6
+      responses:
+        '200':
+          $ref: '#/components/responses/PrivateGetLegPricesResponse'
+      security:
+      - ApiKey:
+        - view
+      - OAuth2:
+        - wallet:user:read
+      tags:
+      - Combo Books
+      x-mint:
+        href: /api-reference/combo-books/private-get_leg_prices
+        metadata:
+          keywords:
+          - private/get_leg_prices
+          - legs
+          - price
+          - amount
+          - ratio
+          - instrument_name
+          - direction
+          og:title: private/get_leg_prices
+          title: private/get_leg_prices
+      summary: Get private get leg prices
+      x-summary-source: derived
+      operationId: getPrivateGetLegPrices
+      x-operation-id-source: derived
+  /public/get_combo_details:
+    get:
+      description: 'Retrieves detailed information about a specific combo, including its leg structure, state, and other properties.
+
+
+        Use public/get_combo_ids to get a list of available combo IDs.
+
+
+        Try in API console'
+      parameters:
+      - name: combo_id
+        in: query
+        description: Combo ID
+        required: true
+        schema:
+          $ref: '#/components/schemas/combo_id'
+      requestBody:
+        description: JSON-RPC request body
+        content:
+          application/json:
+            examples:
+              request:
+                description: JSON-RPC Request Example
+                value:
+                  id: 3
+                  jsonrpc: '2.0'
+                  method: public/get_combo_details
+                  params:
+                    combo_id: BTC-FS-29APR22_PERP
+      responses:
+        '200':
+          $ref: '#/components/responses/PublicGetComboDetailsResponse'
+      security: []
+      tags:
+      - Combo Books
+      x-mint:
+        href: /api-reference/combo-books/public-get_combo_details
+        metadata:
+          keywords:
+          - public/get_combo_details
+          - combo_id
+          - instrument_id
+          - state
+          - state_timestamp
+          - creation_timestamp
+          - legs
+          - instrument_name
+          - amount
+          og:title: public/get_combo_details
+          title: public/get_combo_details
+      summary: Get public get combo details
+      x-summary-source: derived
+      operationId: getPublicGetComboDetails
+      x-operation-id-source: derived
+  /public/get_combo_ids:
+    get:
+      description: 'Retrieves available combo IDs. This method can be used to get the list of all combos, or only the list of combos in the given state.
+
+
+        Use public/get_combo_details to retrieve detailed information about a specific combo.
+
+
+        Try in API console'
+      parameters:
+      - name: currency
+        in: query
+        description: The currency symbol
+        required: true
+        schema:
+          $ref: '#/components/schemas/currency'
+      - name: state
+        in: query
+        description: Combo state, if not provided combos of all states are considered
+        required: false
+        schema:
+          $ref: '#/components/schemas/combo_state'
+      requestBody:
+        description: JSON-RPC request body
+        content:
+          application/json:
+            examples:
+              request:
+                description: JSON-RPC Request Example
+                value:
+                  id: 1
+                  jsonrpc: '2.0'
+                  method: public/get_combo_ids
+                  params:
+                    currency: BTC
+                    state: active
+      responses:
+        '200':
+          $ref: '#/components/responses/PublicGetComboIdsResponse'
+      security: []
+      tags:
+      - Combo Books
+      x-mint:
+        href: /api-reference/combo-books/public-get_combo_ids
+        metadata:
+          keywords:
+          - public/get_combo_ids
+          - currency
+          - state
+          og:title: public/get_combo_ids
+          title: public/get_combo_ids
+      summary: Get public get combo ids
+      x-summary-source: derived
+      operationId: getPublicGetComboIds
+      x-operation-id-source: derived
+  /public/get_combos:
+    get:
+      description: 'Retrieves information about active combos for the specified currency. Returns detailed information including leg structures and combo properties.
+
+
+        For a list of combo IDs only, use public/get_combo_ids. For details about a specific combo, use public/get_combo_details.
+
+
+        Try in API console'
+      parameters:
+      - name: currency
+        in: query
+        description: The currency symbol or `"any"` for all
+        required: true
+        schema:
+          $ref: '#/components/schemas/currency_with_any'
+      requestBody:
+        description: JSON-RPC request body
+        content:
+          application/json:
+            examples:
+              request:
+                description: JSON-RPC Request Example
+                value:
+                  id: 2
+                  jsonrpc: '2.0'
+                  method: public/get_combos
+                  params:
+                    currency: BTC
+      responses:
+        '200':
+          $ref: '#/components/responses/PublicGetCombosResponse'
+      security: []
+      tags:
+      - Combo Books
+      x-mint:
+        href: /api-reference/combo-books/public-get_combos
+        metadata:
+          keywords:
+          - public/get_combos
+          - currency
+          - instrument_id
+          - state
+          - state_timestamp
+          - creation_timestamp
+          - legs
+          - instrument_name
+          - amount
+          og:title: public/get_combos
+          title: public/get_combos
+      summary: Get public get combos
+      x-summary-source: derived
+      operationId: getPublicGetCombos
+      x-operation-id-source: derived
+components:
+  responses:
+    PrivateCreateComboResponse:
+      description: Success response
+      content:
+        application/json:
+          examples:
+            response:
+              description: Response example
+              value:
+                id: 6
+                jsonrpc: '2.0'
+                result:
+                  creation_timestamp: 1650960943000
+                  id: BTC-REV-29APR22-37500
+                  instrument_id: 52
+                  legs:
+                  - amount: 1
+                    instrument_name: BTC-29APR22-37500-C
+                  - amount: -1
+                    instrument_name: BTC-29APR22-37500-P
+                  state: active
+                  state_timestamp: 1650960943922
+          schema:
+            $ref: '#/components/schemas/PrivateCreateComboResponse'
+    PublicGetComboIdsResponse:
+      description: Success response
+      content:
+        application/json:
+          examples:
+            response:
+              description: Response example
+              value:
+                id: 1
+                jsonrpc: '2.0'
+                result:
+                - BTC-CS-29APR22-39300_39600
+                - BTC-FS-29APR22_PERP
+          schema:
+            $ref: '#/components/schemas/PublicGetComboIdsResponse'
+    PrivateGetLegPricesResponse:
+      description: Success response
+      content:
+        application/json:
+          examples:
+            response:
+              description: Response example
+              value:
+                id: 1
+                jsonrpc: '2.0'
+                result:
+                  amount: 2
+                  legs:
+                  - direction: buy
+                    instrument_name: BTC-1NOV24-67000-C
+                    price: 0.6001
+                    ratio: 1
+                  - direction: sell
+                    instrument_name: BTC-1NOV24-66000-C
+                    price: 0.0001
+                    ratio: 1
+          schema:
+            $ref: '#/components/schemas/PrivateGetLegPricesResponse'
+    PublicGetComboDetailsResponse:
+      description: Success response
+      content:
+        application/json:
+          examples:
+            response:
+              description: Response example
+              value:
+                id: 3
+                jsonrpc: '2.0'
+                result:
+                  creation_timestamp: 1650620575000
+                  id: BTC-FS-29APR22_PERP
+                  instrument_id: 27
+                  legs:
+                  - amount: -1
+                    instrument_name: BTC-PERPETUAL
+                  - amount: 1
+                    instrument_name: BTC-29APR22
+                  state: active
+                  state_timestamp: 1650620605150
+          schema:
+            $ref: '#/components/schemas/PublicGetComboDetailsResponse'
+    PublicGetCombosResponse:
+      description: Success response
+      content:
+        application/json:
+          examples:
+            response:
+              description: Response example
+              value:
+                id: 2
+                jsonrpc: '2.0'
+                result:
+                - creation_timestamp: 1650636235000
+                  id: BTC-CS-29APR22-39300_39600
+                  instrument_id: 28
+                  legs:
+                  - amount: 1
+                    instrument_name: BTC-29APR22-39300-C
+                  - amount: -1
+                    instrument_name: BTC-29APR22-39600-C
+                  state: active
+                  state_timestamp: 1650636265101
+                - creation_timestamp: 1650620575000
+                  id: BTC-FS-29APR22_PERP
+                  instrument_id: 27
+                  legs:
+                  - amount: -1
+                    instrument_name: BTC-PERPETUAL
+                  - amount: 1
+                    instrument_name: BTC-29APR22
+                  state: active
+                  state_timestamp: 1650620605150
+          schema:
+            $ref: '#/components/schemas/PublicGetCombosResponse'
+  schemas:
+    PublicGetCombosResponse:
+      type: object
+      properties:
+        id:
+          description: The id that was sent in the request
+          type: integer
+        jsonrpc:
+          description: The JSON-RPC version (2.0)
+          type: string
+          enum:
+          - '2.0'
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/combo'
+      required:
+      - result
+      - jsonrpc
+    combo_id:
+      description: Unique combo identifier
+      type: string
+      example: BTC-FS-31DEC21-PERP
+    combo_leg:
+      type: object
+      properties:
+        amount:
+          $ref: '#/components/schemas/combo_leg_amount'
+        instrument_name:
+          $ref: '#/components/schemas/instrument_name'
+    currency_with_any:
+      description: Currency name or `"any"` if don't care
+      type: string
+      enum:
+      - BTC
+      - ETH
+      - USDC
+      - USDT
+      - EURR
+      - any
+    amount:
+      description: It represents the requested order size. For perpetual and inverse futures the amount is in USD units. For options and linear futures it is the underlying base currency coin.
+      type: number
+    instrument_id:
+      description: Instrument ID
+      type: integer
+    PrivateGetLegPricesResponse:
+      type: object
+      properties:
+        id:
+          description: The id that was sent in the request
+          type: integer
+        jsonrpc:
+          description: The JSON-RPC version (2.0)
+          type: string
+          enum:
+          - '2.0'
+        result:
+          type: object
+          properties:
+            amount:
+              description: This value multiplied by the ratio of a leg gives trade size on that leg.
+              type: number
+            legs:
+              $ref: '#/components/schemas/leg_structure'
+      required:
+      - result
+      - jsonrpc
+    PublicGetComboIdsResponse:
+      type: object
+      properties:
+        id:
+          description: The id that was sent in the request
+          type: integer
+        jsonrpc:
+          description: The JSON-RPC version (2.0)
+          type: string
+          enum:
+          - '2.0'
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/combo_id'
+      required:
+      - result
+      - jsonrpc
+    direction:
+      description: 'Direction: `buy`, or `sell`'
+      type: string
+      enum:
+      - buy
+      - sell
+    instrument_name:
+      description: Unique instrument identifier
+      type: string
+      example: BTC-PERPETUAL
+    timestamp:
+      description: The timestamp (milliseconds since the Unix epoch)
+      type: integer
+      example: 1536569522277
+    combo_state:
+      description: 'Combo state: `"active"`, "`inactive`"'
+      type: string
+      enum:
+      - active
+      - inactive
+    leg_structure:
+      type: array
+      items:
+        properties:
+          direction:
+            description: 'Direction: `buy`, or `sell`'
+            type: string
+            enum:
+            - buy
+            - sell
+          instrument_name:
+            description: Unique instrument identifier
+            type: string
+            example: BTC-PERPETUAL
+          price:
+            description: Price for a leg
+            type: number
+          ratio:
+            description: Ratio of amount between legs
+            type: integer
+        type: object
+    PrivateCreateComboResponse:
+      type: object
+      properties:
+        id:
+          description: The id that was sent in the request
+          type: integer
+        jsonrpc:
+          description: The JSON-RPC version (2.0)
+          type: string
+          enum:
+          - '2.0'
+        result:
+          $ref: '#/components/schemas/combo'
+      required:
+      - result
+      - jsonrpc
+    currency:
+      description: Currency, i.e `"BTC"`, `"ETH"`, `"USDC"`
+      type: string
+      enum:
+      - BTC
+      - ETH
+      - USDC
+      - USDT
+      - EURR
+    PublicGetComboDetailsResponse:
+      type: object
+      properties:
+        id:
+          description: The id that was sent in the request
+          type: integer
+        jsonrpc:
+          description: The JSON-RPC version (2.0)
+          type: string
+          enum:
+          - '2.0'
+        result:
+          $ref: '#/components/schemas/combo'
+      required:
+      - result
+      - jsonrpc
+    combo:
+      type: object
+      properties:
+        creation_timestamp:
+          $ref: '#/components/schemas/timestamp'
+        id:
+          $ref: '#/components/schemas/combo_id'
+        instrument_id:
+          $ref: '#/components/schemas/instrument_id'
+        legs:
+          type: array
+          items:
+            $ref: '#/components/schemas/combo_leg'
+        state:
+          $ref: '#/components/schemas/combo_state'
+        state_timestamp:
+          $ref: '#/components/schemas/timestamp'
+    combo_leg_amount:
+      description: Size multiplier of a leg. A negative value indicates that the trades on given leg are in opposite direction to the combo trades they originate from
+      type: integer
+      example: -1
+  securitySchemes:
+    ApiKey:
+      description: 'Call `public/auth` with `grant_type: coinbase_cdp` and a CDP JWT. Send the returned `access_token` as `Authorization: Bearer`.'
+      scheme: bearer
+      type: http
+    OAuth2:
+      description: 'Call `public/auth` with `grant_type: coinbase_oauth2` and an OAuth access token. Send the returned `access_token` as `Authorization: Bearer`.'
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.coinbase.com/oauth2/auth
+          scopes:
+            wallet:accounts:read: View your accounts.
+            wallet:accounts:update: Authorize `wallet:accounts:update` operations.
+            wallet:buys:create: Place, edit, and cancel orders.
+            wallet:payment-methods:read: View your payment methods.
+            wallet:trades:create: Convert cryptocurrencies.
+            wallet:trades:read: View your cryptocurrency conversions.
+            wallet:transactions:read: View your transactions.
+            wallet:transactions:transfer: Transfer funds between accounts.
+            wallet:user:read: View your account information.
+            wallet:user:update: Update your account information.
+          tokenUrl: https://login.coinbase.com/oauth2/token
+      type: oauth2

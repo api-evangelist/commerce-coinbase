@@ -127,6 +127,101 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/commerce-coinbase-webhooks-api-openapi.yml
+- aid: commerce-coinbase:commerce-coinbase-account-management-api
+  name: Coinbase Commerce Account Management API
+  description: >-
+    The Account Management API from Coinbase Commerce — 17 operation(s) for account management.
+  humanURL: https://commerce.coinbase.com/docs/api
+  baseURL: https://api.commerce.coinbase.com
+  tags:
+  - Account Management
+  properties:
+  - type: OpenAPI
+    url: openapi/commerce-coinbase-account-management-api-openapi.yml
+- aid: commerce-coinbase:commerce-coinbase-authentication-api
+  name: Coinbase Commerce Authentication API
+  description: The Authentication API from Coinbase Commerce — 2 operation(s) for authentication.
+  humanURL: https://commerce.coinbase.com/docs/api
+  baseURL: https://api.commerce.coinbase.com
+  tags:
+  - Authentication
+  properties:
+  - type: OpenAPI
+    url: openapi/commerce-coinbase-authentication-api-openapi.yml
+- aid: commerce-coinbase:commerce-coinbase-combo-books-api
+  name: Coinbase Commerce Combo Books API
+  description: The Combo Books API from Coinbase Commerce — 5 operation(s) for combo books.
+  humanURL: https://commerce.coinbase.com/docs/api
+  baseURL: https://api.commerce.coinbase.com
+  tags:
+  - Combo Books
+  properties:
+  - type: OpenAPI
+    url: openapi/commerce-coinbase-combo-books-api-openapi.yml
+- aid: commerce-coinbase:commerce-coinbase-market-data-api
+  name: Coinbase Commerce Market Data API
+  description: The Market Data API from Coinbase Commerce — 30 operation(s) for market data.
+  humanURL: https://commerce.coinbase.com/docs/api
+  baseURL: https://api.commerce.coinbase.com
+  tags:
+  - Market Data
+  properties:
+  - type: OpenAPI
+    url: openapi/commerce-coinbase-market-data-api-openapi.yml
+- aid: commerce-coinbase:commerce-coinbase-session-management-api
+  name: Coinbase Commerce Session Management API
+  description: >-
+    The Session Management API from Coinbase Commerce — 5 operation(s) for session management.
+  humanURL: https://commerce.coinbase.com/docs/api
+  baseURL: https://api.commerce.coinbase.com
+  tags:
+  - Session Management
+  properties:
+  - type: OpenAPI
+    url: openapi/commerce-coinbase-session-management-api-openapi.yml
+- aid: commerce-coinbase:commerce-coinbase-subscription-management-api
+  name: Coinbase Commerce Subscription Management API
+  description: >-
+    Subscription works as [notifications](#notifications), so users will automatically (after subscribing)
+    receive messages from the server. Overview for each channel response format is described in [subscriptions](#subscriptions)
+    section.
+  humanURL: https://commerce.coinbase.com/docs/api
+  baseURL: https://api.commerce.coinbase.com
+  tags:
+  - Subscription Management
+  properties:
+  - type: OpenAPI
+    url: openapi/commerce-coinbase-subscription-management-api-openapi.yml
+- aid: commerce-coinbase:commerce-coinbase-supporting-api
+  name: Coinbase Commerce Supporting API
+  description: The Supporting API from Coinbase Commerce — 4 operation(s) for supporting.
+  humanURL: https://commerce.coinbase.com/docs/api
+  baseURL: https://api.commerce.coinbase.com
+  tags:
+  - Supporting
+  properties:
+  - type: OpenAPI
+    url: openapi/commerce-coinbase-supporting-api-openapi.yml
+- aid: commerce-coinbase:commerce-coinbase-trading-api
+  name: Coinbase Commerce Trading API
+  description: The Trading API from Coinbase Commerce — 32 operation(s) for trading.
+  humanURL: https://commerce.coinbase.com/docs/api
+  baseURL: https://api.commerce.coinbase.com
+  tags:
+  - Trading
+  properties:
+  - type: OpenAPI
+    url: openapi/commerce-coinbase-trading-api-openapi.yml
+- aid: commerce-coinbase:commerce-coinbase-wallet-api
+  name: Coinbase Commerce Wallet API
+  description: The Wallet API from Coinbase Commerce — 1 operation(s) for wallet.
+  humanURL: https://commerce.coinbase.com/docs/api
+  baseURL: https://api.commerce.coinbase.com
+  tags:
+  - Wallet
+  properties:
+  - type: OpenAPI
+    url: openapi/commerce-coinbase-wallet-api-openapi.yml
 common:
   - type: AgenticAccess
     url: agentic-access/commerce-coinbase-agentic-access.yml

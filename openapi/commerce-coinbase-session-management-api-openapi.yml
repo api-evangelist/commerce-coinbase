@@ -1,0 +1,375 @@
+openapi: 3.2.0
+info:
+  description: Coinbase Retail Advanced Trade API for derivatives trading.
+  title: Coinbase Retail Advanced Trade (Deribit) Session Management…
+  version: 2.1.1
+servers:
+- url: https://drb.coinbase.com/api/v2
+tags:
+- name: Session Management
+paths:
+  /private/disable_cancel_on_disconnect:
+    get:
+      description: 'Disable Cancel On Disconnect for the connection.
+
+
+        When change is applied for the account, then every newly opened connection will start with **inactive** Cancel on Disconnect.
+
+
+        **WebSocket Only:** This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in an error response.
+
+
+        Try in API console'
+      parameters:
+      - name: scope
+        in: query
+        description: Specifies if Cancel On Disconnect change should be applied/checked for the current connection or the account (default - `connection`)<br/><br/> **NOTICE:** Scope `connection` can be used only when working via Websocket.
+        required: false
+        schema:
+          type: string
+          enum:
+          - connection
+          - account
+      requestBody:
+        description: JSON-RPC request body
+        content:
+          application/json:
+            examples:
+              request:
+                description: JSON-RPC Request Example
+                value:
+                  id: 1569
+                  jsonrpc: '2.0'
+                  method: private/disable_cancel_on_disconnect
+                  params:
+                    scope: account
+      responses:
+        '200':
+          $ref: '#/components/responses/OkResponse'
+      security:
+      - ApiKey:
+        - trade
+      - OAuth2:
+        - wallet:buys:create
+      tags:
+      - Session Management
+      x-mint:
+        href: /api-reference/session-management/private-disable_cancel_on_disconnect
+        metadata:
+          keywords:
+          - private/disable_cancel_on_disconnect
+          - scope
+          og:title: private/disable_cancel_on_disconnect
+          title: private/disable_cancel_on_disconnect
+      summary: Get private disable cancel on disconnect
+      x-summary-source: derived
+      operationId: getPrivateDisableCancelOnDisconnect
+      x-operation-id-source: derived
+  /private/enable_cancel_on_disconnect:
+    get:
+      description: 'Enable Cancel On Disconnect for the connection. After enabling, all orders created via this connection will be automatically cancelled when the connection is closed.
+
+
+        Cancel is triggered in the following cases: when the TCP connection is properly terminated, when the connection is closed due to 10 minutes of inactivity, or when a heartbeat detects a disconnection. To reduce the inactivity timeout, consider using public/set_heartbeat.
+
+
+        **Note:** If the connection is gracefully closed using private/logout, cancel-on-disconnect will **not** be triggered.
+
+
+        **Notice:** Cancel-on-Disconnect does not affect orders created by other connections - they will remain active! When change is applied on the `account` scope, then every newly opened connection will start with **active** Cancel on Disconnect.
+
+
+        **WebSocket Only:** This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in an error response.
+
+
+        Try in API console'
+      parameters:
+      - name: scope
+        in: query
+        description: Specifies if Cancel On Disconnect change should be applied/checked for the current connection or the account (default - `connection`)<br/><br/> **NOTICE:** Scope `connection` can be used only when working via Websocket.
+        required: false
+        schema:
+          type: string
+          enum:
+          - connection
+          - account
+      requestBody:
+        description: JSON-RPC request body
+        content:
+          application/json:
+            examples:
+              request:
+                description: JSON-RPC Request Example
+                value:
+                  id: 7859
+                  jsonrpc: '2.0'
+                  method: private/enable_cancel_on_disconnect
+                  params:
+                    scope: account
+      responses:
+        '200':
+          $ref: '#/components/responses/OkResponse'
+      security:
+      - ApiKey:
+        - trade
+      - OAuth2:
+        - wallet:buys:create
+      tags:
+      - Session Management
+      x-mint:
+        href: /api-reference/session-management/private-enable_cancel_on_disconnect
+        metadata:
+          keywords:
+          - private/enable_cancel_on_disconnect
+          - scope
+          og:title: private/enable_cancel_on_disconnect
+          title: private/enable_cancel_on_disconnect
+      summary: Get private enable cancel on disconnect
+      x-summary-source: derived
+      operationId: getPrivateEnableCancelOnDisconnect
+      x-operation-id-source: derived
+  /private/get_cancel_on_disconnect:
+    get:
+      description: 'Read current Cancel On Disconnect configuration for the account.
+
+
+        Try in API console'
+      parameters:
+      - name: scope
+        in: query
+        description: Specifies if Cancel On Disconnect change should be applied/checked for the current connection or the account (default - `connection`)<br/><br/> **NOTICE:** Scope `connection` can be used only when working via Websocket.
+        required: false
+        schema:
+          type: string
+          enum:
+          - connection
+          - account
+      requestBody:
+        description: JSON-RPC request body
+        content:
+          application/json:
+            examples:
+              request:
+                description: JSON-RPC Request Example
+                value:
+                  id: 220
+                  jsonrpc: '2.0'
+                  method: private/get_cancel_on_disconnect
+                  params:
+                    scope: account
+      responses:
+        '200':
+          $ref: '#/components/responses/PrivateGetCancelOnDisconnectResponse'
+      security:
+      - ApiKey:
+        - view
+      - OAuth2:
+        - wallet:user:read
+      tags:
+      - Session Management
+      x-mint:
+        href: /api-reference/session-management/private-get_cancel_on_disconnect
+        metadata:
+          keywords:
+          - private/get_cancel_on_disconnect
+          - scope
+          - enabled
+          og:title: private/get_cancel_on_disconnect
+          title: private/get_cancel_on_disconnect
+      summary: Get private get cancel on disconnect
+      x-summary-source: derived
+      operationId: getPrivateGetCancelOnDisconnect
+      x-operation-id-source: derived
+  /public/disable_heartbeat:
+    get:
+      description: 'Stop sending heartbeat messages. This method takes no parameters.
+
+
+        **WebSocket Only:** This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in an error response.
+
+
+        Try in API console'
+      requestBody:
+        description: JSON-RPC request body
+        content:
+          application/json:
+            examples:
+              request:
+                description: JSON-RPC Request Example
+                value:
+                  id: 3562
+                  jsonrpc: '2.0'
+                  method: public/disable_heartbeat
+                  params: {}
+      responses:
+        '200':
+          $ref: '#/components/responses/OkResponse'
+      security: []
+      tags:
+      - Session Management
+      x-mint:
+        href: /api-reference/session-management/public-disable_heartbeat
+        metadata:
+          keywords:
+          - public/disable_heartbeat
+          og:title: public/disable_heartbeat
+          title: public/disable_heartbeat
+      summary: Get public disable heartbeat
+      x-summary-source: derived
+      operationId: getPublicDisableHeartbeat
+      x-operation-id-source: derived
+  /public/set_heartbeat:
+    get:
+      description: 'Signals the WebSocket connection to send and request heartbeats. Heartbeats can be used to detect stale connections.
+
+
+        When heartbeats have been set up, the API server will send `heartbeat` messages and `test_request` messages. Your software should respond to `test_request` messages by sending a `/api/v2/public/test` request. If your software fails to do so, the API server will immediately close the connection. If your account is configured to cancel on disconnect, any orders opened over the connection will be cancelled.
+
+
+        **WebSocket Only:** This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in an error response.
+
+
+        Try in API console'
+      parameters:
+      - name: interval
+        in: query
+        description: The heartbeat interval in seconds, but not less than 10
+        required: true
+        schema:
+          type: number
+          example: 30
+      requestBody:
+        description: JSON-RPC request body
+        content:
+          application/json:
+            examples:
+              request:
+                description: JSON-RPC Request Example
+                value:
+                  id: 9098
+                  jsonrpc: '2.0'
+                  method: public/set_heartbeat
+                  params:
+                    interval: 30
+      responses:
+        '200':
+          $ref: '#/components/responses/OkResponse'
+      security: []
+      tags:
+      - Session Management
+      x-mint:
+        href: /api-reference/session-management/public-set_heartbeat
+        metadata:
+          keywords:
+          - public/set_heartbeat
+          - interval
+          og:title: public/set_heartbeat
+          title: public/set_heartbeat
+      summary: Get public set heartbeat
+      x-summary-source: derived
+      operationId: getPublicSetHeartbeat
+      x-operation-id-source: derived
+components:
+  schemas:
+    enabled_field:
+      description: Current configuration status
+      type: boolean
+      example: true
+    OkResponse:
+      type: object
+      properties:
+        id:
+          description: The id that was sent in the request
+          type: integer
+        jsonrpc:
+          description: The JSON-RPC version (2.0)
+          type: string
+          enum:
+          - '2.0'
+        result:
+          description: Result of method execution. `ok` in case of success
+          type: string
+          enum:
+          - ok
+      required:
+      - result
+      - jsonrpc
+    cod_scope:
+      description: Informs if Cancel on Disconnect was checked for the current connection or the account
+      type: string
+      enum:
+      - connection
+      - account
+    PrivateGetCancelOnDisconnectResponse:
+      type: object
+      properties:
+        id:
+          description: The id that was sent in the request
+          type: integer
+        jsonrpc:
+          description: The JSON-RPC version (2.0)
+          type: string
+          enum:
+          - '2.0'
+        result:
+          type: object
+          properties:
+            enabled:
+              $ref: '#/components/schemas/enabled_field'
+            scope:
+              $ref: '#/components/schemas/cod_scope'
+      required:
+      - result
+      - jsonrpc
+  responses:
+    PrivateGetCancelOnDisconnectResponse:
+      description: Success response
+      content:
+        application/json:
+          examples:
+            response:
+              description: Response example
+              value:
+                id: 220
+                jsonrpc: '2.0'
+                result:
+                  enabled: false
+                  scope: account
+          schema:
+            $ref: '#/components/schemas/PrivateGetCancelOnDisconnectResponse'
+    OkResponse:
+      description: Success response
+      content:
+        application/json:
+          examples:
+            response:
+              description: Response example
+              value:
+                id: 1569
+                jsonrpc: '2.0'
+                result: ok
+          schema:
+            $ref: '#/components/schemas/OkResponse'
+  securitySchemes:
+    ApiKey:
+      description: 'Call `public/auth` with `grant_type: coinbase_cdp` and a CDP JWT. Send the returned `access_token` as `Authorization: Bearer`.'
+      scheme: bearer
+      type: http
+    OAuth2:
+      description: 'Call `public/auth` with `grant_type: coinbase_oauth2` and an OAuth access token. Send the returned `access_token` as `Authorization: Bearer`.'
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.coinbase.com/oauth2/auth
+          scopes:
+            wallet:accounts:read: View your accounts.
+            wallet:accounts:update: Authorize `wallet:accounts:update` operations.
+            wallet:buys:create: Place, edit, and cancel orders.
+            wallet:payment-methods:read: View your payment methods.
+            wallet:trades:create: Convert cryptocurrencies.
+            wallet:trades:read: View your cryptocurrency conversions.
+            wallet:transactions:read: View your transactions.
+            wallet:transactions:transfer: Transfer funds between accounts.
+            wallet:user:read: View your account information.
+            wallet:user:update: Update your account information.
+          tokenUrl: https://login.coinbase.com/oauth2/token
+      type: oauth2
