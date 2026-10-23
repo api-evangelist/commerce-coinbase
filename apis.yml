@@ -223,6 +223,8 @@ apis:
   - type: OpenAPI
     url: openapi/commerce-coinbase-wallet-api-openapi.yml
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/coinbase-commerce/overview
   - type: AgenticAccess
     url: agentic-access/commerce-coinbase-agentic-access.yml
   - type: VulnerabilityDisclosure
