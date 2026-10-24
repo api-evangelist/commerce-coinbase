@@ -1,0 +1,268 @@
+{
+  "info": {
+    "_postman_id": "7f16fe88-1af9-4394-9fdb-6a9ab8460753",
+    "name": "Coinbase Retail Advanced Trade (Deribit) Authentication API",
+    "description": "Coinbase Retail Advanced Trade API for derivatives trading.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:03:53.000Z",
+    "updatedAt": "2026-10-21T20:03:54.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-7f16fe88-1af9-4394-9fdb-6a9ab8460753"
+  },
+  "item": [
+    {
+      "name": "private",
+      "item": [
+        {
+          "name": "logout",
+          "item": [
+            {
+              "name": "Get private logout",
+              "id": "3c2282f4-97a3-4644-a5fd-6de8d99f8a34",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 42,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/logout\",\n        \"params\": {\n          \"access_token\": \"1529453804065.h2QrBgvn.oS36pCOmuK9EX7954lzCSkUioEtTMg7F5ShToM0ZfYlqU05OquXkQIe2_DDEkPhzmoPp1fBp0ycXShR_0jf-SMSXEdVqxLRWuOw-_StG5BMjToiAl27CbHY4P92MPhlMblTOtTImE81-5dFdyDVydpBwmlfKM3OSQ39kulP9bbfw-2jhyegOL0AgqJTY_tj554oHCQFTbq0A0ZWukukmxL2yu6iy34XdzaJB26Igy-3UxGBMwFu53EhjKBweh7xyP2nDm57-wybndJMtSyTGDXH3vjBVclo1iup5yRP\",\n          \"invalidate_token\": true\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/private/logout?invalidate_token=<boolean>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "private",
+                    "logout"
+                  ],
+                  "query": [
+                    {
+                      "description": "<b>Token Invalidation:</b> By default, all tokens created during the current session are invalidated when you call this method. You can control this behavior using this parameter: <ul><li><b>invalidate_token=true</b> (default): All session tokens are invalidated, requiring re-authentication for new connections</li><li><b>invalidate_token=false</b>: Tokens remain valid, allowing you to reconnect using the same authentication</li></ul>",
+                      "key": "invalidate_token",
+                      "value": "<boolean>"
+                    }
+                  ]
+                },
+                "description": "Gracefully terminate the current WebSocket connection and optionally invalidate all tokens associated with the session.\n\nThis method provides a clean way to close WebSocket connections while preserving active orders when **Cancel On Disconnect (COD)** is enabled.\n\n**Use Cases:**\n\n- **Clean Shutdown:** Properly close WebSocket connections during application shutdown or restart\n- **Order Preservation:** Close connections without triggering order cancellations when COD is enabled\n- **Session Management:** Invalidate tokens to ensure security when closing connections\n- **Maintenance Operations:** Temporarily disconnect for system maintenance without affecting trading positions\n\n**Cancel On Disconnect (COD) Behavior:**\n\nWhen Cancel On Disconnect is enabled for your connection, this method provides a safe way to close the connection without triggering automatic order cancellations. This is different from other disconnection scenarios:\n\n- **Graceful logout** (this method): Orders are **NOT cancelled**, even if COD is enabled\n- **Unexpected disconnection:** Orders are **cancelled** if COD is enabled\n- **Inactivity timeout:** Orders are **cancelled** if COD is enabled\n- **Heartbeat failure:** Orders are **cancelled** if COD is enabled\n\nThis distinction allows you to perform planned disconnections (e.g., for maintenance, updates, or reconnection) while preserving your active orders.\n\n**WebSocket Only:**\n\nThis method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in a 400 error response.\n\n**Note:** This method has no response. The WebSocket connection is closed immediately after the request is processed.\n\nTry in API console"
+              },
+              "response": [
+                {
+                  "id": "40d277e4-86cc-49d6-b72f-e4c3d1f8f39d",
+                  "name": "Connection closed",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 42,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/logout\",\n        \"params\": {\n          \"access_token\": \"1529453804065.h2QrBgvn.oS36pCOmuK9EX7954lzCSkUioEtTMg7F5ShToM0ZfYlqU05OquXkQIe2_DDEkPhzmoPp1fBp0ycXShR_0jf-SMSXEdVqxLRWuOw-_StG5BMjToiAl27CbHY4P92MPhlMblTOtTImE81-5dFdyDVydpBwmlfKM3OSQ39kulP9bbfw-2jhyegOL0AgqJTY_tj554oHCQFTbq0A0ZWukukmxL2yu6iy34XdzaJB26Igy-3UxGBMwFu53EhjKBweh7xyP2nDm57-wybndJMtSyTGDXH3vjBVclo1iup5yRP\",\n          \"invalidate_token\": true\n        }\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/private/logout?invalidate_token=<boolean>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "private",
+                        "logout"
+                      ],
+                      "query": [
+                        {
+                          "description": "<b>Token Invalidation:</b> By default, all tokens created during the current session are invalidated when you call this method. You can control this behavior using this parameter: <ul><li><b>invalidate_token=true</b> (default): All session tokens are invalidated, requiring re-authentication for new connections</li><li><b>invalidate_token=false</b>: Tokens remain valid, allowing you to reconnect using the same authentication</li></ul>",
+                          "key": "invalidate_token",
+                          "value": "<boolean>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T20:03:54.000Z",
+                  "updatedAt": "2026-10-21T20:03:54.000Z",
+                  "uid": "35240-40d277e4-86cc-49d6-b72f-e4c3d1f8f39d"
+                }
+              ],
+              "createdAt": "2026-10-21T20:03:54.000Z",
+              "updatedAt": "2026-10-21T20:03:54.000Z",
+              "uid": "35240-3c2282f4-97a3-4644-a5fd-6de8d99f8a34"
+            }
+          ],
+          "id": "3f91ae77-c4cb-4834-a8c3-effa3f944ed0",
+          "createdAt": "2026-10-21T20:03:54.000Z",
+          "updatedAt": "2026-10-21T20:03:54.000Z",
+          "uid": "35240-3f91ae77-c4cb-4834-a8c3-effa3f944ed0"
+        }
+      ],
+      "id": "2b94d794-cb07-4677-be58-dc971a8b3fd1",
+      "createdAt": "2026-10-21T20:03:54.000Z",
+      "updatedAt": "2026-10-21T20:03:54.000Z",
+      "uid": "35240-2b94d794-cb07-4677-be58-dc971a8b3fd1"
+    },
+    {
+      "name": "public",
+      "item": [
+        {
+          "name": "auth",
+          "item": [
+            {
+              "name": "Create public auth",
+              "id": "b3c671cc-80c6-4af1-a463-6b3e7b91c496",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"<integer>\",\n  \"method\": \"public/auth\",\n  \"params\": {\n    \"grant_type\": \"coinbase_cdp\",\n    \"token\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/public/auth",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "public",
+                    "auth"
+                  ]
+                },
+                "description": "Authenticate using a Coinbase-issued credential.\n\n**Only `POST` is supported.** Send the JSON-RPC request in the request body; query-string credentials are not accepted."
+              },
+              "response": [
+                {
+                  "id": "d0da3ee4-262d-463c-84a3-42514498ae5b",
+                  "name": "Success response",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"<integer>\",\n  \"method\": \"public/auth\",\n  \"params\": {\n    \"grant_type\": \"coinbase_cdp\",\n    \"token\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/public/auth",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "public",
+                        "auth"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"result\": {\n    \"access_token\": \"<string>\",\n    \"token_type\": \"bearer\",\n    \"expires_in\": \"<integer>\",\n    \"scope\": \"<string>\",\n    \"enabled_features\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"google_login\": \"<boolean>\",\n    \"mandatory_tfa_status\": \"<string>\",\n    \"refresh_token\": \"<string>\",\n    \"sid\": \"<string>\",\n    \"state\": \"<string>\"\n  },\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-21T20:03:54.000Z",
+                  "updatedAt": "2026-10-21T20:03:54.000Z",
+                  "uid": "35240-d0da3ee4-262d-463c-84a3-42514498ae5b"
+                }
+              ],
+              "createdAt": "2026-10-21T20:03:54.000Z",
+              "updatedAt": "2026-10-21T20:03:54.000Z",
+              "uid": "35240-b3c671cc-80c6-4af1-a463-6b3e7b91c496"
+            }
+          ],
+          "id": "88095e01-702b-45eb-9d92-39680070b83e",
+          "createdAt": "2026-10-21T20:03:54.000Z",
+          "updatedAt": "2026-10-21T20:03:54.000Z",
+          "uid": "35240-88095e01-702b-45eb-9d92-39680070b83e"
+        }
+      ],
+      "id": "e51541ee-1baf-42b4-809d-130d41f3aa53",
+      "createdAt": "2026-10-21T20:03:54.000Z",
+      "updatedAt": "2026-10-21T20:03:54.000Z",
+      "uid": "35240-e51541ee-1baf-42b4-809d-130d41f3aa53"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://drb.coinbase.com/api/v2"
+    }
+  ]
+}

@@ -1,0 +1,703 @@
+{
+  "info": {
+    "_postman_id": "5eed6ba7-c91e-4789-8f92-66d99e32497b",
+    "name": "Coinbase Retail Advanced Trade (Deribit) Combo Books API",
+    "description": "Coinbase Retail Advanced Trade API for derivatives trading.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:04:00.000Z",
+    "updatedAt": "2026-10-21T20:04:00.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-5eed6ba7-c91e-4789-8f92-66d99e32497b"
+  },
+  "item": [
+    {
+      "name": "private",
+      "item": [
+        {
+          "name": "create_combo",
+          "item": [
+            {
+              "name": "Get private create combo",
+              "id": "39c238ae-7828-4bba-9e68-b6c3449f2891",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 6,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/create_combo\",\n        \"params\": {\n          \"trades\": [\n            {\n              \"amount\": \"1\",\n              \"direction\": \"buy\",\n              \"instrument_name\": \"BTC-29APR22-37500-C\"\n            },\n            {\n              \"amount\": \"1\",\n              \"direction\": \"sell\",\n              \"instrument_name\": \"BTC-29APR22-37500-P\"\n            }\n          ]\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/private/create_combo?trades=[object Object]&trades=[object Object]",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "private",
+                    "create_combo"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) List of trades used to create a combo",
+                      "key": "trades",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "description": "(Required) List of trades used to create a combo",
+                      "key": "trades",
+                      "value": "[object Object]"
+                    }
+                  ]
+                },
+                "description": "Verifies and creates a combo book or returns an existing combo matching the given trades. Combos allow trading on multiple instruments (futures and options) simultaneously as a single strategy.\n\nIf a combo matching the provided trades already exists, this method returns the existing combo. Otherwise, it creates a new combo book with the specified leg structure.\n\nTry in API console"
+              },
+              "response": [
+                {
+                  "id": "90f2a767-3194-4204-bd3b-757547219475",
+                  "name": "Success response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 6,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/create_combo\",\n        \"params\": {\n          \"trades\": [\n            {\n              \"amount\": \"1\",\n              \"direction\": \"buy\",\n              \"instrument_name\": \"BTC-29APR22-37500-C\"\n            },\n            {\n              \"amount\": \"1\",\n              \"direction\": \"sell\",\n              \"instrument_name\": \"BTC-29APR22-37500-P\"\n            }\n          ]\n        }\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/private/create_combo?trades=[object Object]",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "private",
+                        "create_combo"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) List of trades used to create a combo",
+                          "key": "trades",
+                          "value": "[object Object]"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"result\": {\n    \"creation_timestamp\": \"<integer>\",\n    \"id\": \"<string>\",\n    \"instrument_id\": \"<integer>\",\n    \"legs\": [\n      {\n        \"amount\": \"<integer>\",\n        \"instrument_name\": \"<string>\"\n      },\n      {\n        \"amount\": \"<integer>\",\n        \"instrument_name\": \"<string>\"\n      }\n    ],\n    \"state\": \"inactive\",\n    \"state_timestamp\": \"<integer>\"\n  },\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-21T20:04:00.000Z",
+                  "updatedAt": "2026-10-21T20:04:00.000Z",
+                  "uid": "35240-90f2a767-3194-4204-bd3b-757547219475"
+                }
+              ],
+              "createdAt": "2026-10-21T20:04:00.000Z",
+              "updatedAt": "2026-10-21T20:04:00.000Z",
+              "uid": "35240-39c238ae-7828-4bba-9e68-b6c3449f2891"
+            }
+          ],
+          "id": "61684206-d1c0-4c35-9401-a67ebf9ce5c8",
+          "createdAt": "2026-10-21T20:04:00.000Z",
+          "updatedAt": "2026-10-21T20:04:00.000Z",
+          "uid": "35240-61684206-d1c0-4c35-9401-a67ebf9ce5c8"
+        },
+        {
+          "name": "get_leg_prices",
+          "item": [
+            {
+              "name": "Get private get leg prices",
+              "id": "1c6b41b7-345c-49be-a61c-c0bea0923208",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 1,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/get_leg_prices\",\n        \"params\": {\n          \"legs\": [\n            {\n              \"amount\": 2,\n              \"direction\": \"buy\",\n              \"instrument_name\": \"BTC-1NOV24-67000-C\"\n            },\n            {\n              \"amount\": 2,\n              \"direction\": \"sell\",\n              \"instrument_name\": \"BTC-1NOV24-66000-C\"\n            }\n          ],\n          \"price\": 0.6\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/private/get_leg_prices?legs=[object Object]&legs=[object Object]&price=<number>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "private",
+                    "get_leg_prices"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) List of legs for which the prices will be calculated",
+                      "key": "legs",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "description": "(Required) List of legs for which the prices will be calculated",
+                      "key": "legs",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "description": "(Required) Price for the whole leg structure",
+                      "key": "price",
+                      "value": "<number>"
+                    }
+                  ]
+                },
+                "description": "Returns individual leg prices for a given combo structure based on an aggregated price of the strategy and the mark prices of the individual legs.\n\n**Note:** Leg prices change dynamically with mark price fluctuations, and the algorithm is calibrated only for conventional option structures and future spreads. This method supports both inverse strategies and known linear structures within a single currency pair.\n\nTry in API console"
+              },
+              "response": [
+                {
+                  "id": "c4a7f51c-b56e-432f-8df1-79992f9628ed",
+                  "name": "Success response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 1,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/get_leg_prices\",\n        \"params\": {\n          \"legs\": [\n            {\n              \"amount\": 2,\n              \"direction\": \"buy\",\n              \"instrument_name\": \"BTC-1NOV24-67000-C\"\n            },\n            {\n              \"amount\": 2,\n              \"direction\": \"sell\",\n              \"instrument_name\": \"BTC-1NOV24-66000-C\"\n            }\n          ],\n          \"price\": 0.6\n        }\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/private/get_leg_prices?legs=[object Object]&price=<number>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "private",
+                        "get_leg_prices"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) List of legs for which the prices will be calculated",
+                          "key": "legs",
+                          "value": "[object Object]"
+                        },
+                        {
+                          "description": "(Required) Price for the whole leg structure",
+                          "key": "price",
+                          "value": "<number>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"result\": {\n    \"amount\": \"<number>\",\n    \"legs\": [\n      {\n        \"direction\": \"sell\",\n        \"instrument_name\": \"<string>\",\n        \"price\": \"<number>\",\n        \"ratio\": \"<integer>\"\n      },\n      {\n        \"direction\": \"buy\",\n        \"instrument_name\": \"<string>\",\n        \"price\": \"<number>\",\n        \"ratio\": \"<integer>\"\n      }\n    ]\n  },\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-21T20:04:00.000Z",
+                  "updatedAt": "2026-10-21T20:04:00.000Z",
+                  "uid": "35240-c4a7f51c-b56e-432f-8df1-79992f9628ed"
+                }
+              ],
+              "createdAt": "2026-10-21T20:04:00.000Z",
+              "updatedAt": "2026-10-21T20:04:00.000Z",
+              "uid": "35240-1c6b41b7-345c-49be-a61c-c0bea0923208"
+            }
+          ],
+          "id": "d2355008-b4dc-4d1f-b0bb-c95b3da4cc83",
+          "createdAt": "2026-10-21T20:04:00.000Z",
+          "updatedAt": "2026-10-21T20:04:00.000Z",
+          "uid": "35240-d2355008-b4dc-4d1f-b0bb-c95b3da4cc83"
+        }
+      ],
+      "id": "a5884499-178a-4d8c-95b7-e433737833bc",
+      "createdAt": "2026-10-21T20:04:00.000Z",
+      "updatedAt": "2026-10-21T20:04:00.000Z",
+      "uid": "35240-a5884499-178a-4d8c-95b7-e433737833bc"
+    },
+    {
+      "name": "public",
+      "item": [
+        {
+          "name": "get_combo_details",
+          "item": [
+            {
+              "name": "Get public get combo details",
+              "id": "36e30171-816b-43c4-96e0-45454e2e6649",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 3,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"public/get_combo_details\",\n        \"params\": {\n          \"combo_id\": \"BTC-FS-29APR22_PERP\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/public/get_combo_details?combo_id=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "public",
+                    "get_combo_details"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Combo ID",
+                      "key": "combo_id",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Retrieves detailed information about a specific combo, including its leg structure, state, and other properties.\n\nUse public/get_combo_ids to get a list of available combo IDs.\n\nTry in API console"
+              },
+              "response": [
+                {
+                  "id": "08a3ff6d-153c-4858-b500-06bc52d189f4",
+                  "name": "Success response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 3,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"public/get_combo_details\",\n        \"params\": {\n          \"combo_id\": \"BTC-FS-29APR22_PERP\"\n        }\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/public/get_combo_details?combo_id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "public",
+                        "get_combo_details"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Combo ID",
+                          "key": "combo_id",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"result\": {\n    \"creation_timestamp\": \"<integer>\",\n    \"id\": \"<string>\",\n    \"instrument_id\": \"<integer>\",\n    \"legs\": [\n      {\n        \"amount\": \"<integer>\",\n        \"instrument_name\": \"<string>\"\n      },\n      {\n        \"amount\": \"<integer>\",\n        \"instrument_name\": \"<string>\"\n      }\n    ],\n    \"state\": \"inactive\",\n    \"state_timestamp\": \"<integer>\"\n  },\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-21T20:04:00.000Z",
+                  "updatedAt": "2026-10-21T20:04:00.000Z",
+                  "uid": "35240-08a3ff6d-153c-4858-b500-06bc52d189f4"
+                }
+              ],
+              "createdAt": "2026-10-21T20:04:00.000Z",
+              "updatedAt": "2026-10-21T20:04:00.000Z",
+              "uid": "35240-36e30171-816b-43c4-96e0-45454e2e6649"
+            }
+          ],
+          "id": "0ae3bf2b-9702-459c-bca6-ecf95938e6c2",
+          "createdAt": "2026-10-21T20:04:00.000Z",
+          "updatedAt": "2026-10-21T20:04:00.000Z",
+          "uid": "35240-0ae3bf2b-9702-459c-bca6-ecf95938e6c2"
+        },
+        {
+          "name": "get_combo_ids",
+          "item": [
+            {
+              "name": "Get public get combo ids",
+              "id": "c71ee403-61f5-4d22-a035-e6b1a041f125",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 1,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"public/get_combo_ids\",\n        \"params\": {\n          \"currency\": \"BTC\",\n          \"state\": \"active\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/public/get_combo_ids?currency=USDT&state=inactive",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "public",
+                    "get_combo_ids"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The currency symbol",
+                      "key": "currency",
+                      "value": "USDT"
+                    },
+                    {
+                      "description": "Combo state, if not provided combos of all states are considered",
+                      "key": "state",
+                      "value": "inactive"
+                    }
+                  ]
+                },
+                "description": "Retrieves available combo IDs. This method can be used to get the list of all combos, or only the list of combos in the given state.\n\nUse public/get_combo_details to retrieve detailed information about a specific combo.\n\nTry in API console"
+              },
+              "response": [
+                {
+                  "id": "83c9f687-7c3c-49c9-81bb-08d7b792f0f5",
+                  "name": "Success response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 1,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"public/get_combo_ids\",\n        \"params\": {\n          \"currency\": \"BTC\",\n          \"state\": \"active\"\n        }\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/public/get_combo_ids?currency=USDT&state=inactive",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "public",
+                        "get_combo_ids"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The currency symbol",
+                          "key": "currency",
+                          "value": "USDT"
+                        },
+                        {
+                          "description": "Combo state, if not provided combos of all states are considered",
+                          "key": "state",
+                          "value": "inactive"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"result\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-21T20:04:00.000Z",
+                  "updatedAt": "2026-10-21T20:04:00.000Z",
+                  "uid": "35240-83c9f687-7c3c-49c9-81bb-08d7b792f0f5"
+                }
+              ],
+              "createdAt": "2026-10-21T20:04:00.000Z",
+              "updatedAt": "2026-10-21T20:04:00.000Z",
+              "uid": "35240-c71ee403-61f5-4d22-a035-e6b1a041f125"
+            }
+          ],
+          "id": "5d27157f-159f-4bd9-822f-1d46881ea4cb",
+          "createdAt": "2026-10-21T20:04:00.000Z",
+          "updatedAt": "2026-10-21T20:04:00.000Z",
+          "uid": "35240-5d27157f-159f-4bd9-822f-1d46881ea4cb"
+        },
+        {
+          "name": "get_combos",
+          "item": [
+            {
+              "name": "Get public get combos",
+              "id": "20547dda-45fa-48fc-aef3-1a0c03732805",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 2,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"public/get_combos\",\n        \"params\": {\n          \"currency\": \"BTC\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/public/get_combos?currency=ETH",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "public",
+                    "get_combos"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The currency symbol or `\"any\"` for all",
+                      "key": "currency",
+                      "value": "ETH"
+                    }
+                  ]
+                },
+                "description": "Retrieves information about active combos for the specified currency. Returns detailed information including leg structures and combo properties.\n\nFor a list of combo IDs only, use public/get_combo_ids. For details about a specific combo, use public/get_combo_details.\n\nTry in API console"
+              },
+              "response": [
+                {
+                  "id": "d21dbc20-0761-4a60-988e-5577aeb38fc5",
+                  "name": "Success response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 2,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"public/get_combos\",\n        \"params\": {\n          \"currency\": \"BTC\"\n        }\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/public/get_combos?currency=ETH",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "public",
+                        "get_combos"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The currency symbol or `\"any\"` for all",
+                          "key": "currency",
+                          "value": "ETH"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"result\": [\n    {\n      \"creation_timestamp\": \"<integer>\",\n      \"id\": \"<string>\",\n      \"instrument_id\": \"<integer>\",\n      \"legs\": [\n        {\n          \"amount\": \"<integer>\",\n          \"instrument_name\": \"<string>\"\n        },\n        {\n          \"amount\": \"<integer>\",\n          \"instrument_name\": \"<string>\"\n        }\n      ],\n      \"state\": \"active\",\n      \"state_timestamp\": \"<integer>\"\n    },\n    {\n      \"creation_timestamp\": \"<integer>\",\n      \"id\": \"<string>\",\n      \"instrument_id\": \"<integer>\",\n      \"legs\": [\n        {\n          \"amount\": \"<integer>\",\n          \"instrument_name\": \"<string>\"\n        },\n        {\n          \"amount\": \"<integer>\",\n          \"instrument_name\": \"<string>\"\n        }\n      ],\n      \"state\": \"active\",\n      \"state_timestamp\": \"<integer>\"\n    }\n  ],\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-21T20:04:00.000Z",
+                  "updatedAt": "2026-10-21T20:04:00.000Z",
+                  "uid": "35240-d21dbc20-0761-4a60-988e-5577aeb38fc5"
+                }
+              ],
+              "createdAt": "2026-10-21T20:04:00.000Z",
+              "updatedAt": "2026-10-21T20:04:00.000Z",
+              "uid": "35240-20547dda-45fa-48fc-aef3-1a0c03732805"
+            }
+          ],
+          "id": "757a3629-95a1-4d48-908b-dda317f51112",
+          "createdAt": "2026-10-21T20:04:00.000Z",
+          "updatedAt": "2026-10-21T20:04:00.000Z",
+          "uid": "35240-757a3629-95a1-4d48-908b-dda317f51112"
+        }
+      ],
+      "id": "2c263f3e-c782-4fe5-94ae-7a58d7987c2e",
+      "createdAt": "2026-10-21T20:04:00.000Z",
+      "updatedAt": "2026-10-21T20:04:00.000Z",
+      "uid": "35240-2c263f3e-c782-4fe5-94ae-7a58d7987c2e"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://drb.coinbase.com/api/v2"
+    }
+  ]
+}

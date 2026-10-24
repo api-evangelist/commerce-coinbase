@@ -1,0 +1,29 @@
+{
+  "info": {
+    "_postman_id": "b2454d30-0343-4b5f-8514-8caa14368bca",
+    "name": "Coinbase Business Checkouts Webhooks API",
+    "description": "Current-generation REST API replacing the legacy Charges API for creating and managing single-use hosted payment checkouts. Merchants create a checkout object with a fixed USDC amount on the Base network; customers complete payment through a hosted URL. Uses JWT bearer token authentication and idempotency keys. Provides simplified status model and webhook events for the payment lifecycle.\n\nContact Support:\n Name: Coinbase Developer Platform Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:03:40.000Z",
+    "updatedAt": "2026-10-21T20:03:40.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-b2454d30-0343-4b5f-8514-8caa14368bca"
+  },
+  "item": [],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://business.coinbase.com/api/v1"
+    }
+  ]
+}

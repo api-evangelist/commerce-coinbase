@@ -1,0 +1,2876 @@
+{
+  "info": {
+    "_postman_id": "c2714d9f-0a09-4a9d-9954-67e68869e62b",
+    "name": "Coinbase Retail Advanced Trade (Deribit) Account Management\u2026",
+    "description": "Coinbase Retail Advanced Trade API for derivatives trading.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:03:46.000Z",
+    "updatedAt": "2026-10-21T20:03:47.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-c2714d9f-0a09-4a9d-9954-67e68869e62b"
+  },
+  "item": [
+    {
+      "name": "private",
+      "item": [
+        {
+          "name": "change_margin_model",
+          "item": [
+            {
+              "name": "Get private change margin model",
+              "id": "5f946f13-7e23-4587-952b-4fc310ba2f73",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 1,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/change_margin_model\",\n        \"params\": {\n          \"margin_model\": \"cross_pm\",\n          \"user_id\": 3\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/private/change_margin_model?user_id=<integer>&margin_model=cross_sm&dry_run=<boolean>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "private",
+                    "change_margin_model"
+                  ],
+                  "query": [
+                    {
+                      "description": "Id of a (sub)account - by default current user id is used",
+                      "key": "user_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "(Required) Margin model",
+                      "key": "margin_model",
+                      "value": "cross_sm"
+                    },
+                    {
+                      "description": "If `true` request returns the result without switching the margining model. Default: `false`",
+                      "key": "dry_run",
+                      "value": "<boolean>"
+                    }
+                  ]
+                },
+                "description": "Changes the margin model for the authenticated account or a specified subaccount. Margin models determine how margin requirements are calculated (e.g., Standard Margin vs. Portfolio Margin).\n\nChanging the margin model may affect margin requirements, available funds, and trading capabilities. Use the `dry_run` parameter to preview the impact of the change before applying it.\n\n**\ud83d\udcd6 Related Article:** Margin types and usage\n\nTry in API console"
+              },
+              "response": [
+                {
+                  "id": "bcf9c2de-5351-42b4-975f-da06911c4f56",
+                  "name": "Success response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 1,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/change_margin_model\",\n        \"params\": {\n          \"margin_model\": \"cross_pm\",\n          \"user_id\": 3\n        }\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/private/change_margin_model?user_id=<integer>&margin_model=cross_sm&dry_run=<boolean>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "private",
+                        "change_margin_model"
+                      ],
+                      "query": [
+                        {
+                          "description": "Id of a (sub)account - by default current user id is used",
+                          "key": "user_id",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "(Required) Margin model",
+                          "key": "margin_model",
+                          "value": "cross_sm"
+                        },
+                        {
+                          "description": "If `true` request returns the result without switching the margining model. Default: `false`",
+                          "key": "dry_run",
+                          "value": "<boolean>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"result\": [\n    {\n      \"old_state\": {\n        \"maintenance_margin_rate\": \"<number>\",\n        \"initial_margin_rate\": \"<number>\",\n        \"available_balance\": \"<number>\"\n      },\n      \"new_state\": {\n        \"maintenance_margin_rate\": \"<number>\",\n        \"initial_margin_rate\": \"<number>\",\n        \"available_balance\": \"<number>\"\n      },\n      \"currency\": \"USDT\"\n    },\n    {\n      \"old_state\": {\n        \"maintenance_margin_rate\": \"<number>\",\n        \"initial_margin_rate\": \"<number>\",\n        \"available_balance\": \"<number>\"\n      },\n      \"new_state\": {\n        \"maintenance_margin_rate\": \"<number>\",\n        \"initial_margin_rate\": \"<number>\",\n        \"available_balance\": \"<number>\"\n      },\n      \"currency\": \"USDT\"\n    }\n  ],\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-21T20:03:47.000Z",
+                  "updatedAt": "2026-10-21T20:03:47.000Z",
+                  "uid": "35240-bcf9c2de-5351-42b4-975f-da06911c4f56"
+                }
+              ],
+              "createdAt": "2026-10-21T20:03:47.000Z",
+              "updatedAt": "2026-10-21T20:03:47.000Z",
+              "uid": "35240-5f946f13-7e23-4587-952b-4fc310ba2f73"
+            }
+          ],
+          "id": "24837e1a-74e9-40e2-8edd-095e5482b1cb",
+          "createdAt": "2026-10-21T20:03:47.000Z",
+          "updatedAt": "2026-10-21T20:03:47.000Z",
+          "uid": "35240-24837e1a-74e9-40e2-8edd-095e5482b1cb"
+        },
+        {
+          "name": "get_access_log",
+          "item": [
+            {
+              "name": "Get private get access log",
+              "id": "512b7e1d-b093-4a6a-8d56-aa775f8791e5",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 1,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/get_access_log\",\n        \"params\": {\n          \"count\": 3,\n          \"offset\": 0\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/private/get_access_log?offset=<integer>&count=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "private",
+                    "get_access_log"
+                  ],
+                  "query": [
+                    {
+                      "description": "The offset for pagination, default - `0`",
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Number of requested items, default - `10`, maximum - `1000`",
+                      "key": "count",
+                      "value": "<integer>"
+                    }
+                  ]
+                },
+                "description": "Retrieves a log of API access attempts and authentication events for the authenticated account. The log includes information such as IP addresses, timestamps, API methods called, and authentication status.\n\nUse this method to monitor account security, review API usage patterns, and identify unauthorized access attempts. Results can be paginated using the `offset` and `count` parameters.\n\nTry in API console"
+              },
+              "response": [
+                {
+                  "id": "6cbd687b-4925-4017-bd3a-ea0f3593e50f",
+                  "name": "Success response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 1,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/get_access_log\",\n        \"params\": {\n          \"count\": 3,\n          \"offset\": 0\n        }\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/private/get_access_log?offset=<integer>&count=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "private",
+                        "get_access_log"
+                      ],
+                      "query": [
+                        {
+                          "description": "The offset for pagination, default - `0`",
+                          "key": "offset",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Number of requested items, default - `10`, maximum - `1000`",
+                          "key": "count",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"result\": [\n    {\n      \"id\": \"<integer>\",\n      \"ip\": \"<string>\",\n      \"timestamp\": \"<integer>\",\n      \"country\": \"<string>\",\n      \"city\": \"<string>\",\n      \"log\": \"<string>\",\n      \"data\": {}\n    },\n    {\n      \"id\": \"<integer>\",\n      \"ip\": \"<string>\",\n      \"timestamp\": \"<integer>\",\n      \"country\": \"<string>\",\n      \"city\": \"<string>\",\n      \"log\": \"<string>\",\n      \"data\": {}\n    }\n  ],\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-21T20:03:47.000Z",
+                  "updatedAt": "2026-10-21T20:03:47.000Z",
+                  "uid": "35240-6cbd687b-4925-4017-bd3a-ea0f3593e50f"
+                }
+              ],
+              "createdAt": "2026-10-21T20:03:47.000Z",
+              "updatedAt": "2026-10-21T20:03:47.000Z",
+              "uid": "35240-512b7e1d-b093-4a6a-8d56-aa775f8791e5"
+            }
+          ],
+          "id": "4b2655a5-b6ee-437c-8193-2a8e1977e3fe",
+          "createdAt": "2026-10-21T20:03:47.000Z",
+          "updatedAt": "2026-10-21T20:03:47.000Z",
+          "uid": "35240-4b2655a5-b6ee-437c-8193-2a8e1977e3fe"
+        },
+        {
+          "name": "get_account_summaries",
+          "item": [
+            {
+              "name": "Get private get account summaries",
+              "id": "1dd09dd8-446d-4e51-975c-045adb7e6a20",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 2515,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/get_account_summaries\",\n        \"params\": {\n          \"extended\": true\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/private/get_account_summaries?subaccount_id=<integer>&extended=<boolean>&include_isolated=false",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "private",
+                    "get_account_summaries"
+                  ],
+                  "query": [
+                    {
+                      "description": "The user id for the subaccount",
+                      "key": "subaccount_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Include additional fields",
+                      "key": "extended",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "description": "If true, includes `isolated_account_summaries` in the response containing account summaries for active isolated margin subaccounts. Default - `false`",
+                      "key": "include_isolated",
+                      "value": "false"
+                    }
+                  ]
+                },
+                "description": "Retrieves a per-currency list of account summaries for the authenticated user. Each summary includes balance, equity, available funds, and margin information for each currency.\n\nTo retrieve summaries for a specific subaccount, use the `subaccount_id` parameter. When the `extended` parameter is set to `true`, additional account details such as account ID, username, email, and account type are included.\n\nTry in API console\n\nNote: This method does not accept a singular `currency` parameter; summaries for all portfolio currencies are always returned for both main and isolated subaccounts."
+              },
+              "response": [
+                {
+                  "id": "3746b865-a54b-4b3f-9735-a76929f175b9",
+                  "name": "Success response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 2515,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/get_account_summaries\",\n        \"params\": {\n          \"extended\": true\n        }\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/private/get_account_summaries?subaccount_id=<integer>&extended=<boolean>&include_isolated=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "private",
+                        "get_account_summaries"
+                      ],
+                      "query": [
+                        {
+                          "description": "The user id for the subaccount",
+                          "key": "subaccount_id",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Include additional fields",
+                          "key": "extended",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "If true, includes `isolated_account_summaries` in the response containing account summaries for active isolated margin subaccounts. Default - `false`",
+                          "key": "include_isolated",
+                          "value": "false"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"result\": {\n    \"security_keys_enabled\": \"<boolean>\",\n    \"system_name\": \"<string>\",\n    \"username\": \"<string>\",\n    \"email\": \"<string>\",\n    \"type\": \"main\",\n    \"id\": \"<integer>\",\n    \"affiliate_promotion_fee\": \"<number>\",\n    \"block_rfq_self_match_prevention\": \"<boolean>\",\n    \"creation_timestamp\": \"<integer>\",\n    \"interuser_transfers_enabled\": \"<boolean>\",\n    \"login_enabled\": \"<boolean>\",\n    \"mmp_enabled\": \"<boolean>\",\n    \"receive_notifications\": \"<boolean>\",\n    \"referrer_id\": \"<string>\",\n    \"self_trading_extended_to_subaccounts\": \"<string>\",\n    \"self_trading_reject_mode\": \"<string>\",\n    \"summaries\": [\n      {\n        \"equity\": \"<number>\",\n        \"currency\": \"<string>\",\n        \"maintenance_margin\": \"<number>\",\n        \"initial_margin\": \"<number>\",\n        \"available_funds\": \"<number>\",\n        \"available_withdrawal_funds\": \"<number>\",\n        \"balance\": \"<number>\",\n        \"session_upl\": \"<number>\",\n        \"session_rpl\": \"<number>\",\n        \"total_pl\": \"<number>\",\n        \"options_pl\": \"<number>\",\n        \"options_session_upl\": \"<number>\",\n        \"options_session_rpl\": \"<number>\",\n        \"options_delta\": \"<number>\",\n        \"options_gamma\": \"<number>\",\n        \"options_vega\": \"<number>\",\n        \"options_value\": \"<number>\",\n        \"options_theta\": \"<number>\",\n        \"futures_pl\": \"<number>\",\n        \"options_gamma_map\": {\n          \"doloree8_\": \"<number>\",\n          \"consequat_e_\": \"<number>\",\n          \"sitbd\": \"<number>\"\n        },\n        \"options_theta_map\": {\n          \"amet6\": \"<number>\"\n        },\n        \"options_vega_map\": {\n          \"magnae\": \"<number>\"\n        },\n        \"futures_session_upl\": \"<number>\",\n        \"futures_session_rpl\": \"<number>\",\n        \"projected_maintenance_margin\": \"<number>\",\n        \"delta_total\": \"<number>\",\n        \"projected_delta_total\": \"<number>\",\n        \"additional_reserve\": \"<number>\",\n        \"affiliate_promotion_fee\": \"<number>\",\n        \"close_out_margin\": \"<number>\",\n        \"cross_collateral_enabled\": \"<boolean>\",\n        \"delta_total_map\": {\n          \"laboris_70a\": \"<number>\"\n        },\n        \"deposit_address\": \"<string>\",\n        \"fee_balance\": \"<number>\",\n        \"fee_group\": \"<string>\",\n        \"fees\": {\n          \"adipisicing_b9\": {\n            \"Duis_8\": {\n              \"default\": {\n                \"type\": \"<string>\",\n                \"taker\": \"<number>\",\n                \"maker\": \"<number>\"\n              },\n              \"block_trade\": \"<number>\"\n            }\n          },\n          \"velitb\": {\n            \"sed_3f\": {\n              \"default\": {\n                \"type\": \"<string>\",\n                \"taker\": \"<number>\",\n                \"maker\": \"<number>\"\n              },\n              \"block_trade\": \"<number>\"\n            },\n            \"veniam_d3\": {\n              \"default\": {\n                \"type\": \"<string>\",\n                \"taker\": \"<number>\",\n                \"maker\": \"<number>\"\n              },\n              \"block_trade\": \"<number>\"\n            }\n          },\n          \"dolor8\": {\n            \"aliquip_1\": {\n              \"default\": {\n                \"type\": \"<string>\",\n                \"taker\": \"<number>\",\n                \"maker\": \"<number>\"\n              },\n              \"block_trade\": \"<number>\"\n            }\n          }\n        },\n        \"has_non_block_chain_equity\": \"<boolean>\",\n        \"limits\": {},\n        \"locked_balance\": \"<number>\",\n        \"margin_balance\": \"<number>\",\n        \"margin_model\": \"<string>\",\n        \"portfolio_margining_enabled\": \"<boolean>\",\n        \"projected_close_out_margin\": \"<number>\",\n        \"projected_initial_margin\": \"<number>\",\n        \"receive_notifications\": \"<boolean>\",\n        \"spot_reserve\": \"<number>\",\n        \"total_delta_total_usd\": \"<number>\",\n        \"total_equity_usd\": \"<number>\",\n        \"total_initial_margin_usd\": \"<number>\",\n        \"total_maintenance_margin_usd\": \"<number>\",\n        \"total_margin_balance_usd\": \"<number>\",\n        \"trading_products_details\": {}\n      },\n      {\n        \"equity\": \"<number>\",\n        \"currency\": \"<string>\",\n        \"maintenance_margin\": \"<number>\",\n        \"initial_margin\": \"<number>\",\n        \"available_funds\": \"<number>\",\n        \"available_withdrawal_funds\": \"<number>\",\n        \"balance\": \"<number>\",\n        \"session_upl\": \"<number>\",\n        \"session_rpl\": \"<number>\",\n        \"total_pl\": \"<number>\",\n        \"options_pl\": \"<number>\",\n        \"options_session_upl\": \"<number>\",\n        \"options_session_rpl\": \"<number>\",\n        \"options_delta\": \"<number>\",\n        \"options_gamma\": \"<number>\",\n        \"options_vega\": \"<number>\",\n        \"options_value\": \"<number>\",\n        \"options_theta\": \"<number>\",\n        \"futures_pl\": \"<number>\",\n        \"options_gamma_map\": {\n          \"ex784\": \"<number>\",\n          \"dolore_be8\": \"<number>\"\n        },\n        \"options_theta_map\": {\n          \"laborum_ee_\": \"<number>\",\n          \"incididunt1\": \"<number>\"\n        },\n        \"options_vega_map\": {\n          \"id_c\": \"<number>\"\n        },\n        \"futures_session_upl\": \"<number>\",\n        \"futures_session_rpl\": \"<number>\",\n        \"projected_maintenance_margin\": \"<number>\",\n        \"delta_total\": \"<number>\",\n        \"projected_delta_total\": \"<number>\",\n        \"additional_reserve\": \"<number>\",\n        \"affiliate_promotion_fee\": \"<number>\",\n        \"close_out_margin\": \"<number>\",\n        \"cross_collateral_enabled\": \"<boolean>\",\n        \"delta_total_map\": {\n          \"sed7\": \"<number>\",\n          \"Lorem_87\": \"<number>\"\n        },\n        \"deposit_address\": \"<string>\",\n        \"fee_balance\": \"<number>\",\n        \"fee_group\": \"<string>\",\n        \"fees\": {\n          \"irure9\": {\n            \"id_32f\": {\n              \"default\": {\n                \"type\": \"<string>\",\n                \"taker\": \"<number>\",\n                \"maker\": \"<number>\"\n              },\n              \"block_trade\": \"<number>\"\n            }\n          },\n          \"minim_e\": {\n            \"elit_d\": {\n              \"default\": {\n                \"type\": \"<string>\",\n                \"taker\": \"<number>\",\n                \"maker\": \"<number>\"\n              },\n              \"block_trade\": \"<number>\"\n            },\n            \"do_969\": {\n              \"default\": {\n                \"type\": \"<string>\",\n                \"taker\": \"<number>\",\n                \"maker\": \"<number>\"\n              },\n              \"block_trade\": \"<number>\"\n            }\n          },\n          \"non_791\": {\n            \"dolore_7\": {\n              \"default\": {\n                \"type\": \"<string>\",\n                \"taker\": \"<number>\",\n                \"maker\": \"<number>\"\n              },\n              \"block_trade\": \"<number>\"\n            }\n          },\n          \"laborefb4\": {\n            \"deserunt_56b\": {\n              \"default\": {\n                \"type\": \"<string>\",\n                \"taker\": \"<number>\",\n                \"maker\": \"<number>\"\n              },\n              \"block_trade\": \"<number>\"\n            }\n          }\n        },\n        \"has_non_block_chain_equity\": \"<boolean>\",\n        \"limits\": {},\n        \"locked_balance\": \"<number>\",\n        \"margin_balance\": \"<number>\",\n        \"margin_model\": \"<string>\",\n        \"portfolio_margining_enabled\": \"<boolean>\",\n        \"projected_close_out_margin\": \"<number>\",\n        \"projected_initial_margin\": \"<number>\",\n        \"receive_notifications\": \"<boolean>\",\n        \"spot_reserve\": \"<number>\",\n        \"total_delta_total_usd\": \"<number>\",\n        \"total_equity_usd\": \"<number>\",\n        \"total_initial_margin_usd\": \"<number>\",\n        \"total_maintenance_margin_usd\": \"<number>\",\n        \"total_margin_balance_usd\": \"<number>\",\n        \"trading_products_details\": {}\n      }\n    ],\n    \"trading_products_details\": {}\n  },\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-21T20:03:47.000Z",
+                  "updatedAt": "2026-10-21T20:03:47.000Z",
+                  "uid": "35240-3746b865-a54b-4b3f-9735-a76929f175b9"
+                }
+              ],
+              "createdAt": "2026-10-21T20:03:47.000Z",
+              "updatedAt": "2026-10-21T20:03:47.000Z",
+              "uid": "35240-1dd09dd8-446d-4e51-975c-045adb7e6a20"
+            }
+          ],
+          "id": "73f0f53c-968f-4b21-8bb7-2c38424654ad",
+          "createdAt": "2026-10-21T20:03:47.000Z",
+          "updatedAt": "2026-10-21T20:03:47.000Z",
+          "uid": "35240-73f0f53c-968f-4b21-8bb7-2c38424654ad"
+        },
+        {
+          "name": "get_account_summary",
+          "item": [
+            {
+              "name": "Get private get account summary",
+              "id": "020d316b-812c-450d-b970-92289d8c61d2",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 2515,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/get_account_summary\",\n        \"params\": {\n          \"currency\": \"BTC\",\n          \"extended\": true\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/private/get_account_summary?currency=BNB&subaccount_id=<integer>&extended=<boolean>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "private",
+                    "get_account_summary"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The currency symbol",
+                      "key": "currency",
+                      "value": "BNB"
+                    },
+                    {
+                      "description": "The user id for the subaccount",
+                      "key": "subaccount_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Include additional fields",
+                      "key": "extended",
+                      "value": "<boolean>"
+                    }
+                  ]
+                },
+                "description": "Retrieves the account summary for a specific currency. The summary includes cash `balance`, `equity`, `margin_balance`, `available_funds`, `available_withdrawal_funds`, initial/maintenance margin, session and total PnL, options greeks, and related fields.\n\nKey relationships (standard margin): `equity = balance + futures session PnL + options_value`, `margin_balance = equity - options_value`, `available_funds = max(0, margin_balance - initial_margin)`. Under portfolio margin, `margin_balance` equals `equity`. Session PnL fields reset at daily settlement; `total_pl` does not.\n\nTo retrieve the summary for a specific subaccount, use the `subaccount_id` parameter. When the `extended` parameter is set to `true`, additional account details such as account ID, username, email, and account type are included.\n\nTry in API console"
+              },
+              "response": [
+                {
+                  "id": "3b8efa1e-381f-4b62-8c9e-c11ea2e070f7",
+                  "name": "Success response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 2515,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/get_account_summary\",\n        \"params\": {\n          \"currency\": \"BTC\",\n          \"extended\": true\n        }\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/private/get_account_summary?currency=BNB&subaccount_id=<integer>&extended=<boolean>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "private",
+                        "get_account_summary"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The currency symbol",
+                          "key": "currency",
+                          "value": "BNB"
+                        },
+                        {
+                          "description": "The user id for the subaccount",
+                          "key": "subaccount_id",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Include additional fields",
+                          "key": "extended",
+                          "value": "<boolean>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"result\": {\n    \"equity\": \"<number>\",\n    \"currency\": \"<string>\",\n    \"maintenance_margin\": \"<number>\",\n    \"initial_margin\": \"<number>\",\n    \"available_funds\": \"<number>\",\n    \"available_withdrawal_funds\": \"<number>\",\n    \"balance\": \"<number>\",\n    \"session_upl\": \"<number>\",\n    \"session_rpl\": \"<number>\",\n    \"total_pl\": \"<number>\",\n    \"options_pl\": \"<number>\",\n    \"options_session_upl\": \"<number>\",\n    \"options_session_rpl\": \"<number>\",\n    \"options_delta\": \"<number>\",\n    \"options_gamma\": \"<number>\",\n    \"options_vega\": \"<number>\",\n    \"options_value\": \"<number>\",\n    \"options_theta\": \"<number>\",\n    \"futures_pl\": \"<number>\",\n    \"options_gamma_map\": {\n      \"adf__\": \"<number>\",\n      \"do_9ff\": \"<number>\"\n    },\n    \"options_theta_map\": {\n      \"reprehenderit_d_\": \"<number>\",\n      \"euc\": \"<number>\"\n    },\n    \"options_vega_map\": {\n      \"nostrud_f\": \"<number>\",\n      \"dolor0_\": \"<number>\",\n      \"aliquip815\": \"<number>\",\n      \"nisi00d\": \"<number>\"\n    },\n    \"futures_session_upl\": \"<number>\",\n    \"futures_session_rpl\": \"<number>\",\n    \"projected_maintenance_margin\": \"<number>\",\n    \"delta_total\": \"<number>\",\n    \"projected_delta_total\": \"<number>\",\n    \"security_keys_enabled\": \"<boolean>\",\n    \"system_name\": \"<string>\",\n    \"username\": \"<string>\",\n    \"email\": \"<string>\",\n    \"type\": \"main\",\n    \"id\": \"<integer>\",\n    \"additional_reserve\": \"<number>\",\n    \"affiliate_promotion_fee\": \"<number>\",\n    \"block_rfq_self_match_prevention\": \"<boolean>\",\n    \"close_out_margin\": \"<number>\",\n    \"creation_timestamp\": \"<integer>\",\n    \"cross_collateral_enabled\": \"<boolean>\",\n    \"delta_total_map\": {\n      \"do2\": \"<number>\",\n      \"dolore32_\": \"<number>\",\n      \"nostrud_12\": \"<number>\"\n    },\n    \"deposit_address\": \"<string>\",\n    \"fee_balance\": \"<number>\",\n    \"fee_group\": \"<string>\",\n    \"fees\": {\n      \"eu25\": {\n        \"culpa_d3\": {\n          \"default\": {\n            \"type\": \"<string>\",\n            \"taker\": \"<number>\",\n            \"maker\": \"<number>\"\n          },\n          \"block_trade\": \"<number>\"\n        },\n        \"in826\": {\n          \"default\": {\n            \"type\": \"<string>\",\n            \"taker\": \"<number>\",\n            \"maker\": \"<number>\"\n          },\n          \"block_trade\": \"<number>\"\n        }\n      }\n    },\n    \"has_non_block_chain_equity\": \"<boolean>\",\n    \"interuser_transfers_enabled\": \"<boolean>\",\n    \"is_direct_access_allowed\": \"<boolean>\",\n    \"limits\": {},\n    \"locked_balance\": \"<number>\",\n    \"login_enabled\": \"<boolean>\",\n    \"margin_balance\": \"<number>\",\n    \"margin_model\": \"<string>\",\n    \"mmp_enabled\": \"<boolean>\",\n    \"portfolio_margining_enabled\": \"<boolean>\",\n    \"projected_close_out_margin\": \"<number>\",\n    \"projected_initial_margin\": \"<number>\",\n    \"receive_notifications\": \"<boolean>\",\n    \"referrer_id\": \"<string>\",\n    \"self_trading_extended_to_subaccounts\": \"<string>\",\n    \"self_trading_reject_mode\": \"<string>\",\n    \"spot_reserve\": \"<number>\",\n    \"total_delta_total_usd\": \"<number>\",\n    \"total_equity_usd\": \"<number>\",\n    \"total_initial_margin_usd\": \"<number>\",\n    \"total_maintenance_margin_usd\": \"<number>\",\n    \"total_margin_balance_usd\": \"<number>\",\n    \"trading_products_details\": {}\n  },\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-21T20:03:47.000Z",
+                  "updatedAt": "2026-10-21T20:03:47.000Z",
+                  "uid": "35240-3b8efa1e-381f-4b62-8c9e-c11ea2e070f7"
+                }
+              ],
+              "createdAt": "2026-10-21T20:03:47.000Z",
+              "updatedAt": "2026-10-21T20:03:47.000Z",
+              "uid": "35240-020d316b-812c-450d-b970-92289d8c61d2"
+            }
+          ],
+          "id": "6af81ac8-912e-433e-a55f-eea06a9be99a",
+          "createdAt": "2026-10-21T20:03:47.000Z",
+          "updatedAt": "2026-10-21T20:03:47.000Z",
+          "uid": "35240-6af81ac8-912e-433e-a55f-eea06a9be99a"
+        },
+        {
+          "name": "get_leverage",
+          "item": [
+            {
+              "name": "Get private get leverage",
+              "id": "f0fbf232-fefc-4edc-94d5-ec567b0774d6",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 1,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/get_leverage\",\n        \"params\": {\n          \"instrument_name\": \"BTC-PERPETUAL\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/private/get_leverage?instrument_name=<string>&subaccount_id=<integer>&isolated=false",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "private",
+                    "get_leverage"
+                  ],
+                  "query": [
+                    {
+                      "description": "Instrument name",
+                      "key": "instrument_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The user id for the subaccount. Available to retail-broker callers; defaults to the authenticated account.",
+                      "key": "subaccount_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "If true, returns leverage settings for isolated margin mode (main accounts only).",
+                      "key": "isolated",
+                      "value": "false"
+                    }
+                  ]
+                },
+                "description": "Retrieves the current user-configured custom leverage and effective maximum leverage for a specified active future instrument.\n\nWhen `instrument_name` is supplied, returns a single leverage details object. When omitted, returns leverage details only for futures with a stored custom leverage override; instruments using the default maximum leverage are omitted. For `isolated=true`, regular subaccounts receive an empty object or array because isolated leverage configuration is visible only to the main account.\n\nTry in API console"
+              },
+              "response": [
+                {
+                  "id": "bc4478a5-207d-417d-aba5-440eceba47f1",
+                  "name": "Success response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 1,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/get_leverage\",\n        \"params\": {\n          \"instrument_name\": \"BTC-PERPETUAL\"\n        }\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/private/get_leverage?instrument_name=<string>&subaccount_id=<integer>&isolated=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "private",
+                        "get_leverage"
+                      ],
+                      "query": [
+                        {
+                          "description": "Instrument name",
+                          "key": "instrument_name",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The user id for the subaccount. Available to retail-broker callers; defaults to the authenticated account.",
+                          "key": "subaccount_id",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "If true, returns leverage settings for isolated margin mode (main accounts only).",
+                          "key": "isolated",
+                          "value": "false"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"result\": {\n    \"instrument_name\": \"<string>\",\n    \"max_leverage\": \"<number>\",\n    \"leverage\": \"<number,null>\"\n  },\n  \"id\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-21T20:03:47.000Z",
+                  "updatedAt": "2026-10-21T20:03:47.000Z",
+                  "uid": "35240-bc4478a5-207d-417d-aba5-440eceba47f1"
+                }
+              ],
+              "createdAt": "2026-10-21T20:03:47.000Z",
+              "updatedAt": "2026-10-21T20:03:47.000Z",
+              "uid": "35240-f0fbf232-fefc-4edc-94d5-ec567b0774d6"
+            }
+          ],
+          "id": "c0e19e55-d550-4fb6-82fc-881331e2651a",
+          "createdAt": "2026-10-21T20:03:47.000Z",
+          "updatedAt": "2026-10-21T20:03:47.000Z",
+          "uid": "35240-c0e19e55-d550-4fb6-82fc-881331e2651a"
+        },
+        {
+          "name": "get_pme_params",
+          "item": [
+            {
+              "name": "Get private get pme params",
+              "id": "008b87cb-bd03-4f9b-bf7f-5fc4ae9ffcfc",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 1,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/get_pme_params\",\n        \"params\": {\n          \"currency\": \"BTC\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/private/get_pme_params?currency=BTC",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "private",
+                    "get_pme_params"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The currency symbol",
+                      "key": "currency",
+                      "value": "BTC"
+                    }
+                  ]
+                },
+                "description": "Retrieves Portfolio Margin (PM) open-order restrictions and risk limits for the specified currency.\n\nWhen Portfolio Margin is enabled, the response includes maximum order counts, aggregate futures and options order sizes, and the risk-reducing order limit. When Portfolio Margin is disabled, the response contains only `enabled: false`.\n\n**\ud83d\udcd6 Related Article:** Portfolio Margin\n\nTry in API console"
+              },
+              "response": [
+                {
+                  "id": "03f618df-ba3f-4810-9d5d-2e33ddc309ca",
+                  "name": "Success response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 1,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/get_pme_params\",\n        \"params\": {\n          \"currency\": \"BTC\"\n        }\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/private/get_pme_params?currency=BTC",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "private",
+                        "get_pme_params"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The currency symbol",
+                          "key": "currency",
+                          "value": "BTC"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"result\": {\n    \"enabled\": true,\n    \"max_total_open_orders\": \"<integer>\",\n    \"max_future_open_orders\": \"<integer>\",\n    \"max_option_open_orders\": \"<integer>\",\n    \"max_future_open_orders_size\": \"<number>\",\n    \"max_option_open_orders_size\": \"<number>\",\n    \"max_risk_reducing_orders\": \"<integer>\"\n  },\n  \"id\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-21T20:03:47.000Z",
+                  "updatedAt": "2026-10-21T20:03:47.000Z",
+                  "uid": "35240-03f618df-ba3f-4810-9d5d-2e33ddc309ca"
+                }
+              ],
+              "createdAt": "2026-10-21T20:03:47.000Z",
+              "updatedAt": "2026-10-21T20:03:47.000Z",
+              "uid": "35240-008b87cb-bd03-4f9b-bf7f-5fc4ae9ffcfc"
+            }
+          ],
+          "id": "0690e8f9-ce08-4d91-969b-789d7deb1431",
+          "createdAt": "2026-10-21T20:03:47.000Z",
+          "updatedAt": "2026-10-21T20:03:47.000Z",
+          "uid": "35240-0690e8f9-ce08-4d91-969b-789d7deb1431"
+        },
+        {
+          "name": "get_position",
+          "item": [
+            {
+              "name": "Get private get position",
+              "id": "5942654f-7b6c-435a-a5b8-eb983cd52ec0",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 404,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/get_position\",\n        \"params\": {\n          \"instrument_name\": \"BTC-PERPETUAL\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/private/get_position?instrument_name=<string>&include_isolated=false",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "private",
+                    "get_position"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Instrument name",
+                      "key": "instrument_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "If true, retrieves the position from a bound isolated margin subaccount for the instrument. Omit to read the main account cross position. Default - `false`",
+                      "key": "include_isolated",
+                      "value": "false"
+                    }
+                  ]
+                },
+                "description": "Retrieves the open position for a specific instrument. Returns detailed position information including size, average entry price, mark price, unrealized P&L, initial margin, maintenance margin, and other position-related metrics.\n\nIf no position exists for the specified instrument, the response will indicate a zero position.\n\nTry in API console"
+              },
+              "response": [
+                {
+                  "id": "5c06ba64-169d-45d1-a022-ea094dc0c5b2",
+                  "name": "Success response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 404,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/get_position\",\n        \"params\": {\n          \"instrument_name\": \"BTC-PERPETUAL\"\n        }\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/private/get_position?instrument_name=<string>&include_isolated=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "private",
+                        "get_position"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Instrument name",
+                          "key": "instrument_name",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "If true, retrieves the position from a bound isolated margin subaccount for the instrument. Omit to read the main account cross position. Default - `false`",
+                          "key": "include_isolated",
+                          "value": "false"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"result\": {\n    \"instrument_name\": \"<string>\",\n    \"kind\": \"option_combo\",\n    \"user_id\": \"<integer>\",\n    \"average_price\": \"<number>\",\n    \"direction\": \"sell\",\n    \"mark_price\": \"<number>\",\n    \"delta\": \"<number>\",\n    \"index_price\": \"<number>\",\n    \"initial_margin\": \"<number>\",\n    \"maintenance_margin\": \"<number>\",\n    \"settlement_price\": \"<number>\",\n    \"total_profit_loss\": \"<number>\",\n    \"floating_profit_loss\": \"<number>\",\n    \"realized_profit_loss\": \"<number>\",\n    \"size\": \"<number>\",\n    \"average_price_usd\": \"<number>\",\n    \"floating_profit_loss_usd\": \"<number>\",\n    \"gamma\": \"<number>\",\n    \"interest_value\": \"<number>\",\n    \"isolated\": \"<boolean>\",\n    \"leverage\": \"<integer>\",\n    \"main_uid\": \"<integer>\",\n    \"realized_funding\": \"<number>\",\n    \"size_currency\": \"<number>\",\n    \"theta\": \"<number>\",\n    \"vega\": \"<number>\",\n    \"estimated_liquidation_price\": \"<number,null>\",\n    \"open_orders_margin\": \"<number>\"\n  },\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-21T20:03:47.000Z",
+                  "updatedAt": "2026-10-21T20:03:47.000Z",
+                  "uid": "35240-5c06ba64-169d-45d1-a022-ea094dc0c5b2"
+                },
+                {
+                  "id": "5bf4cf7d-f1db-4300-825e-230af5f05cd2",
+                  "name": "Success response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 404,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/get_position\",\n        \"params\": {\n          \"instrument_name\": \"BTC-PERPETUAL\"\n        }\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/private/get_position?instrument_name=<string>&include_isolated=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "private",
+                        "get_position"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Instrument name",
+                          "key": "instrument_name",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "If true, retrieves the position from a bound isolated margin subaccount for the instrument. Omit to read the main account cross position. Default - `false`",
+                          "key": "include_isolated",
+                          "value": "false"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"error\": \"<integer>\",\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-21T20:03:47.000Z",
+                  "updatedAt": "2026-10-21T20:03:47.000Z",
+                  "uid": "35240-5bf4cf7d-f1db-4300-825e-230af5f05cd2"
+                }
+              ],
+              "createdAt": "2026-10-21T20:03:47.000Z",
+              "updatedAt": "2026-10-21T20:03:47.000Z",
+              "uid": "35240-5942654f-7b6c-435a-a5b8-eb983cd52ec0"
+            }
+          ],
+          "id": "e91a609e-d662-45b1-b765-65c1f27f0fbf",
+          "createdAt": "2026-10-21T20:03:47.000Z",
+          "updatedAt": "2026-10-21T20:03:47.000Z",
+          "uid": "35240-e91a609e-d662-45b1-b765-65c1f27f0fbf"
+        },
+        {
+          "name": "get_positions",
+          "item": [
+            {
+              "name": "Get private get positions",
+              "id": "2f1b7fbf-7172-4c2e-be7e-9603af394716",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 2236,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/get_positions\",\n        \"params\": {\n          \"currency\": \"BTC\",\n          \"kind\": \"future\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/private/get_positions?currency=any&kind=option_combo&subaccount_id=<integer>&include_isolated=false",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "private",
+                    "get_positions"
+                  ],
+                  "query": [
+                    {
+                      "key": "currency",
+                      "value": "any"
+                    },
+                    {
+                      "description": "Kind filter on positions",
+                      "key": "kind",
+                      "value": "option_combo"
+                    },
+                    {
+                      "description": "The user id for the subaccount",
+                      "key": "subaccount_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "If true, widens the positions query to include positions owned by hidden isolated-margin subaccounts. Default - `false`",
+                      "key": "include_isolated",
+                      "value": "false"
+                    }
+                  ]
+                },
+                "description": "Retrieves all open positions for the authenticated account. Returns position details including size, average entry price, mark price, unrealized P&L, initial margin, maintenance margin, and other position-related information.\n\nResults can be filtered by currency and instrument kind (future, option, etc.). To retrieve positions for a specific subaccount, use the `subaccount_id` parameter.\n\nTry in API console"
+              },
+              "response": [
+                {
+                  "id": "c4ee2a63-2eac-443a-87bc-f3b9a4f10ad9",
+                  "name": "Success response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 2236,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/get_positions\",\n        \"params\": {\n          \"currency\": \"BTC\",\n          \"kind\": \"future\"\n        }\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/private/get_positions?currency=any&kind=option_combo&subaccount_id=<integer>&include_isolated=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "private",
+                        "get_positions"
+                      ],
+                      "query": [
+                        {
+                          "key": "currency",
+                          "value": "any"
+                        },
+                        {
+                          "description": "Kind filter on positions",
+                          "key": "kind",
+                          "value": "option_combo"
+                        },
+                        {
+                          "description": "The user id for the subaccount",
+                          "key": "subaccount_id",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "If true, widens the positions query to include positions owned by hidden isolated-margin subaccounts. Default - `false`",
+                          "key": "include_isolated",
+                          "value": "false"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"result\": [\n    {\n      \"instrument_name\": \"<string>\",\n      \"kind\": \"spot\",\n      \"user_id\": \"<integer>\",\n      \"average_price\": \"<number>\",\n      \"direction\": \"buy\",\n      \"mark_price\": \"<number>\",\n      \"delta\": \"<number>\",\n      \"index_price\": \"<number>\",\n      \"initial_margin\": \"<number>\",\n      \"maintenance_margin\": \"<number>\",\n      \"settlement_price\": \"<number>\",\n      \"total_profit_loss\": \"<number>\",\n      \"floating_profit_loss\": \"<number>\",\n      \"realized_profit_loss\": \"<number>\",\n      \"size\": \"<number>\",\n      \"average_price_usd\": \"<number>\",\n      \"floating_profit_loss_usd\": \"<number>\",\n      \"gamma\": \"<number>\",\n      \"interest_value\": \"<number>\",\n      \"isolated\": \"<boolean>\",\n      \"leverage\": \"<integer>\",\n      \"main_uid\": \"<integer>\",\n      \"realized_funding\": \"<number>\",\n      \"size_currency\": \"<number>\",\n      \"theta\": \"<number>\",\n      \"vega\": \"<number>\",\n      \"estimated_liquidation_price\": \"<number,null>\",\n      \"open_orders_margin\": \"<number>\"\n    },\n    {\n      \"instrument_name\": \"<string>\",\n      \"kind\": \"option_combo\",\n      \"user_id\": \"<integer>\",\n      \"average_price\": \"<number>\",\n      \"direction\": \"sell\",\n      \"mark_price\": \"<number>\",\n      \"delta\": \"<number>\",\n      \"index_price\": \"<number>\",\n      \"initial_margin\": \"<number>\",\n      \"maintenance_margin\": \"<number>\",\n      \"settlement_price\": \"<number>\",\n      \"total_profit_loss\": \"<number>\",\n      \"floating_profit_loss\": \"<number>\",\n      \"realized_profit_loss\": \"<number>\",\n      \"size\": \"<number>\",\n      \"average_price_usd\": \"<number>\",\n      \"floating_profit_loss_usd\": \"<number>\",\n      \"gamma\": \"<number>\",\n      \"interest_value\": \"<number>\",\n      \"isolated\": \"<boolean>\",\n      \"leverage\": \"<integer>\",\n      \"main_uid\": \"<integer>\",\n      \"realized_funding\": \"<number>\",\n      \"size_currency\": \"<number>\",\n      \"theta\": \"<number>\",\n      \"vega\": \"<number>\",\n      \"estimated_liquidation_price\": \"<number,null>\",\n      \"open_orders_margin\": \"<number>\"\n    }\n  ],\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-21T20:03:47.000Z",
+                  "updatedAt": "2026-10-21T20:03:47.000Z",
+                  "uid": "35240-c4ee2a63-2eac-443a-87bc-f3b9a4f10ad9"
+                },
+                {
+                  "id": "842eef8b-b10c-4886-9a29-ab297821e468",
+                  "name": "Success response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 2236,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/get_positions\",\n        \"params\": {\n          \"currency\": \"BTC\",\n          \"kind\": \"future\"\n        }\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/private/get_positions?currency=any&kind=option_combo&subaccount_id=<integer>&include_isolated=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "private",
+                        "get_positions"
+                      ],
+                      "query": [
+                        {
+                          "key": "currency",
+                          "value": "any"
+                        },
+                        {
+                          "description": "Kind filter on positions",
+                          "key": "kind",
+                          "value": "option_combo"
+                        },
+                        {
+                          "description": "The user id for the subaccount",
+                          "key": "subaccount_id",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "If true, widens the positions query to include positions owned by hidden isolated-margin subaccounts. Default - `false`",
+                          "key": "include_isolated",
+                          "value": "false"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"error\": \"<integer>\",\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-21T20:03:47.000Z",
+                  "updatedAt": "2026-10-21T20:03:47.000Z",
+                  "uid": "35240-842eef8b-b10c-4886-9a29-ab297821e468"
+                }
+              ],
+              "createdAt": "2026-10-21T20:03:47.000Z",
+              "updatedAt": "2026-10-21T20:03:47.000Z",
+              "uid": "35240-2f1b7fbf-7172-4c2e-be7e-9603af394716"
+            }
+          ],
+          "id": "4fa6e9e3-9894-4ff5-b622-82e5d0f9d869",
+          "createdAt": "2026-10-21T20:03:47.000Z",
+          "updatedAt": "2026-10-21T20:03:47.000Z",
+          "uid": "35240-4fa6e9e3-9894-4ff5-b622-82e5d0f9d869"
+        },
+        {
+          "name": "get_risk_profile",
+          "item": [
+            {
+              "name": "Get private get risk profile",
+              "id": "9a1ad180-d868-40ee-88d4-47ad785e6ae3",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 1,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/get_risk_profile\",\n        \"params\": {}\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/private/get_risk_profile",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "private",
+                    "get_risk_profile"
+                  ]
+                },
+                "description": "Retrieves risk profile permissions and constraints assigned to the authenticated user account.\n\nIncludes flags for Portfolio Margining eligibility, short option trading authorization, and maximum risk-profile leverage ceiling.\n\nTry in API console"
+              },
+              "response": [
+                {
+                  "id": "cd438fd9-6909-4d6d-9303-87076c5e1ea8",
+                  "name": "Success response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 1,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/get_risk_profile\",\n        \"params\": {}\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/private/get_risk_profile",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "private",
+                        "get_risk_profile"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"result\": {\n    \"portfolio_margining_allowed\": \"<boolean>\",\n    \"short_option_allowed\": \"<boolean>\",\n    \"max_leverage\": \"<number,null>\"\n  },\n  \"id\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-21T20:03:47.000Z",
+                  "updatedAt": "2026-10-21T20:03:47.000Z",
+                  "uid": "35240-cd438fd9-6909-4d6d-9303-87076c5e1ea8"
+                }
+              ],
+              "createdAt": "2026-10-21T20:03:47.000Z",
+              "updatedAt": "2026-10-21T20:03:47.000Z",
+              "uid": "35240-9a1ad180-d868-40ee-88d4-47ad785e6ae3"
+            }
+          ],
+          "id": "6668d8b8-f90e-4326-b829-d70046b2dc32",
+          "createdAt": "2026-10-21T20:03:47.000Z",
+          "updatedAt": "2026-10-21T20:03:47.000Z",
+          "uid": "35240-6668d8b8-f90e-4326-b829-d70046b2dc32"
+        },
+        {
+          "name": "get_subaccounts",
+          "item": [
+            {
+              "name": "Get private get subaccounts",
+              "id": "5fbc483f-b26f-45bc-b6ac-472840e3bb30",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 4947,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/get_subaccounts\",\n        \"params\": {\n          \"with_portfolio\": true\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/private/get_subaccounts?with_portfolio=<boolean>&include_isolated=false",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "private",
+                    "get_subaccounts"
+                  ],
+                  "query": [
+                    {
+                      "description": "Portfolio flag: `true` for portfolio information, `false` for subaccount information only. `false` by default",
+                      "key": "with_portfolio",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "description": "If true, includes hidden managed isolated-margin subaccounts in the response. Isolated subaccount entries include `isolated: true` and `isolated_margin_instrument`. Default - `false`",
+                      "key": "include_isolated",
+                      "value": "false"
+                    }
+                  ]
+                },
+                "description": "Retrieves information about all subaccounts associated with the main account. Returns details such as subaccount IDs, names, and status.\n\nWhen called from a subaccount, the response includes limited details for the main account and full details for the subaccount initiating the request.\n\nSet the `with_portfolio` parameter to `true` to include portfolio information (balances, positions, etc.) in the response. By default, only subaccount metadata is returned.\n\n**\ud83d\udcd6 Related Article:** Managing Subaccounts\n\nTry in API console"
+              },
+              "response": [
+                {
+                  "id": "09c18309-6b92-4594-bc17-eb99af71cb67",
+                  "name": "Success response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 4947,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/get_subaccounts\",\n        \"params\": {\n          \"with_portfolio\": true\n        }\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/private/get_subaccounts?with_portfolio=<boolean>&include_isolated=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "private",
+                        "get_subaccounts"
+                      ],
+                      "query": [
+                        {
+                          "description": "Portfolio flag: `true` for portfolio information, `false` for subaccount information only. `false` by default",
+                          "key": "with_portfolio",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "If true, includes hidden managed isolated-margin subaccounts in the response. Isolated subaccount entries include `isolated: true` and `isolated_margin_instrument`. Default - `false`",
+                          "key": "include_isolated",
+                          "value": "false"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"result\": [\n    {\n      \"username\": \"<string>\",\n      \"email\": \"<string>\",\n      \"type\": \"main\",\n      \"receive_notifications\": \"<boolean>\",\n      \"is_password\": \"<boolean>\",\n      \"system_name\": \"<string>\",\n      \"id\": \"<integer>\",\n      \"isolated\": \"<boolean,null>\",\n      \"isolated_margin_instrument\": \"<string,null>\",\n      \"login_enabled\": \"<boolean>\",\n      \"margin_model\": \"<string>\",\n      \"not_confirmed_email\": \"<string>\",\n      \"portfolio\": {\n        \"btc(example)\": {\n          \"margin_balance\": \"<number>\",\n          \"currency\": \"btc\",\n          \"maintenance_margin\": \"<number>\",\n          \"initial_margin\": \"<number>\",\n          \"equity\": \"<number>\",\n          \"balance\": \"<number>\",\n          \"available_withdrawal_funds\": \"<number>\",\n          \"available_funds\": \"<number>\",\n          \"additional_reserve\": \"<number>\",\n          \"spot_reserve\": \"<number>\"\n        }\n      },\n      \"proof_id\": \"<string>\",\n      \"proof_id_signature\": \"<string>\",\n      \"security_keys_assignments\": \"<array>\",\n      \"security_keys_enabled\": \"<boolean>\"\n    },\n    {\n      \"username\": \"<string>\",\n      \"email\": \"<string>\",\n      \"type\": \"main\",\n      \"receive_notifications\": \"<boolean>\",\n      \"is_password\": \"<boolean>\",\n      \"system_name\": \"<string>\",\n      \"id\": \"<integer>\",\n      \"isolated\": \"<boolean,null>\",\n      \"isolated_margin_instrument\": \"<string,null>\",\n      \"login_enabled\": \"<boolean>\",\n      \"margin_model\": \"<string>\",\n      \"not_confirmed_email\": \"<string>\",\n      \"portfolio\": {\n        \"btc(example)\": {\n          \"margin_balance\": \"<number>\",\n          \"currency\": \"eth\",\n          \"maintenance_margin\": \"<number>\",\n          \"initial_margin\": \"<number>\",\n          \"equity\": \"<number>\",\n          \"balance\": \"<number>\",\n          \"available_withdrawal_funds\": \"<number>\",\n          \"available_funds\": \"<number>\",\n          \"additional_reserve\": \"<number>\",\n          \"spot_reserve\": \"<number>\"\n        }\n      },\n      \"proof_id\": \"<string>\",\n      \"proof_id_signature\": \"<string>\",\n      \"security_keys_assignments\": \"<array>\",\n      \"security_keys_enabled\": \"<boolean>\"\n    }\n  ],\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-21T20:03:47.000Z",
+                  "updatedAt": "2026-10-21T20:03:47.000Z",
+                  "uid": "35240-09c18309-6b92-4594-bc17-eb99af71cb67"
+                },
+                {
+                  "id": "21dea2d5-4ee6-4bca-9a69-755bfd511bff",
+                  "name": "Success response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 4947,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/get_subaccounts\",\n        \"params\": {\n          \"with_portfolio\": true\n        }\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/private/get_subaccounts?with_portfolio=<boolean>&include_isolated=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "private",
+                        "get_subaccounts"
+                      ],
+                      "query": [
+                        {
+                          "description": "Portfolio flag: `true` for portfolio information, `false` for subaccount information only. `false` by default",
+                          "key": "with_portfolio",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "If true, includes hidden managed isolated-margin subaccounts in the response. Isolated subaccount entries include `isolated: true` and `isolated_margin_instrument`. Default - `false`",
+                          "key": "include_isolated",
+                          "value": "false"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"error\": \"<integer>\",\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-21T20:03:47.000Z",
+                  "updatedAt": "2026-10-21T20:03:47.000Z",
+                  "uid": "35240-21dea2d5-4ee6-4bca-9a69-755bfd511bff"
+                }
+              ],
+              "createdAt": "2026-10-21T20:03:47.000Z",
+              "updatedAt": "2026-10-21T20:03:47.000Z",
+              "uid": "35240-5fbc483f-b26f-45bc-b6ac-472840e3bb30"
+            }
+          ],
+          "id": "f63daf14-c290-44de-afac-93b583b93349",
+          "createdAt": "2026-10-21T20:03:47.000Z",
+          "updatedAt": "2026-10-21T20:03:47.000Z",
+          "uid": "35240-f63daf14-c290-44de-afac-93b583b93349"
+        },
+        {
+          "name": "get_subaccounts_details",
+          "item": [
+            {
+              "name": "Get private get subaccounts details",
+              "id": "e0256692-089b-4a4b-ba82-858e964eeace",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 1,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/get_subaccounts_details\",\n        \"params\": {\n          \"currency\": \"BTC\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/private/get_subaccounts_details?currency=BTC&with_open_orders=<boolean>&include_isolated=false",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "private",
+                    "get_subaccounts_details"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The currency symbol",
+                      "key": "currency",
+                      "value": "BTC"
+                    },
+                    {
+                      "description": "Optional parameter to ask for open orders list, default: `false`",
+                      "key": "with_open_orders",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "description": "If true, includes positions and open orders for hidden isolated-margin subaccounts. Default - `false`",
+                      "key": "include_isolated",
+                      "value": "false"
+                    }
+                  ]
+                },
+                "description": "Retrieves position details for all subaccounts for a specific currency. Returns positions aggregated across all subaccounts, including size, average entry price, mark price, and P&L information.\n\nOptionally include open orders for each subaccount by setting the `with_open_orders` parameter to `true`.\n\n**\ud83d\udcd6 Related Article:** Managing Subaccounts\n\nTry in API console"
+              },
+              "response": [
+                {
+                  "id": "d95cdeb1-a47b-4916-b00e-24337c8371bd",
+                  "name": "Success response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 1,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/get_subaccounts_details\",\n        \"params\": {\n          \"currency\": \"BTC\"\n        }\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/private/get_subaccounts_details?currency=BTC&with_open_orders=<boolean>&include_isolated=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "private",
+                        "get_subaccounts_details"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The currency symbol",
+                          "key": "currency",
+                          "value": "BTC"
+                        },
+                        {
+                          "description": "Optional parameter to ask for open orders list, default: `false`",
+                          "key": "with_open_orders",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "If true, includes positions and open orders for hidden isolated-margin subaccounts. Default - `false`",
+                          "key": "include_isolated",
+                          "value": "false"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"result\": [\n    {\n      \"uid\": \"<integer>\",\n      \"positions\": [\n        {\n          \"instrument_name\": \"<string>\",\n          \"kind\": \"option\",\n          \"user_id\": \"<integer>\",\n          \"average_price\": \"<number>\",\n          \"direction\": \"sell\",\n          \"mark_price\": \"<number>\",\n          \"delta\": \"<number>\",\n          \"index_price\": \"<number>\",\n          \"initial_margin\": \"<number>\",\n          \"maintenance_margin\": \"<number>\",\n          \"settlement_price\": \"<number>\",\n          \"total_profit_loss\": \"<number>\",\n          \"floating_profit_loss\": \"<number>\",\n          \"realized_profit_loss\": \"<number>\",\n          \"size\": \"<number>\",\n          \"average_price_usd\": \"<number>\",\n          \"floating_profit_loss_usd\": \"<number>\",\n          \"gamma\": \"<number>\",\n          \"interest_value\": \"<number>\",\n          \"isolated\": \"<boolean>\",\n          \"leverage\": \"<integer>\",\n          \"main_uid\": \"<integer>\",\n          \"realized_funding\": \"<number>\",\n          \"size_currency\": \"<number>\",\n          \"theta\": \"<number>\",\n          \"vega\": \"<number>\"\n        },\n        {\n          \"instrument_name\": \"<string>\",\n          \"kind\": \"future\",\n          \"user_id\": \"<integer>\",\n          \"average_price\": \"<number>\",\n          \"direction\": \"zero\",\n          \"mark_price\": \"<number>\",\n          \"delta\": \"<number>\",\n          \"index_price\": \"<number>\",\n          \"initial_margin\": \"<number>\",\n          \"maintenance_margin\": \"<number>\",\n          \"settlement_price\": \"<number>\",\n          \"total_profit_loss\": \"<number>\",\n          \"floating_profit_loss\": \"<number>\",\n          \"realized_profit_loss\": \"<number>\",\n          \"size\": \"<number>\",\n          \"average_price_usd\": \"<number>\",\n          \"floating_profit_loss_usd\": \"<number>\",\n          \"gamma\": \"<number>\",\n          \"interest_value\": \"<number>\",\n          \"isolated\": \"<boolean>\",\n          \"leverage\": \"<integer>\",\n          \"main_uid\": \"<integer>\",\n          \"realized_funding\": \"<number>\",\n          \"size_currency\": \"<number>\",\n          \"theta\": \"<number>\",\n          \"vega\": \"<number>\"\n        }\n      ],\n      \"open_orders\": [\n        {\n          \"order_id\": \"<string>\",\n          \"order_state\": \"open\",\n          \"order_type\": \"stop_market\",\n          \"time_in_force\": \"fill_or_kill\",\n          \"instrument_name\": \"<string>\",\n          \"creation_timestamp\": \"<integer>\",\n          \"last_update_timestamp\": \"<integer>\",\n          \"direction\": \"buy\",\n          \"price\": \"<number>\",\n          \"label\": \"<string>\",\n          \"post_only\": \"<boolean>\",\n          \"api\": \"<boolean>\",\n          \"advanced\": \"usd\",\n          \"amount\": \"<number>\",\n          \"app_name\": \"<string>\",\n          \"auto_replaced\": \"<boolean>\",\n          \"average_price\": \"<number>\",\n          \"block_trade\": \"<boolean>\",\n          \"cancel_reason\": \"pme_risk_reduction\",\n          \"combo_order_id\": \"<string>\",\n          \"contracts\": \"<number>\",\n          \"display_amount\": \"<number>\",\n          \"filled_amount\": \"<number>\",\n          \"implv\": \"<number>\",\n          \"is_liquidation\": \"<boolean>\",\n          \"is_primary_otoco\": \"<boolean>\",\n          \"is_rebalance\": \"<boolean>\",\n          \"is_secondary_oto\": \"<boolean>\",\n          \"isolated\": \"<boolean>\",\n          \"main_uid\": \"<integer>\",\n          \"mmp\": \"<boolean>\",\n          \"mmp_cancelled\": \"<boolean>\",\n          \"mmp_group\": \"<string>\",\n          \"mobile\": \"<boolean>\",\n          \"oco_ref\": \"<string>\",\n          \"original_order_type\": \"market_limit\",\n          \"oto_order_ids\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"primary_order_id\": \"<string>\",\n          \"quote\": \"<boolean>\",\n          \"quote_id\": \"<string>\",\n          \"quote_set_id\": \"<string>\",\n          \"reduce_only\": \"<boolean>\",\n          \"refresh_amount\": \"<number>\",\n          \"reject_post_only\": \"<boolean>\",\n          \"replaced\": \"<boolean>\",\n          \"risk_reducing\": \"<boolean>\",\n          \"starbase_client_order_id\": \"<string>\",\n          \"starbase_last_update_timestamp\": \"<integer>\",\n          \"starbase_order_id\": \"<integer>\",\n          \"trigger\": \"last_price\",\n          \"trigger_fill_condition\": \"first_hit\",\n          \"trigger_offset\": \"<number>\",\n          \"trigger_order_id\": \"<string>\",\n          \"trigger_price\": \"<number>\",\n          \"trigger_reference_price\": \"<number>\",\n          \"triggered\": \"<boolean>\",\n          \"usd\": \"<number>\",\n          \"user_id\": \"<integer>\",\n          \"web\": \"<boolean>\"\n        },\n        {\n          \"order_id\": \"<string>\",\n          \"order_state\": \"cancelled\",\n          \"order_type\": \"limit\",\n          \"time_in_force\": \"fill_or_kill\",\n          \"instrument_name\": \"<string>\",\n          \"creation_timestamp\": \"<integer>\",\n          \"last_update_timestamp\": \"<integer>\",\n          \"direction\": \"sell\",\n          \"price\": \"<number>\",\n          \"label\": \"<string>\",\n          \"post_only\": \"<boolean>\",\n          \"api\": \"<boolean>\",\n          \"advanced\": \"usd\",\n          \"amount\": \"<number>\",\n          \"app_name\": \"<string>\",\n          \"auto_replaced\": \"<boolean>\",\n          \"average_price\": \"<number>\",\n          \"block_trade\": \"<boolean>\",\n          \"cancel_reason\": \"oto_primary_closed\",\n          \"combo_order_id\": \"<string>\",\n          \"contracts\": \"<number>\",\n          \"display_amount\": \"<number>\",\n          \"filled_amount\": \"<number>\",\n          \"implv\": \"<number>\",\n          \"is_liquidation\": \"<boolean>\",\n          \"is_primary_otoco\": \"<boolean>\",\n          \"is_rebalance\": \"<boolean>\",\n          \"is_secondary_oto\": \"<boolean>\",\n          \"isolated\": \"<boolean>\",\n          \"main_uid\": \"<integer>\",\n          \"mmp\": \"<boolean>\",\n          \"mmp_cancelled\": \"<boolean>\",\n          \"mmp_group\": \"<string>\",\n          \"mobile\": \"<boolean>\",\n          \"oco_ref\": \"<string>\",\n          \"original_order_type\": \"market_limit\",\n          \"oto_order_ids\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"primary_order_id\": \"<string>\",\n          \"quote\": \"<boolean>\",\n          \"quote_id\": \"<string>\",\n          \"quote_set_id\": \"<string>\",\n          \"reduce_only\": \"<boolean>\",\n          \"refresh_amount\": \"<number>\",\n          \"reject_post_only\": \"<boolean>\",\n          \"replaced\": \"<boolean>\",\n          \"risk_reducing\": \"<boolean>\",\n          \"starbase_client_order_id\": \"<string>\",\n          \"starbase_last_update_timestamp\": \"<integer>\",\n          \"starbase_order_id\": \"<integer>\",\n          \"trigger\": \"last_price\",\n          \"trigger_fill_condition\": \"first_hit\",\n          \"trigger_offset\": \"<number>\",\n          \"trigger_order_id\": \"<string>\",\n          \"trigger_price\": \"<number>\",\n          \"trigger_reference_price\": \"<number>\",\n          \"triggered\": \"<boolean>\",\n          \"usd\": \"<number>\",\n          \"user_id\": \"<integer>\",\n          \"web\": \"<boolean>\"\n        }\n      ]\n    },\n    {\n      \"uid\": \"<integer>\",\n      \"positions\": [\n        {\n          \"instrument_name\": \"<string>\",\n          \"kind\": \"spot\",\n          \"user_id\": \"<integer>\",\n          \"average_price\": \"<number>\",\n          \"direction\": \"buy\",\n          \"mark_price\": \"<number>\",\n          \"delta\": \"<number>\",\n          \"index_price\": \"<number>\",\n          \"initial_margin\": \"<number>\",\n          \"maintenance_margin\": \"<number>\",\n          \"settlement_price\": \"<number>\",\n          \"total_profit_loss\": \"<number>\",\n          \"floating_profit_loss\": \"<number>\",\n          \"realized_profit_loss\": \"<number>\",\n          \"size\": \"<number>\",\n          \"average_price_usd\": \"<number>\",\n          \"floating_profit_loss_usd\": \"<number>\",\n          \"gamma\": \"<number>\",\n          \"interest_value\": \"<number>\",\n          \"isolated\": \"<boolean>\",\n          \"leverage\": \"<integer>\",\n          \"main_uid\": \"<integer>\",\n          \"realized_funding\": \"<number>\",\n          \"size_currency\": \"<number>\",\n          \"theta\": \"<number>\",\n          \"vega\": \"<number>\"\n        },\n        {\n          \"instrument_name\": \"<string>\",\n          \"kind\": \"future_combo\",\n          \"user_id\": \"<integer>\",\n          \"average_price\": \"<number>\",\n          \"direction\": \"zero\",\n          \"mark_price\": \"<number>\",\n          \"delta\": \"<number>\",\n          \"index_price\": \"<number>\",\n          \"initial_margin\": \"<number>\",\n          \"maintenance_margin\": \"<number>\",\n          \"settlement_price\": \"<number>\",\n          \"total_profit_loss\": \"<number>\",\n          \"floating_profit_loss\": \"<number>\",\n          \"realized_profit_loss\": \"<number>\",\n          \"size\": \"<number>\",\n          \"average_price_usd\": \"<number>\",\n          \"floating_profit_loss_usd\": \"<number>\",\n          \"gamma\": \"<number>\",\n          \"interest_value\": \"<number>\",\n          \"isolated\": \"<boolean>\",\n          \"leverage\": \"<integer>\",\n          \"main_uid\": \"<integer>\",\n          \"realized_funding\": \"<number>\",\n          \"size_currency\": \"<number>\",\n          \"theta\": \"<number>\",\n          \"vega\": \"<number>\"\n        }\n      ],\n      \"open_orders\": [\n        {\n          \"order_id\": \"<string>\",\n          \"order_state\": \"open\",\n          \"order_type\": \"trailing_stop\",\n          \"time_in_force\": \"immediate_or_cancel\",\n          \"instrument_name\": \"<string>\",\n          \"creation_timestamp\": \"<integer>\",\n          \"last_update_timestamp\": \"<integer>\",\n          \"direction\": \"buy\",\n          \"price\": \"<number>\",\n          \"label\": \"<string>\",\n          \"post_only\": \"<boolean>\",\n          \"api\": \"<boolean>\",\n          \"advanced\": \"implv\",\n          \"amount\": \"<number>\",\n          \"app_name\": \"<string>\",\n          \"auto_replaced\": \"<boolean>\",\n          \"average_price\": \"<number>\",\n          \"block_trade\": \"<boolean>\",\n          \"cancel_reason\": \"cancel_on_disconnect\",\n          \"combo_order_id\": \"<string>\",\n          \"contracts\": \"<number>\",\n          \"display_amount\": \"<number>\",\n          \"filled_amount\": \"<number>\",\n          \"implv\": \"<number>\",\n          \"is_liquidation\": \"<boolean>\",\n          \"is_primary_otoco\": \"<boolean>\",\n          \"is_rebalance\": \"<boolean>\",\n          \"is_secondary_oto\": \"<boolean>\",\n          \"isolated\": \"<boolean>\",\n          \"main_uid\": \"<integer>\",\n          \"mmp\": \"<boolean>\",\n          \"mmp_cancelled\": \"<boolean>\",\n          \"mmp_group\": \"<string>\",\n          \"mobile\": \"<boolean>\",\n          \"oco_ref\": \"<string>\",\n          \"original_order_type\": \"market\",\n          \"oto_order_ids\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"primary_order_id\": \"<string>\",\n          \"quote\": \"<boolean>\",\n          \"quote_id\": \"<string>\",\n          \"quote_set_id\": \"<string>\",\n          \"reduce_only\": \"<boolean>\",\n          \"refresh_amount\": \"<number>\",\n          \"reject_post_only\": \"<boolean>\",\n          \"replaced\": \"<boolean>\",\n          \"risk_reducing\": \"<boolean>\",\n          \"starbase_client_order_id\": \"<string>\",\n          \"starbase_last_update_timestamp\": \"<integer>\",\n          \"starbase_order_id\": \"<integer>\",\n          \"trigger\": \"mark_price\",\n          \"trigger_fill_condition\": \"first_hit\",\n          \"trigger_offset\": \"<number>\",\n          \"trigger_order_id\": \"<string>\",\n          \"trigger_price\": \"<number>\",\n          \"trigger_reference_price\": \"<number>\",\n          \"triggered\": \"<boolean>\",\n          \"usd\": \"<number>\",\n          \"user_id\": \"<integer>\",\n          \"web\": \"<boolean>\"\n        },\n        {\n          \"order_id\": \"<string>\",\n          \"order_state\": \"open\",\n          \"order_type\": \"stop_market\",\n          \"time_in_force\": \"good_til_cancelled\",\n          \"instrument_name\": \"<string>\",\n          \"creation_timestamp\": \"<integer>\",\n          \"last_update_timestamp\": \"<integer>\",\n          \"direction\": \"buy\",\n          \"price\": \"<number>\",\n          \"label\": \"<string>\",\n          \"post_only\": \"<boolean>\",\n          \"api\": \"<boolean>\",\n          \"advanced\": \"usd\",\n          \"amount\": \"<number>\",\n          \"app_name\": \"<string>\",\n          \"auto_replaced\": \"<boolean>\",\n          \"average_price\": \"<number>\",\n          \"block_trade\": \"<boolean>\",\n          \"cancel_reason\": \"pme_account_locked\",\n          \"combo_order_id\": \"<string>\",\n          \"contracts\": \"<number>\",\n          \"display_amount\": \"<number>\",\n          \"filled_amount\": \"<number>\",\n          \"implv\": \"<number>\",\n          \"is_liquidation\": \"<boolean>\",\n          \"is_primary_otoco\": \"<boolean>\",\n          \"is_rebalance\": \"<boolean>\",\n          \"is_secondary_oto\": \"<boolean>\",\n          \"isolated\": \"<boolean>\",\n          \"main_uid\": \"<integer>\",\n          \"mmp\": \"<boolean>\",\n          \"mmp_cancelled\": \"<boolean>\",\n          \"mmp_group\": \"<string>\",\n          \"mobile\": \"<boolean>\",\n          \"oco_ref\": \"<string>\",\n          \"original_order_type\": \"market_limit\",\n          \"oto_order_ids\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"primary_order_id\": \"<string>\",\n          \"quote\": \"<boolean>\",\n          \"quote_id\": \"<string>\",\n          \"quote_set_id\": \"<string>\",\n          \"reduce_only\": \"<boolean>\",\n          \"refresh_amount\": \"<number>\",\n          \"reject_post_only\": \"<boolean>\",\n          \"replaced\": \"<boolean>\",\n          \"risk_reducing\": \"<boolean>\",\n          \"starbase_client_order_id\": \"<string>\",\n          \"starbase_last_update_timestamp\": \"<integer>\",\n          \"starbase_order_id\": \"<integer>\",\n          \"trigger\": \"last_price\",\n          \"trigger_fill_condition\": \"first_hit\",\n          \"trigger_offset\": \"<number>\",\n          \"trigger_order_id\": \"<string>\",\n          \"trigger_price\": \"<number>\",\n          \"trigger_reference_price\": \"<number>\",\n          \"triggered\": \"<boolean>\",\n          \"usd\": \"<number>\",\n          \"user_id\": \"<integer>\",\n          \"web\": \"<boolean>\"\n        }\n      ]\n    }\n  ],\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-21T20:03:47.000Z",
+                  "updatedAt": "2026-10-21T20:03:47.000Z",
+                  "uid": "35240-d95cdeb1-a47b-4916-b00e-24337c8371bd"
+                },
+                {
+                  "id": "bbe5ac73-ef03-420c-bb3b-920a9b5d8a36",
+                  "name": "Success response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 1,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/get_subaccounts_details\",\n        \"params\": {\n          \"currency\": \"BTC\"\n        }\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/private/get_subaccounts_details?currency=BTC&with_open_orders=<boolean>&include_isolated=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "private",
+                        "get_subaccounts_details"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The currency symbol",
+                          "key": "currency",
+                          "value": "BTC"
+                        },
+                        {
+                          "description": "Optional parameter to ask for open orders list, default: `false`",
+                          "key": "with_open_orders",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "If true, includes positions and open orders for hidden isolated-margin subaccounts. Default - `false`",
+                          "key": "include_isolated",
+                          "value": "false"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"error\": \"<integer>\",\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-21T20:03:47.000Z",
+                  "updatedAt": "2026-10-21T20:03:47.000Z",
+                  "uid": "35240-bbe5ac73-ef03-420c-bb3b-920a9b5d8a36"
+                }
+              ],
+              "createdAt": "2026-10-21T20:03:47.000Z",
+              "updatedAt": "2026-10-21T20:03:47.000Z",
+              "uid": "35240-e0256692-089b-4a4b-ba82-858e964eeace"
+            }
+          ],
+          "id": "5c6c720e-97ad-4b2e-be8f-98cffd41361c",
+          "createdAt": "2026-10-21T20:03:47.000Z",
+          "updatedAt": "2026-10-21T20:03:47.000Z",
+          "uid": "35240-5c6c720e-97ad-4b2e-be8f-98cffd41361c"
+        },
+        {
+          "name": "get_trading_limits",
+          "item": [
+            {
+              "name": "Get private get trading limits",
+              "id": "34f03ff7-7811-4b12-8827-5c6e6d8d12cd",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 1,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/get_trading_limits\",\n        \"params\": {\n          \"currency\": \"BTC\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/private/get_trading_limits?currency=BTC",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "private",
+                    "get_trading_limits"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The currency symbol",
+                      "key": "currency",
+                      "value": "BTC"
+                    }
+                  ]
+                },
+                "description": "Retrieves trading limits and open order thresholds for a given currency and margin model.\n\nReturns limits on open order count per instrument, total open order count, maximum future position sizes, and options constraints.\n\nTry in API console"
+              },
+              "response": [
+                {
+                  "id": "dc1492bc-85b0-482d-87fc-9cc90bad5ecc",
+                  "name": "Success response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 1,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/get_trading_limits\",\n        \"params\": {\n          \"currency\": \"BTC\"\n        }\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/private/get_trading_limits?currency=BTC",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "private",
+                        "get_trading_limits"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The currency symbol",
+                          "key": "currency",
+                          "value": "BTC"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"jsonrpc\": \"2.0\",\n  \"result\": {\n    \"currency\": \"<string>\",\n    \"portfolio_margining_enabled\": \"<boolean>\",\n    \"max_future_open_orders\": \"<integer>\",\n    \"max_future_open_orders_size\": \"<number>\",\n    \"max_future_position_size\": \"<number>\",\n    \"max_open_orders_in_instrument\": \"<integer>\",\n    \"max_option_open_orders\": \"<integer>\",\n    \"max_option_open_orders_size\": \"<number>\",\n    \"max_risk_reducing_orders\": \"<integer>\",\n    \"max_total_open_orders\": \"<integer>\",\n    \"max_total_short_options_positions\": \"<number>\"\n  },\n  \"id\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-21T20:03:47.000Z",
+                  "updatedAt": "2026-10-21T20:03:47.000Z",
+                  "uid": "35240-dc1492bc-85b0-482d-87fc-9cc90bad5ecc"
+                }
+              ],
+              "createdAt": "2026-10-21T20:03:47.000Z",
+              "updatedAt": "2026-10-21T20:03:47.000Z",
+              "uid": "35240-34f03ff7-7811-4b12-8827-5c6e6d8d12cd"
+            }
+          ],
+          "id": "9eab54b0-d373-4dd5-a4e8-ffbe1bd33849",
+          "createdAt": "2026-10-21T20:03:47.000Z",
+          "updatedAt": "2026-10-21T20:03:47.000Z",
+          "uid": "35240-9eab54b0-d373-4dd5-a4e8-ffbe1bd33849"
+        },
+        {
+          "name": "get_transaction_log",
+          "item": [
+            {
+              "name": "Get private get transaction log",
+              "id": "9907ac3d-f6ae-4ca9-8fea-3d2a49b05ed3",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 4,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/get_transaction_log\",\n        \"params\": {\n          \"count\": 5,\n          \"currency\": \"BTC\",\n          \"end_timestamp\": \"1613660407000\",\n          \"start_timestamp\": \"1613657734000\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/private/get_transaction_log?currency=BNB&start_timestamp=<integer>&end_timestamp=<integer>&query=<string>&count=<integer>&subaccount_id=<integer>&continuation=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "private",
+                    "get_transaction_log"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The currency symbol",
+                      "key": "currency",
+                      "value": "BNB"
+                    },
+                    {
+                      "description": "(Required) The earliest timestamp to return result from (milliseconds since the UNIX epoch)",
+                      "key": "start_timestamp",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "(Required) The most recent timestamp to return result from (milliseconds since the UNIX epoch)",
+                      "key": "end_timestamp",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "The following keywords can be used to filter the results: `trade`, `maker`, `taker`, `open`, `close`, `liquidation`, `buy`, `sell`, `withdrawal`, `delivery`, `settlement`, `deposit`, `transfer`, `option`, `future`, `correction`, `block_trade`, `swap`, `expiry`. Plus withdrawal or transfer addresses",
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Count of transaction log entries returned, default - `100`, maximum - `250`",
+                      "key": "count",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Id of a subaccount",
+                      "key": "subaccount_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Continuation token for pagination",
+                      "key": "continuation",
+                      "value": "<integer>"
+                    }
+                  ]
+                },
+                "description": "Retrieves a detailed transaction log for the authenticated account. The log includes all account activities such as trades, deposits, withdrawals, transfers, fees, and other balance-affecting operations.\n\nResults can be filtered by currency, time range, and transaction type. Use the `continuation` parameter for pagination when retrieving large transaction histories. To retrieve transactions for a specific subaccount, use the `subaccount_id` parameter.\n\nTrade entries executed in Starbase include `starbase_match_id`, `starbase_order_id`, and `starbase_timestamp`.\n\nWhen an option expires out of the money, the transaction log type is `expiry`. As there is nothing to settle into futures in this case, this remains the only entry in the transaction log for that expiration.\n\n**History Limit:** This API method has **no time limit** - users can query transaction history back to account creation. Note that the CSV export feature available on the website is year-limited to 2023.\n\n**Note - This method has distinct API rate limiting requirements:** Sustained rate: 1 request/second. For more information, see Rate Limits.\n\n**\ud83d\udcd6 Related Support Article:** Transaction log\n\nTry in API console"
+              },
+              "response": [
+                {
+                  "id": "9fbc7f0e-7de8-4fe7-868c-10ccb23ce221",
+                  "name": "Success response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 4,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/get_transaction_log\",\n        \"params\": {\n          \"count\": 5,\n          \"currency\": \"BTC\",\n          \"end_timestamp\": \"1613660407000\",\n          \"start_timestamp\": \"1613657734000\"\n        }\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/private/get_transaction_log?currency=BNB&start_timestamp=<integer>&end_timestamp=<integer>&query=<string>&count=<integer>&subaccount_id=<integer>&continuation=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "private",
+                        "get_transaction_log"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The currency symbol",
+                          "key": "currency",
+                          "value": "BNB"
+                        },
+                        {
+                          "description": "(Required) The earliest timestamp to return result from (milliseconds since the UNIX epoch)",
+                          "key": "start_timestamp",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "(Required) The most recent timestamp to return result from (milliseconds since the UNIX epoch)",
+                          "key": "end_timestamp",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "The following keywords can be used to filter the results: `trade`, `maker`, `taker`, `open`, `close`, `liquidation`, `buy`, `sell`, `withdrawal`, `delivery`, `settlement`, `deposit`, `transfer`, `option`, `future`, `correction`, `block_trade`, `swap`, `expiry`. Plus withdrawal or transfer addresses",
+                          "key": "query",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Count of transaction log entries returned, default - `100`, maximum - `250`",
+                          "key": "count",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Id of a subaccount",
+                          "key": "subaccount_id",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Continuation token for pagination",
+                          "key": "continuation",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"result\": {\n    \"continuation\": \"<integer>\",\n    \"logs\": [\n      {\n        \"id\": \"<integer>\",\n        \"currency\": \"USDT\",\n        \"timestamp\": \"<integer>\",\n        \"user_id\": \"<integer>\",\n        \"commission\": \"<number>\",\n        \"cashflow\": \"<number>\",\n        \"balance\": \"<number>\",\n        \"change\": \"<number>\",\n        \"user_seq\": \"<integer>\",\n        \"type\": \"<string>\",\n        \"amount\": \"<number>\",\n        \"block_rfq_id\": \"<integer>\",\n        \"contracts\": \"<number>\",\n        \"equity\": \"<number>\",\n        \"fee_role\": \"maker\",\n        \"index_price\": \"<number>\",\n        \"info\": {},\n        \"instrument_name\": \"<string>\",\n        \"interest_pl\": \"<number>\",\n        \"ip\": \"<string>\",\n        \"mark_price\": \"<number>\",\n        \"order_id\": \"<string>\",\n        \"position\": \"<number>\",\n        \"price\": \"<number>\",\n        \"price_currency\": \"<string>\",\n        \"profit_as_cashflow\": \"<boolean>\",\n        \"role\": \"source\",\n        \"session_rpl\": \"<number>\",\n        \"session_upl\": \"<number>\",\n        \"settlement_price\": \"<number>\",\n        \"side\": \"<string>\",\n        \"starbase_match_id\": \"<integer>\",\n        \"starbase_order_id\": \"<integer>\",\n        \"starbase_timestamp\": \"<integer>\",\n        \"total_interest_pl\": \"<number>\",\n        \"trade_id\": \"<string>\",\n        \"user_role\": \"taker\",\n        \"username\": \"<string>\"\n      },\n      {\n        \"id\": \"<integer>\",\n        \"currency\": \"USDC\",\n        \"timestamp\": \"<integer>\",\n        \"user_id\": \"<integer>\",\n        \"commission\": \"<number>\",\n        \"cashflow\": \"<number>\",\n        \"balance\": \"<number>\",\n        \"change\": \"<number>\",\n        \"user_seq\": \"<integer>\",\n        \"type\": \"<string>\",\n        \"amount\": \"<number>\",\n        \"block_rfq_id\": \"<integer>\",\n        \"contracts\": \"<number>\",\n        \"equity\": \"<number>\",\n        \"fee_role\": \"maker\",\n        \"index_price\": \"<number>\",\n        \"info\": {},\n        \"instrument_name\": \"<string>\",\n        \"interest_pl\": \"<number>\",\n        \"ip\": \"<string>\",\n        \"mark_price\": \"<number>\",\n        \"order_id\": \"<string>\",\n        \"position\": \"<number>\",\n        \"price\": \"<number>\",\n        \"price_currency\": \"<string>\",\n        \"profit_as_cashflow\": \"<boolean>\",\n        \"role\": \"source\",\n        \"session_rpl\": \"<number>\",\n        \"session_upl\": \"<number>\",\n        \"settlement_price\": \"<number>\",\n        \"side\": \"<string>\",\n        \"starbase_match_id\": \"<integer>\",\n        \"starbase_order_id\": \"<integer>\",\n        \"starbase_timestamp\": \"<integer>\",\n        \"total_interest_pl\": \"<number>\",\n        \"trade_id\": \"<string>\",\n        \"user_role\": \"taker\",\n        \"username\": \"<string>\"\n      }\n    ]\n  },\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-21T20:03:47.000Z",
+                  "updatedAt": "2026-10-21T20:03:47.000Z",
+                  "uid": "35240-9fbc7f0e-7de8-4fe7-868c-10ccb23ce221"
+                }
+              ],
+              "createdAt": "2026-10-21T20:03:47.000Z",
+              "updatedAt": "2026-10-21T20:03:47.000Z",
+              "uid": "35240-9907ac3d-f6ae-4ca9-8fea-3d2a49b05ed3"
+            }
+          ],
+          "id": "5b24866b-eee5-471e-bf2e-b6d59c581567",
+          "createdAt": "2026-10-21T20:03:47.000Z",
+          "updatedAt": "2026-10-21T20:03:47.000Z",
+          "uid": "35240-5b24866b-eee5-471e-bf2e-b6d59c581567"
+        },
+        {
+          "name": "get_user_locks",
+          "item": [
+            {
+              "name": "Get private get user locks",
+              "id": "b04487d5-9139-4897-8e54-10230e7e84cf",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 74,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/get_user_locks\",\n        \"params\": {}\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/private/get_user_locks",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "private",
+                    "get_user_locks"
+                  ]
+                },
+                "description": "Retrieves information about any account locks or restrictions currently active on the authenticated account. Account locks may be applied for security reasons, compliance requirements, or administrative purposes.\n\nThe response includes details about the type of lock, reason, and duration (if applicable). Some locks may prevent trading, withdrawals, or other account operations.\n\n**\ud83d\udcd6 Related Support Article:** Emergency locking an account\n\nTry in API console"
+              },
+              "response": [
+                {
+                  "id": "d0121220-1d76-4924-8270-ce605c28afed",
+                  "name": "Success response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 74,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/get_user_locks\",\n        \"params\": {}\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/private/get_user_locks",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "private",
+                        "get_user_locks"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"result\": [\n    {\n      \"currency\": \"USDC\",\n      \"enabled\": \"<boolean>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"currency\": \"BTC\",\n      \"enabled\": \"<boolean>\",\n      \"message\": \"<string>\"\n    }\n  ],\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-21T20:03:47.000Z",
+                  "updatedAt": "2026-10-21T20:03:47.000Z",
+                  "uid": "35240-d0121220-1d76-4924-8270-ce605c28afed"
+                }
+              ],
+              "createdAt": "2026-10-21T20:03:47.000Z",
+              "updatedAt": "2026-10-21T20:03:47.000Z",
+              "uid": "35240-b04487d5-9139-4897-8e54-10230e7e84cf"
+            }
+          ],
+          "id": "4113c64c-b2c2-49a2-bc5e-a9a030275492",
+          "createdAt": "2026-10-21T20:03:47.000Z",
+          "updatedAt": "2026-10-21T20:03:47.000Z",
+          "uid": "35240-4113c64c-b2c2-49a2-bc5e-a9a030275492"
+        },
+        {
+          "name": "pme",
+          "item": [
+            {
+              "name": "simulate",
+              "item": [
+                {
+                  "name": "Get private pme simulate",
+                  "id": "b6154197-cbf3-46d6-b30e-56f8002b2db7",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 2255,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/pme/simulate\",\n        \"params\": {\n          \"currency\": \"BTC\"\n        }\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/private/pme/simulate?currency=BTC&add_positions=<boolean>&simulated_positions=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "private",
+                        "pme",
+                        "simulate"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The currency for which the Extended Risk Matrix will be calculated. Use `CROSS` for Cross Collateral simulation.",
+                          "key": "currency",
+                          "value": "BTC"
+                        },
+                        {
+                          "description": "If `true`, adds simulated positions to current positions, otherwise uses only simulated positions. By default `true`",
+                          "key": "add_positions",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "Object with positions in following form: `{InstrumentName1: Position1, InstrumentName2: Position2...}`, for example `{\"BTC-PERPETUAL\": -1.0}` (or corresponding URI-encoding for GET). Size in base currency.",
+                          "key": "simulated_positions",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "description": "Calculates the Extended Risk Matrix (ERM) and detailed margin information for Portfolio Margin accounts. The ERM provides a comprehensive view of portfolio risk across different scenarios and market conditions.\n\nYou can calculate the ERM for a specific currency or for the entire Cross-Collateral portfolio. The response includes margin requirements, risk metrics, and scenario analysis that helps assess portfolio risk under various market conditions.\n\nUse this method to understand margin requirements and risk exposure before making trading decisions in a Portfolio Margin account.\n\n**\ud83d\udcd6 Related Article:** Portfolio Margin\n\nTry in API console"
+                  },
+                  "response": [
+                    {
+                      "id": "625836f5-f941-46e2-bb52-d28b1d9c72e0",
+                      "name": "Success response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 2255,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/pme/simulate\",\n        \"params\": {\n          \"currency\": \"BTC\"\n        }\n      }\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/private/pme/simulate?currency=BTC&add_positions=<boolean>&simulated_positions=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "private",
+                            "pme",
+                            "simulate"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) The currency for which the Extended Risk Matrix will be calculated. Use `CROSS` for Cross Collateral simulation.",
+                              "key": "currency",
+                              "value": "BTC"
+                            },
+                            {
+                              "description": "If `true`, adds simulated positions to current positions, otherwise uses only simulated positions. By default `true`",
+                              "key": "add_positions",
+                              "value": "<boolean>"
+                            },
+                            {
+                              "description": "Object with positions in following form: `{InstrumentName1: Position1, InstrumentName2: Position2...}`, for example `{\"BTC-PERPETUAL\": -1.0}` (or corresponding URI-encoding for GET). Size in base currency.",
+                              "key": "simulated_positions",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"result\": {},\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"<integer>\"\n}",
+                      "createdAt": "2026-10-21T20:03:47.000Z",
+                      "updatedAt": "2026-10-21T20:03:47.000Z",
+                      "uid": "35240-625836f5-f941-46e2-bb52-d28b1d9c72e0"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T20:03:47.000Z",
+                  "updatedAt": "2026-10-21T20:03:47.000Z",
+                  "uid": "35240-b6154197-cbf3-46d6-b30e-56f8002b2db7"
+                }
+              ],
+              "id": "7c173b98-da39-40ef-bda3-4f1378d33edf",
+              "createdAt": "2026-10-21T20:03:47.000Z",
+              "updatedAt": "2026-10-21T20:03:47.000Z",
+              "uid": "35240-7c173b98-da39-40ef-bda3-4f1378d33edf"
+            }
+          ],
+          "id": "5874ac4d-ddda-4874-bbf5-5bfb206c00f7",
+          "createdAt": "2026-10-21T20:03:47.000Z",
+          "updatedAt": "2026-10-21T20:03:47.000Z",
+          "uid": "35240-5874ac4d-ddda-4874-bbf5-5bfb206c00f7"
+        },
+        {
+          "name": "simulate_portfolio",
+          "item": [
+            {
+              "name": "Get private simulate portfolio",
+              "id": "51410342-37cd-4644-ba7d-1c6e9bd9858d",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 22222,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/simulate_portfolio\",\n        \"params\": {\n          \"add_positions\": true,\n          \"currency\": \"BTC\",\n          \"simulated_positions\": {\n            \"BTC-PERPETUAL\": 1\n          }\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/private/simulate_portfolio?currency=BTC&add_positions=<boolean>&simulated_positions=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "private",
+                    "simulate_portfolio"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The currency symbol",
+                      "key": "currency",
+                      "value": "BTC"
+                    },
+                    {
+                      "description": "If `true`, adds simulated positions to current positions, otherwise uses only simulated positions. By default `true`",
+                      "key": "add_positions",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "description": "Object with positions in following form: `{InstrumentName1: Position1, InstrumentName2: Position2...}`, for example `{\"BTC-PERPETUAL\": -1000.0}` (or corresponding URI-encoding for GET). For futures in USD, for options in base currency.",
+                      "key": "simulated_positions",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Calculates portfolio margin requirements and risk metrics for simulated positions or the current portfolio. This method helps you understand margin requirements before opening new positions or assess the impact of potential trades.\n\nYou can simulate adding new positions to the current portfolio or calculate margin for a completely simulated portfolio. The response includes initial margin, maintenance margin, available funds, and other risk metrics.\n\n**Note:** This method has a restricted rate limit of not more than once per second due to the computational complexity of portfolio margin calculations.\n\n**\ud83d\udcd6 Related Article:** Portfolio Margin\n\nTry in API console"
+              },
+              "response": [
+                {
+                  "id": "8307e9ff-3705-4524-911b-eb4f6790720d",
+                  "name": "Success response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 22222,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/simulate_portfolio\",\n        \"params\": {\n          \"add_positions\": true,\n          \"currency\": \"BTC\",\n          \"simulated_positions\": {\n            \"BTC-PERPETUAL\": 1\n          }\n        }\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/private/simulate_portfolio?currency=BTC&add_positions=<boolean>&simulated_positions=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "private",
+                        "simulate_portfolio"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The currency symbol",
+                          "key": "currency",
+                          "value": "BTC"
+                        },
+                        {
+                          "description": "If `true`, adds simulated positions to current positions, otherwise uses only simulated positions. By default `true`",
+                          "key": "add_positions",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "Object with positions in following form: `{InstrumentName1: Position1, InstrumentName2: Position2...}`, for example `{\"BTC-PERPETUAL\": -1000.0}` (or corresponding URI-encoding for GET). For futures in USD, for options in base currency.",
+                          "key": "simulated_positions",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"result\": {\n    \"additional_reserve\": \"<number>\",\n    \"available_funds\": \"<number>\",\n    \"available_subaccount_transfer_funds\": \"<number>\",\n    \"available_withdrawal_funds\": \"<number>\",\n    \"balance\": \"<number>\",\n    \"cross_collateral_enabled\": \"<boolean>\",\n    \"currency\": \"<string>\",\n    \"delta_total\": \"<number>\",\n    \"delta_total_map\": {\n      \"aliquip_6\": \"<number>\"\n    },\n    \"equity\": \"<number>\",\n    \"fee_balance\": \"<number>\",\n    \"futures_pl\": \"<number>\",\n    \"futures_session_rpl\": \"<number>\",\n    \"futures_session_upl\": \"<number>\",\n    \"initial_margin\": \"<number>\",\n    \"locked_balance\": \"<number>\",\n    \"maintenance_margin\": \"<number>\",\n    \"margin_balance\": \"<number>\",\n    \"margin_model\": \"<string>\",\n    \"options_delta\": \"<number>\",\n    \"options_gamma\": \"<number>\",\n    \"options_gamma_map\": {\n      \"dolore_4b\": \"<number>\",\n      \"dolor___b\": \"<number>\",\n      \"dolor__67\": \"<number>\",\n      \"commodo8\": \"<number>\"\n    },\n    \"options_pl\": \"<number>\",\n    \"options_session_rpl\": \"<number>\",\n    \"options_session_upl\": \"<number>\",\n    \"options_theta\": \"<number>\",\n    \"options_theta_map\": {\n      \"nisi_8\": \"<number>\",\n      \"sed_7_6\": \"<number>\",\n      \"eu3_\": \"<number>\"\n    },\n    \"options_value\": \"<number>\",\n    \"options_vega\": \"<number>\",\n    \"options_vega_map\": {\n      \"deserunt0e0\": \"<number>\"\n    },\n    \"portfolio_margining_enabled\": \"<boolean>\",\n    \"projected_delta_total\": \"<number>\",\n    \"projected_initial_margin\": \"<number>\",\n    \"projected_maintenance_margin\": \"<number>\",\n    \"session_rpl\": \"<number>\",\n    \"session_upl\": \"<number>\",\n    \"spot_reserve\": \"<number>\",\n    \"total_delta_total_usd\": \"<number>\",\n    \"total_equity_usd\": \"<number>\",\n    \"total_initial_margin_usd\": \"<number>\",\n    \"total_maintenance_margin_usd\": \"<number>\",\n    \"total_margin_balance_usd\": \"<number>\",\n    \"total_pl\": \"<number>\"\n  },\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-21T20:03:47.000Z",
+                  "updatedAt": "2026-10-21T20:03:47.000Z",
+                  "uid": "35240-8307e9ff-3705-4524-911b-eb4f6790720d"
+                }
+              ],
+              "createdAt": "2026-10-21T20:03:47.000Z",
+              "updatedAt": "2026-10-21T20:03:47.000Z",
+              "uid": "35240-51410342-37cd-4644-ba7d-1c6e9bd9858d"
+            }
+          ],
+          "id": "788f9efb-ea2a-4626-9cae-4ed3681ecf2d",
+          "createdAt": "2026-10-21T20:03:47.000Z",
+          "updatedAt": "2026-10-21T20:03:47.000Z",
+          "uid": "35240-788f9efb-ea2a-4626-9cae-4ed3681ecf2d"
+        }
+      ],
+      "id": "9b7663b9-3246-4d62-bdff-f76313bf673a",
+      "createdAt": "2026-10-21T20:03:47.000Z",
+      "updatedAt": "2026-10-21T20:03:47.000Z",
+      "uid": "35240-9b7663b9-3246-4d62-bdff-f76313bf673a"
+    },
+    {
+      "name": "public",
+      "item": [
+        {
+          "name": "get_announcements",
+          "item": [
+            {
+              "name": "Get public get announcements",
+              "id": "c80ba690-2053-4d0b-a8d9-7c4ae42f1d5d",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 7661,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"public/get_announcements\",\n        \"params\": {}\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/public/get_announcements?start_timestamp=<integer>&count=5",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "public",
+                    "get_announcements"
+                  ],
+                  "query": [
+                    {
+                      "description": "The most recent timestamp to return the results for (milliseconds since the UNIX epoch)",
+                      "key": "start_timestamp",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Maximum count of returned announcements, default - `5`, maximum - `50`",
+                      "key": "count",
+                      "value": "5"
+                    }
+                  ]
+                },
+                "description": "Retrieves platform announcements and important notices. Announcements include system updates, maintenance schedules, new features, policy changes, and other important information.\n\nResults are returned in reverse chronological order (newest first). The default `start_timestamp` is the current time, and the `count` parameter must be between 1 and 50 (default is 5).\n\nTry in API console"
+              },
+              "response": [
+                {
+                  "id": "cfd61f76-e0a1-4cc5-beeb-2bcbe6d81d71",
+                  "name": "Success response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 7661,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"public/get_announcements\",\n        \"params\": {}\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/public/get_announcements?start_timestamp=<integer>&count=5",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "public",
+                        "get_announcements"
+                      ],
+                      "query": [
+                        {
+                          "description": "The most recent timestamp to return the results for (milliseconds since the UNIX epoch)",
+                          "key": "start_timestamp",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Maximum count of returned announcements, default - `5`, maximum - `50`",
+                          "key": "count",
+                          "value": "5"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"result\": [\n    {\n      \"title\": \"<string>\",\n      \"body\": \"<string>\",\n      \"important\": \"<boolean>\",\n      \"id\": \"<number>\",\n      \"publication_timestamp\": \"<integer>\",\n      \"confirmation\": \"<boolean>\"\n    },\n    {\n      \"title\": \"<string>\",\n      \"body\": \"<string>\",\n      \"important\": \"<boolean>\",\n      \"id\": \"<number>\",\n      \"publication_timestamp\": \"<integer>\",\n      \"confirmation\": \"<boolean>\"\n    }\n  ],\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-21T20:03:47.000Z",
+                  "updatedAt": "2026-10-21T20:03:47.000Z",
+                  "uid": "35240-cfd61f76-e0a1-4cc5-beeb-2bcbe6d81d71"
+                }
+              ],
+              "createdAt": "2026-10-21T20:03:47.000Z",
+              "updatedAt": "2026-10-21T20:03:47.000Z",
+              "uid": "35240-c80ba690-2053-4d0b-a8d9-7c4ae42f1d5d"
+            }
+          ],
+          "id": "9400a739-971e-4a75-a27f-6a512760d303",
+          "createdAt": "2026-10-21T20:03:47.000Z",
+          "updatedAt": "2026-10-21T20:03:47.000Z",
+          "uid": "35240-9400a739-971e-4a75-a27f-6a512760d303"
+        }
+      ],
+      "id": "87445e41-1764-4c20-9db6-7295b164ab16",
+      "createdAt": "2026-10-21T20:03:47.000Z",
+      "updatedAt": "2026-10-21T20:03:47.000Z",
+      "uid": "35240-87445e41-1764-4c20-9db6-7295b164ab16"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://drb.coinbase.com/api/v2"
+    }
+  ]
+}

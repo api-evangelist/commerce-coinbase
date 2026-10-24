@@ -1,494 +1,477 @@
 {
+  "info": {
+    "_postman_id": "69d5751d-de4f-4c77-9bfd-b6bb484cdd6a",
+    "name": "Coinbase Commerce Charges Events API",
+    "description": "Legacy REST API for creating and managing crypto payment charges. Merchants generate a charge object representing a payment request; customers pay to the charge address and the API tracks status through the full lifecycle from created \u2192 pending \u2192 confirmed or failed. Authentication uses the X-CC-Api-Key header and the API-Version header.\n\nContact Support:\n Name: Coinbase Commerce Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:03:35.000Z",
+    "updatedAt": "2026-10-21T20:03:35.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-69d5751d-de4f-4c77-9bfd-b6bb484cdd6a"
+  },
   "item": [
     {
-      "id": "d4b92492-6986-4c46-9f38-183de6407ed9",
-      "name": "Events",
-      "description": {
-        "content": "Retrieve charge-related webhook events",
-        "type": "text/plain"
-      },
+      "name": "events",
       "item": [
         {
-          "id": "3c1ee770-c0a0-4479-8a17-8a40a9d46148",
-          "name": "List all events",
-          "request": {
-            "name": "List all events",
-            "description": {
-              "content": "Returns a paginated list of charge-related webhook events.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "events"
+          "name": "{event_id}",
+          "item": [
+            {
+              "name": "Retrieve an event",
+              "id": "43f7fda9-ca3a-4ed1-b4be-f71fe81a1515",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/events/:event_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "events",
+                    ":event_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "85a391cc-a110-4c08-a22a-c89b3f2aca4e",
+                      "key": "event_id",
+                      "value": "<string>",
+                      "description": "(Required) The event ID"
+                    }
+                  ]
+                },
+                "description": "Returns the details of a specific event."
+              },
+              "response": [
+                {
+                  "id": "9f1d97b0-afcd-497d-b0b0-338ff9d7faa5",
+                  "name": "Event details",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-CC-Api-Key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/events/:event_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "events",
+                        ":event_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "event_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"id\": \"<uuid>\",\n    \"type\": \"charge:pending\",\n    \"api_version\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"data\": {\n      \"id\": \"<uuid>\",\n      \"code\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"local_price\": {\n        \"amount\": \"<string>\",\n        \"currency\": \"<string>\"\n      },\n      \"pricing_type\": \"fixed_price\",\n      \"pricing\": {\n        \"nisid\": {\n          \"amount\": \"<string>\",\n          \"currency\": \"<string>\"\n        },\n        \"deserunta0d\": {\n          \"amount\": \"<string>\",\n          \"currency\": \"<string>\"\n        }\n      },\n      \"addresses\": {\n        \"ad8b8\": \"<string>\",\n        \"minim5a\": \"<string>\",\n        \"ea_f\": \"<string>\",\n        \"ut_ebd\": \"<string>\"\n      },\n      \"status\": \"UNRESOLVED\",\n      \"redirect_url\": \"<uri>\",\n      \"cancel_url\": \"<uri>\",\n      \"metadata\": {\n        \"officiabe\": \"<string>\"\n      },\n      \"hosted_url\": \"<uri>\",\n      \"timeline\": [\n        {\n          \"time\": \"<dateTime>\",\n          \"status\": \"CANCELATION_COMPLETE\",\n          \"context\": \"<string>\"\n        },\n        {\n          \"time\": \"<dateTime>\",\n          \"status\": \"CANCELATION_COMPLETE\",\n          \"context\": \"<string>\"\n        }\n      ],\n      \"payments\": [\n        {\n          \"network\": \"<string>\",\n          \"transaction_id\": \"<string>\",\n          \"status\": \"PENDING\",\n          \"value\": {\n            \"local\": {\n              \"amount\": \"<string>\",\n              \"currency\": \"<string>\"\n            },\n            \"crypto\": {\n              \"amount\": \"<string>\",\n              \"currency\": \"<string>\"\n            }\n          },\n          \"block\": {\n            \"height\": \"<integer>\",\n            \"hash\": \"<string>\",\n            \"confirmations_accumulated\": \"<integer>\",\n            \"confirmations_required\": \"<integer>\"\n          }\n        },\n        {\n          \"network\": \"<string>\",\n          \"transaction_id\": \"<string>\",\n          \"status\": \"CONFIRMED\",\n          \"value\": {\n            \"local\": {\n              \"amount\": \"<string>\",\n              \"currency\": \"<string>\"\n            },\n            \"crypto\": {\n              \"amount\": \"<string>\",\n              \"currency\": \"<string>\"\n            }\n          },\n          \"block\": {\n            \"height\": \"<integer>\",\n            \"hash\": \"<string>\",\n            \"confirmations_accumulated\": \"<integer>\",\n            \"confirmations_required\": \"<integer>\"\n          }\n        }\n      ],\n      \"expires_at\": \"<dateTime>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\"\n    }\n  }\n}",
+                  "createdAt": "2026-10-21T20:03:36.000Z",
+                  "updatedAt": "2026-10-21T20:03:36.000Z",
+                  "uid": "35240-9f1d97b0-afcd-497d-b0b0-338ff9d7faa5"
+                },
+                {
+                  "id": "4016ac88-12aa-454b-ab6d-b492883637bb",
+                  "name": "Missing or invalid API key",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-CC-Api-Key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/events/:event_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "events",
+                        ":event_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "event_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"type\": \"<string>\",\n    \"message\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-21T20:03:36.000Z",
+                  "updatedAt": "2026-10-21T20:03:36.000Z",
+                  "uid": "35240-4016ac88-12aa-454b-ab6d-b492883637bb"
+                },
+                {
+                  "id": "8a811c6f-c155-4fb2-a068-da8592ca2924",
+                  "name": "Resource not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-CC-Api-Key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/events/:event_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "events",
+                        ":event_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "event_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"type\": \"<string>\",\n    \"message\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-21T20:03:36.000Z",
+                  "updatedAt": "2026-10-21T20:03:36.000Z",
+                  "uid": "35240-8a811c6f-c155-4fb2-a068-da8592ca2924"
+                },
+                {
+                  "id": "27a4c08a-5150-459b-814e-30412332fce5",
+                  "name": "Internal server error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "X-CC-Api-Key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/events/:event_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "events",
+                        ":event_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "event_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"type\": \"<string>\",\n    \"message\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-21T20:03:36.000Z",
+                  "updatedAt": "2026-10-21T20:03:36.000Z",
+                  "uid": "35240-27a4c08a-5150-459b-814e-30412332fce5"
+                }
               ],
+              "createdAt": "2026-10-21T20:03:36.000Z",
+              "updatedAt": "2026-10-21T20:03:36.000Z",
+              "uid": "35240-43f7fda9-ca3a-4ed1-b4be-f71fe81a1515"
+            }
+          ],
+          "id": "8857c9e3-cc6f-4e56-b4e1-f9fdd360a60d",
+          "createdAt": "2026-10-21T20:03:36.000Z",
+          "updatedAt": "2026-10-21T20:03:36.000Z",
+          "uid": "35240-8857c9e3-cc6f-4e56-b4e1-f9fdd360a60d"
+        },
+        {
+          "name": "List all events",
+          "id": "3ff6474d-a445-4c0c-869c-5209c5cc6dda",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/events?limit=25&starting_after=<string>&ending_before=<string>",
               "host": [
                 "{{baseUrl}}"
               ],
+              "path": [
+                "events"
+              ],
               "query": [
                 {
-                  "disabled": false,
                   "key": "limit",
                   "value": "25"
                 },
                 {
-                  "disabled": false,
                   "key": "starting_after",
                   "value": "<string>"
                 },
                 {
-                  "disabled": false,
                   "key": "ending_before",
                   "value": "<string>"
                 }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "112cb02d-ae47-490c-8340-669340edd2fe",
-              "name": "List of events",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "events"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "limit",
-                      "value": "25"
-                    },
-                    {
-                      "key": "starting_after",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "ending_before",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-CC-Api-Key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": [\n    {\n      \"id\": \"94d820fc-e2eb-e54c-b6cc-9ddec7b17fb0\",\n      \"type\": \"charge:failed\",\n      \"api_version\": \"2018-03-22\",\n      \"created_at\": \"2014-12-10T05:49:55.707Z\",\n      \"data\": {\n        \"id\": \"985f1699-71fb-475f-5bbc-7cf8d2959f8e\",\n        \"code\": \"WZNDTFQK\",\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"local_price\": {\n          \"amount\": \"49.99\",\n          \"currency\": \"USD\"\n        },\n        \"pricing_type\": \"fixed_price\",\n        \"pricing\": {\n          \"key_0\": {\n            \"amount\": \"49.99\",\n            \"currency\": \"USD\"\n          },\n          \"key_1\": {\n            \"amount\": \"49.99\",\n            \"currency\": \"USD\"\n          }\n        },\n        \"addresses\": {\n          \"key_0\": \"string\"\n        },\n        \"status\": \"RESOLVED\",\n        \"redirect_url\": \"http://lquJVlUYHciHYSWpl.nlmJsjA.7aC47FnWH.ACrjS4AWXGUk-bwKN8NvHxbB+sWVpVLxjEadOVbQH88JN,qJx-nSxUQ\",\n        \"cancel_url\": \"http://EmgeNLrhpICLKAmi.ipdhjrnu4BXStXkVyyUTgj+IuG6gb2yRlf24UNz1uo5OjtggjWgeTV5\",\n        \"metadata\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\",\n          \"key_3\": \"string\"\n        },\n        \"hosted_url\": \"https://CVjlzUJWOaElvZrXoBFdMCpDAyB.fgneQTLBHsF0XD-YhCs5CZqMF,Z02Uegi+-RiPNHCDjddXeMINGZGT22h2X8Z6rh.L\",\n        \"timeline\": [\n          {\n            \"time\": \"1997-12-13T04:37:10.426Z\",\n            \"status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"context\": \"string\"\n          },\n          {\n            \"time\": \"1968-12-17T03:13:46.777Z\",\n            \"status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"context\": \"string\"\n          }\n        ],\n        \"payments\": [\n          {\n            \"network\": \"string\",\n            \"transaction_id\": \"string\",\n            \"status\": \"CONFIRMED\",\n            \"value\": {\n              \"local\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"crypto\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"block\": {\n              \"height\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"hash\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"confirmations_accumulated\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"confirmations_required\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          },\n          {\n            \"network\": \"string\",\n            \"transaction_id\": \"string\",\n            \"status\": \"CONFIRMED\",\n            \"value\": {\n              \"local\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"crypto\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"block\": {\n              \"height\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"hash\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"confirmations_accumulated\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"confirmations_required\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          }\n        ],\n        \"expires_at\": \"1991-01-13T12:59:03.495Z\",\n        \"created_at\": \"1987-04-02T17:45:28.006Z\",\n        \"updated_at\": \"1947-07-18T22:44:35.304Z\"\n      }\n    },\n    {\n      \"id\": \"9435d763-e200-3d49-96a4-954038e0cad0\",\n      \"type\": \"charge:delayed\",\n      \"api_version\": \"2018-03-22\",\n      \"created_at\": \"1953-12-29T15:07:23.567Z\",\n      \"data\": {\n        \"id\": \"bae3733b-55a7-c846-fd9f-56fd8e7b656f\",\n        \"code\": \"WZNDTFQK\",\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"local_price\": {\n          \"amount\": \"49.99\",\n          \"currency\": \"USD\"\n        },\n        \"pricing_type\": \"fixed_price\",\n        \"pricing\": {\n          \"key_0\": {\n            \"amount\": \"49.99\",\n            \"currency\": \"USD\"\n          }\n        },\n        \"addresses\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        \"status\": \"PENDING\",\n        \"redirect_url\": \"https://AQqxACdOOmLOvBBjikEzOB.kbhmJZtEj0z7NMaEGhxLTqV-3sG.ZOp+MgHgNzVDbfkBXrPKQjWSF4MHf\",\n        \"cancel_url\": \"https://Dvwfz.zrcvWaxzIlQXCoEuH0hZ\",\n        \"metadata\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\"\n        },\n        \"hosted_url\": \"http://oVrwYDxCTiQOQvUXmjlEdGxiH.uflaym9N2kUKLC5Z+DH3uxx1mIl-5DAOVh.g.kys6iCGWS3mFae.Gatpy0lACQ,s\",\n        \"timeline\": [\n          {\n            \"time\": \"1988-05-20T01:23:35.335Z\",\n            \"status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"context\": \"string\"\n          },\n          {\n            \"time\": \"2023-05-18T10:07:58.319Z\",\n            \"status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"context\": \"string\"\n          }\n        ],\n        \"payments\": [\n          {\n            \"network\": \"string\",\n            \"transaction_id\": \"string\",\n            \"status\": \"CONFIRMED\",\n            \"value\": {\n              \"local\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"crypto\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"block\": {\n              \"height\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"hash\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"confirmations_accumulated\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"confirmations_required\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          },\n          {\n            \"network\": \"string\",\n            \"transaction_id\": \"string\",\n            \"status\": \"CONFIRMED\",\n            \"value\": {\n              \"local\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"crypto\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"block\": {\n              \"height\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"hash\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"confirmations_accumulated\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"confirmations_required\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          }\n        ],\n        \"expires_at\": \"1946-12-31T01:54:53.180Z\",\n        \"created_at\": \"1954-06-01T18:09:57.667Z\",\n        \"updated_at\": \"1998-10-25T14:08:02.388Z\"\n      }\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "21bad288-54fe-4137-ba5a-a7770178ae4e",
-              "name": "Missing or invalid API key",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "events"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "limit",
-                      "value": "25"
-                    },
-                    {
-                      "key": "starting_after",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "ending_before",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-CC-Api-Key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "b72426c8-c3fe-4ced-92ef-abf811d5a729",
-              "name": "Internal server error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "events"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "limit",
-                      "value": "25"
-                    },
-                    {
-                      "key": "starting_after",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "ending_before",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-CC-Api-Key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Internal Server Error",
-              "code": 500,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "7e2280ed-0730-4e7d-a95e-b4421ebb4c9a",
-          "name": "Retrieve an event",
-          "request": {
-            "name": "Retrieve an event",
-            "description": {
-              "content": "Returns the details of a specific event.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "events",
-                ":event_id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "event_id",
-                  "description": "(Required) The event ID"
-                }
               ]
             },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
+            "description": "Returns a paginated list of charge-related webhook events."
           },
           "response": [
             {
-              "id": "cb1b0c0e-bc30-4e5c-8a2f-ebb4b97df1a5",
-              "name": "Event details",
+              "id": "bcba4acc-6bb4-476f-bb63-e286a39edcf2",
+              "name": "List of events",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "events",
-                    ":event_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "event_id",
-                      "description": "(Required) The event ID"
-                    }
-                  ]
-                },
+                "method": "GET",
                 "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-CC-Api-Key",
-                    "value": "<API Key>"
-                  },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/events?limit=25&starting_after=<string>&ending_before=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "events"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "starting_after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ending_before",
+                      "value": "<string>"
+                    }
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"data\": {\n    \"id\": \"161bf4d3-3e70-0419-6a5c-3a81c03044ed\",\n    \"type\": \"charge:delayed\",\n    \"api_version\": \"2018-03-22\",\n    \"created_at\": \"1987-09-06T11:46:01.683Z\",\n    \"data\": {\n      \"id\": \"cf084f4a-1ca5-7b95-cd61-dc0cc699cca1\",\n      \"code\": \"WZNDTFQK\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"local_price\": {\n        \"amount\": \"49.99\",\n        \"currency\": \"USD\"\n      },\n      \"pricing_type\": \"no_price\",\n      \"pricing\": {\n        \"key_0\": {\n          \"amount\": \"49.99\",\n          \"currency\": \"USD\"\n        },\n        \"key_1\": {\n          \"amount\": \"49.99\",\n          \"currency\": \"USD\"\n        }\n      },\n      \"addresses\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"status\": \"NEW\",\n      \"redirect_url\": \"https://PyZQ.klrBM3kkzoNnCeATdP9rLcbaDrdUQ+Yq984\",\n      \"cancel_url\": \"https://TreEvXU.wueI+6xzylJRMOilLt+0SRHSiYaN7M7IG7ar6ugSJ0NpuzIhkqWSkI2Cy\",\n      \"metadata\": {\n        \"key_0\": \"string\"\n      },\n      \"hosted_url\": \"https://h.atyrF.YAnbB0x-6xiA,t.pf7nLOOHkZd10f7o7JJdv9tI-fTSE8CHloXoSny0PBUAnOfB6kLs\",\n      \"timeline\": [\n        {\n          \"time\": \"2016-10-07T17:38:20.285Z\",\n          \"status\": \"UNRESOLVED\",\n          \"context\": \"string\"\n        },\n        {\n          \"time\": \"1971-01-23T14:22:33.298Z\",\n          \"status\": \"UNRESOLVED\",\n          \"context\": \"string\"\n        }\n      ],\n      \"payments\": [\n        {\n          \"network\": \"string\",\n          \"transaction_id\": \"string\",\n          \"status\": \"CONFIRMED\",\n          \"value\": {\n            \"local\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"crypto\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"block\": {\n            \"height\": 751,\n            \"hash\": \"string\",\n            \"confirmations_accumulated\": 1329,\n            \"confirmations_required\": 2680\n          }\n        },\n        {\n          \"network\": \"string\",\n          \"transaction_id\": \"string\",\n          \"status\": \"CONFIRMED\",\n          \"value\": {\n            \"local\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"crypto\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"block\": {\n            \"height\": 9548,\n            \"hash\": \"string\",\n            \"confirmations_accumulated\": 7458,\n            \"confirmations_required\": 5498\n          }\n        }\n      ],\n      \"expires_at\": \"1974-01-23T03:53:38.687Z\",\n      \"created_at\": \"2019-06-10T07:02:33.667Z\",\n      \"updated_at\": \"1947-01-31T04:43:32.124Z\"\n    }\n  }\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"<uuid>\",\n      \"type\": \"charge:delayed\",\n      \"api_version\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"data\": {\n        \"id\": \"<uuid>\",\n        \"code\": \"<string>\",\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"local_price\": {\n          \"amount\": \"<string>\",\n          \"currency\": \"<string>\"\n        },\n        \"pricing_type\": \"no_price\",\n        \"pricing\": {\n          \"adipisicing_1\": {\n            \"amount\": \"<string>\",\n            \"currency\": \"<string>\"\n          }\n        },\n        \"addresses\": {\n          \"nisi_a\": \"<string>\"\n        },\n        \"status\": \"CANCELED\",\n        \"redirect_url\": \"<uri>\",\n        \"cancel_url\": \"<uri>\",\n        \"metadata\": {\n          \"aliquaae1\": \"<string>\",\n          \"non_ecf\": \"<string>\",\n          \"veniam_7\": \"<string>\",\n          \"anim_3a9\": \"<string>\"\n        },\n        \"hosted_url\": \"<uri>\",\n        \"timeline\": [\n          {\n            \"time\": \"<dateTime>\",\n            \"status\": \"RESOLVED\",\n            \"context\": \"<string>\"\n          },\n          {\n            \"time\": \"<dateTime>\",\n            \"status\": \"NEW\",\n            \"context\": \"<string>\"\n          }\n        ],\n        \"payments\": [\n          {\n            \"network\": \"<string>\",\n            \"transaction_id\": \"<string>\",\n            \"status\": \"CONFIRMED\",\n            \"value\": {\n              \"local\": {\n                \"amount\": \"<string>\",\n                \"currency\": \"<string>\"\n              },\n              \"crypto\": {\n                \"amount\": \"<string>\",\n                \"currency\": \"<string>\"\n              }\n            },\n            \"block\": {\n              \"height\": \"<integer>\",\n              \"hash\": \"<string>\",\n              \"confirmations_accumulated\": \"<integer>\",\n              \"confirmations_required\": \"<integer>\"\n            }\n          },\n          {\n            \"network\": \"<string>\",\n            \"transaction_id\": \"<string>\",\n            \"status\": \"PENDING\",\n            \"value\": {\n              \"local\": {\n                \"amount\": \"<string>\",\n                \"currency\": \"<string>\"\n              },\n              \"crypto\": {\n                \"amount\": \"<string>\",\n                \"currency\": \"<string>\"\n              }\n            },\n            \"block\": {\n              \"height\": \"<integer>\",\n              \"hash\": \"<string>\",\n              \"confirmations_accumulated\": \"<integer>\",\n              \"confirmations_required\": \"<integer>\"\n            }\n          }\n        ],\n        \"expires_at\": \"<dateTime>\",\n        \"created_at\": \"<dateTime>\",\n        \"updated_at\": \"<dateTime>\"\n      }\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"type\": \"charge:delayed\",\n      \"api_version\": \"<string>\",\n      \"created_at\": \"<dateTime>\",\n      \"data\": {\n        \"id\": \"<uuid>\",\n        \"code\": \"<string>\",\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"local_price\": {\n          \"amount\": \"<string>\",\n          \"currency\": \"<string>\"\n        },\n        \"pricing_type\": \"fixed_price\",\n        \"pricing\": {\n          \"in_467\": {\n            \"amount\": \"<string>\",\n            \"currency\": \"<string>\"\n          },\n          \"irure_4d\": {\n            \"amount\": \"<string>\",\n            \"currency\": \"<string>\"\n          }\n        },\n        \"addresses\": {\n          \"magna_9\": \"<string>\",\n          \"dolor5\": \"<string>\",\n          \"in_ff\": \"<string>\"\n        },\n        \"status\": \"COMPLETED\",\n        \"redirect_url\": \"<uri>\",\n        \"cancel_url\": \"<uri>\",\n        \"metadata\": {\n          \"Lorem_605\": \"<string>\"\n        },\n        \"hosted_url\": \"<uri>\",\n        \"timeline\": [\n          {\n            \"time\": \"<dateTime>\",\n            \"status\": \"CANCELATION_COMPLETE\",\n            \"context\": \"<string>\"\n          },\n          {\n            \"time\": \"<dateTime>\",\n            \"status\": \"RESOLVED\",\n            \"context\": \"<string>\"\n          }\n        ],\n        \"payments\": [\n          {\n            \"network\": \"<string>\",\n            \"transaction_id\": \"<string>\",\n            \"status\": \"PENDING\",\n            \"value\": {\n              \"local\": {\n                \"amount\": \"<string>\",\n                \"currency\": \"<string>\"\n              },\n              \"crypto\": {\n                \"amount\": \"<string>\",\n                \"currency\": \"<string>\"\n              }\n            },\n            \"block\": {\n              \"height\": \"<integer>\",\n              \"hash\": \"<string>\",\n              \"confirmations_accumulated\": \"<integer>\",\n              \"confirmations_required\": \"<integer>\"\n            }\n          },\n          {\n            \"network\": \"<string>\",\n            \"transaction_id\": \"<string>\",\n            \"status\": \"PENDING\",\n            \"value\": {\n              \"local\": {\n                \"amount\": \"<string>\",\n                \"currency\": \"<string>\"\n              },\n              \"crypto\": {\n                \"amount\": \"<string>\",\n                \"currency\": \"<string>\"\n              }\n            },\n            \"block\": {\n              \"height\": \"<integer>\",\n              \"hash\": \"<string>\",\n              \"confirmations_accumulated\": \"<integer>\",\n              \"confirmations_required\": \"<integer>\"\n            }\n          }\n        ],\n        \"expires_at\": \"<dateTime>\",\n        \"created_at\": \"<dateTime>\",\n        \"updated_at\": \"<dateTime>\"\n      }\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:03:36.000Z",
+              "updatedAt": "2026-10-21T20:03:36.000Z",
+              "uid": "35240-bcba4acc-6bb4-476f-bb63-e286a39edcf2"
             },
             {
-              "id": "e5bc98d9-073e-4271-9e3c-5f8df1f25f11",
+              "id": "84efa16f-9d3f-4ccb-90e6-329186205e1b",
               "name": "Missing or invalid API key",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "events",
-                    ":event_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "event_id",
-                      "description": "(Required) The event ID"
-                    }
-                  ]
-                },
+                "method": "GET",
                 "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-CC-Api-Key",
-                    "value": "<API Key>"
-                  },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/events?limit=25&starting_after=<string>&ending_before=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "events"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "starting_after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ending_before",
+                      "value": "<string>"
+                    }
+                  ]
+                }
               },
               "status": "Unauthorized",
               "code": 401,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"type\": \"<string>\",\n    \"message\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-10-21T20:03:36.000Z",
+              "updatedAt": "2026-10-21T20:03:36.000Z",
+              "uid": "35240-84efa16f-9d3f-4ccb-90e6-329186205e1b"
             },
             {
-              "id": "222a66c0-4e3c-4ca6-bf7b-db2b9e41e456",
-              "name": "Resource not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "events",
-                    ":event_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "event_id",
-                      "description": "(Required) The event ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-CC-Api-Key",
-                    "value": "<API Key>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "74494310-bc9a-4f39-b76c-fa1ce90c6678",
+              "id": "b7acde85-3d1c-4451-b065-b5882a41d510",
               "name": "Internal server error",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "events",
-                    ":event_id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "event_id",
-                      "description": "(Required) The event ID"
-                    }
-                  ]
-                },
+                "method": "GET",
                 "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: apikey",
-                      "type": "text/plain"
-                    },
-                    "key": "X-CC-Api-Key",
-                    "value": "<API Key>"
-                  },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "X-CC-Api-Key",
+                    "value": "<API Key>"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/events?limit=25&starting_after=<string>&ending_before=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "events"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "starting_after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ending_before",
+                      "value": "<string>"
+                    }
+                  ]
+                }
               },
               "status": "Internal Server Error",
               "code": 500,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"error\": {\n    \"type\": \"string\",\n    \"message\": \"string\"\n  }\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"type\": \"<string>\",\n    \"message\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-10-21T20:03:36.000Z",
+              "updatedAt": "2026-10-21T20:03:36.000Z",
+              "uid": "35240-b7acde85-3d1c-4451-b065-b5882a41d510"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T20:03:36.000Z",
+          "updatedAt": "2026-10-21T20:03:36.000Z",
+          "uid": "35240-3ff6474d-a445-4c0c-869c-5209c5cc6dda"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://api.commerce.coinbase.com",
-      "key": "baseUrl"
+      "id": "f330a179-6f0e-480a-a4ab-bb6ee5bc673d",
+      "createdAt": "2026-10-21T20:03:36.000Z",
+      "updatedAt": "2026-10-21T20:03:36.000Z",
+      "uid": "35240-f330a179-6f0e-480a-a4ab-bb6ee5bc673d"
     }
   ],
   "auth": {
@@ -496,25 +479,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "X-CC-Api-Key"
+        "value": "X-CC-Api-Key",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "header"
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "d59d4e90-6609-4f4c-8747-03fa9bf56fd6",
-    "name": "Coinbase Commerce Charges Events API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "Legacy REST API for creating and managing crypto payment charges. Merchants generate a charge object representing a payment request; customers pay to the charge address and the API tracks status through the full lifecycle from created → pending → confirmed or failed. Authentication uses the X-CC-Api-Key header and the API-Version header.\n\n\nContact Support:\n Name: Coinbase Commerce Support",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.commerce.coinbase.com"
     }
-  }
+  ]
 }

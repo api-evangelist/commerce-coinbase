@@ -1,0 +1,205 @@
+{
+  "info": {
+    "_postman_id": "472b6e8c-3bbd-480f-9220-910dcedabe28",
+    "name": "Coinbase Retail Advanced Trade (Deribit) Wallet API",
+    "description": "Coinbase Retail Advanced Trade API for derivatives trading.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:04:47.000Z",
+    "updatedAt": "2026-10-21T20:04:48.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-472b6e8c-3bbd-480f-9220-910dcedabe28"
+  },
+  "item": [
+    {
+      "name": "private",
+      "item": [
+        {
+          "name": "submit_transfer_between_subaccounts",
+          "item": [
+            {
+              "name": "Get private submit transfer between subaccounts",
+              "id": "c3c7c16a-f327-433b-9355-edb1ddbfa5b1",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 210,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/submit_transfer_between_subaccounts\",\n        \"params\": {\n          \"amount\": 12.1234,\n          \"currency\": \"ETH\",\n          \"destination\": 20,\n          \"source\": 10\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/private/submit_transfer_between_subaccounts?currency=USDC&amount=<number>&destination=<integer>&source=<integer>&nonce=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "private",
+                    "submit_transfer_between_subaccounts"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The currency symbol",
+                      "key": "currency",
+                      "value": "USDC"
+                    },
+                    {
+                      "description": "(Required) Amount of funds to be transferred",
+                      "key": "amount",
+                      "value": "<number>"
+                    },
+                    {
+                      "description": "(Required) Id of destination subaccount. Can be found in `My Account >> Subaccounts` tab",
+                      "key": "destination",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Id of the source (sub)account. Can be found in `My Account >> Subaccounts` tab. By default, it is the Id of the account which made the request. However, if a different \"source\" is specified, the user must possess the mainaccount scope, and only other subaccounts can be designated as the source.",
+                      "key": "source",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Optional idempotency nonce. If provided, subsequent requests with the same nonce will return the previously created transaction instead of creating a new one. Must be 8-128 characters. The nonce is persisted on the resulting transaction and returned in the response.",
+                      "key": "nonce",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Transfer funds between two subaccounts or between a subaccount and the main account.\n\n**\ud83d\udcd6 Related Article:** Managing Transfers\n\nTry in API console"
+              },
+              "response": [
+                {
+                  "id": "eaca8d94-45f6-4b6f-8ced-e09377cf8503",
+                  "name": "Success response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 210,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/submit_transfer_between_subaccounts\",\n        \"params\": {\n          \"amount\": 12.1234,\n          \"currency\": \"ETH\",\n          \"destination\": 20,\n          \"source\": 10\n        }\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/private/submit_transfer_between_subaccounts?currency=USDC&amount=<number>&destination=<integer>&source=<integer>&nonce=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "private",
+                        "submit_transfer_between_subaccounts"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The currency symbol",
+                          "key": "currency",
+                          "value": "USDC"
+                        },
+                        {
+                          "description": "(Required) Amount of funds to be transferred",
+                          "key": "amount",
+                          "value": "<number>"
+                        },
+                        {
+                          "description": "(Required) Id of destination subaccount. Can be found in `My Account >> Subaccounts` tab",
+                          "key": "destination",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Id of the source (sub)account. Can be found in `My Account >> Subaccounts` tab. By default, it is the Id of the account which made the request. However, if a different \"source\" is specified, the user must possess the mainaccount scope, and only other subaccounts can be designated as the source.",
+                          "key": "source",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Optional idempotency nonce. If provided, subsequent requests with the same nonce will return the previously created transaction instead of creating a new one. Must be 8-128 characters. The nonce is persisted on the resulting transaction and returned in the response.",
+                          "key": "nonce",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"result\": {\n    \"currency\": \"USDC\",\n    \"id\": \"<integer>\",\n    \"type\": \"user\",\n    \"amount\": \"<number>\",\n    \"state\": \"<string>\",\n    \"other_side\": \"<string>\",\n    \"updated_timestamp\": \"<integer>\",\n    \"created_timestamp\": \"<integer>\",\n    \"direction\": \"payment\",\n    \"nonce\": \"<string>\"\n  },\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-21T20:04:48.000Z",
+                  "updatedAt": "2026-10-21T20:04:48.000Z",
+                  "uid": "35240-eaca8d94-45f6-4b6f-8ced-e09377cf8503"
+                }
+              ],
+              "createdAt": "2026-10-21T20:04:48.000Z",
+              "updatedAt": "2026-10-21T20:04:48.000Z",
+              "uid": "35240-c3c7c16a-f327-433b-9355-edb1ddbfa5b1"
+            }
+          ],
+          "id": "5a027e01-c0fb-4ed2-a07d-eba7fa23a94c",
+          "createdAt": "2026-10-21T20:04:48.000Z",
+          "updatedAt": "2026-10-21T20:04:48.000Z",
+          "uid": "35240-5a027e01-c0fb-4ed2-a07d-eba7fa23a94c"
+        }
+      ],
+      "id": "1da44052-e2ef-4ef2-9142-4f0b467a6f7d",
+      "createdAt": "2026-10-21T20:04:48.000Z",
+      "updatedAt": "2026-10-21T20:04:48.000Z",
+      "uid": "35240-1da44052-e2ef-4ef2-9142-4f0b467a6f7d"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://drb.coinbase.com/api/v2"
+    }
+  ]
+}

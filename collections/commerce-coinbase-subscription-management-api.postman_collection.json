@@ -1,0 +1,1062 @@
+{
+  "info": {
+    "_postman_id": "7c424ae0-d7a7-4dc3-a5c0-6b5fb9eede01",
+    "name": "Coinbase Retail Advanced Trade (Deribit) Subscription\u2026",
+    "description": "Coinbase Retail Advanced Trade API for derivatives trading.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:04:27.000Z",
+    "updatedAt": "2026-10-21T20:04:27.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-7c424ae0-d7a7-4dc3-a5c0-6b5fb9eede01"
+  },
+  "item": [
+    {
+      "name": "private",
+      "item": [
+        {
+          "name": "subscribe",
+          "item": [
+            {
+              "name": "Get private subscribe",
+              "id": "aa31b199-db35-46c3-a978-ab4c8cd39aa4",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 4235,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/subscribe\",\n        \"params\": {\n          \"channels\": [\n            \"deribit_price_index.btc_usd\"\n          ]\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/private/subscribe?channels=<string>&channels=<string>&label=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "private",
+                    "subscribe"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) A list of channels to subscribe to. See [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications) for all available channels.",
+                      "key": "channels",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) A list of channels to subscribe to. See [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications) for all available channels.",
+                      "key": "channels",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Optional label which will be added to notifications of private channels (max 16 characters).",
+                      "key": "label",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Subscribe to one or more channels. The name of the channel determines what information will be provided, and in what form.\n\nFor a complete list of available subscription channels and their notification formats, see Notifications and Subscriptions.\n\n**Note - This method has distinct API rate limiting requirements:** Sustained rate: ~3.3 requests/second. For more information, see Rate Limits.\n\n**\ud83d\udcd6 Related Article:** Market Data Collection Best Practices\n\nTry in API console"
+              },
+              "response": [
+                {
+                  "id": "b0b45734-31e8-4391-bbcb-1c2c464d9ddc",
+                  "name": "Success response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 4235,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/subscribe\",\n        \"params\": {\n          \"channels\": [\n            \"deribit_price_index.btc_usd\"\n          ]\n        }\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/private/subscribe?channels=<string>&label=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "private",
+                        "subscribe"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) A list of channels to subscribe to. See [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications) for all available channels.",
+                          "key": "channels",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Optional label which will be added to notifications of private channels (max 16 characters).",
+                          "key": "label",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"result\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-21T20:04:28.000Z",
+                  "updatedAt": "2026-10-21T20:04:28.000Z",
+                  "uid": "35240-b0b45734-31e8-4391-bbcb-1c2c464d9ddc"
+                },
+                {
+                  "id": "e11999a9-3cca-411c-8814-9397ef2d2c50",
+                  "name": "Success response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 4235,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/subscribe\",\n        \"params\": {\n          \"channels\": [\n            \"deribit_price_index.btc_usd\"\n          ]\n        }\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/private/subscribe?channels=<string>&label=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "private",
+                        "subscribe"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) A list of channels to subscribe to. See [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications) for all available channels.",
+                          "key": "channels",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Optional label which will be added to notifications of private channels (max 16 characters).",
+                          "key": "label",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"error\": \"<integer>\",\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-21T20:04:28.000Z",
+                  "updatedAt": "2026-10-21T20:04:28.000Z",
+                  "uid": "35240-e11999a9-3cca-411c-8814-9397ef2d2c50"
+                }
+              ],
+              "createdAt": "2026-10-21T20:04:28.000Z",
+              "updatedAt": "2026-10-21T20:04:28.000Z",
+              "uid": "35240-aa31b199-db35-46c3-a978-ab4c8cd39aa4"
+            }
+          ],
+          "id": "669ebc8f-1a52-4236-84f9-724f94fa74ce",
+          "createdAt": "2026-10-21T20:04:28.000Z",
+          "updatedAt": "2026-10-21T20:04:28.000Z",
+          "uid": "35240-669ebc8f-1a52-4236-84f9-724f94fa74ce"
+        },
+        {
+          "name": "unsubscribe",
+          "item": [
+            {
+              "name": "Get private unsubscribe",
+              "id": "46faa698-e176-4ac3-a707-f2d7d4ba0af2",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 3370,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/unsubscribe\",\n        \"params\": {\n          \"channels\": [\n            \"deribit_price_index.btc_usd\"\n          ]\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/private/unsubscribe?channels=<string>&channels=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "private",
+                    "unsubscribe"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) A list of channels to unsubscribe from. Only successfully unsubscribed channels will be returned in the result. See [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications) for all available channels.",
+                      "key": "channels",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) A list of channels to unsubscribe from. Only successfully unsubscribed channels will be returned in the result. See [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications) for all available channels.",
+                      "key": "channels",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Unsubscribe from one or more channels. The response contains only the channels that were successfully unsubscribed in this request.\n\nFor a complete list of available subscription channels and their notification formats, see Notifications and Subscriptions.\n\n**Note:** The `result` field in the response contains only the channels that were successfully processed and unsubscribed from this specific request. It does not include all previously subscribed topics. If a channel in the request is invalid, not subscribed, or fails validation, it will not appear in the result.\n\nTry in API console"
+              },
+              "response": [
+                {
+                  "id": "130f0113-6d83-47ce-a991-737be4e63f3c",
+                  "name": "Successfully unsubscribed from channels",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 3370,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/unsubscribe\",\n        \"params\": {\n          \"channels\": [\n            \"deribit_price_index.btc_usd\"\n          ]\n        }\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/private/unsubscribe?channels=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "private",
+                        "unsubscribe"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) A list of channels to unsubscribe from. Only successfully unsubscribed channels will be returned in the result. See [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications) for all available channels.",
+                          "key": "channels",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<integer>\",\n  \"jsonrpc\": \"<string>\",\n  \"result\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "createdAt": "2026-10-21T20:04:28.000Z",
+                  "updatedAt": "2026-10-21T20:04:28.000Z",
+                  "uid": "35240-130f0113-6d83-47ce-a991-737be4e63f3c"
+                },
+                {
+                  "id": "6041e928-5fcc-4db0-bd98-59bb506f81f9",
+                  "name": "Success response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 3370,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/unsubscribe\",\n        \"params\": {\n          \"channels\": [\n            \"deribit_price_index.btc_usd\"\n          ]\n        }\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/private/unsubscribe?channels=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "private",
+                        "unsubscribe"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) A list of channels to unsubscribe from. Only successfully unsubscribed channels will be returned in the result. See [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications) for all available channels.",
+                          "key": "channels",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"error\": \"<integer>\",\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-21T20:04:28.000Z",
+                  "updatedAt": "2026-10-21T20:04:28.000Z",
+                  "uid": "35240-6041e928-5fcc-4db0-bd98-59bb506f81f9"
+                }
+              ],
+              "createdAt": "2026-10-21T20:04:28.000Z",
+              "updatedAt": "2026-10-21T20:04:28.000Z",
+              "uid": "35240-46faa698-e176-4ac3-a707-f2d7d4ba0af2"
+            }
+          ],
+          "id": "eccd5a3b-8d2c-41d6-8c6a-b5ec9d6d8f79",
+          "createdAt": "2026-10-21T20:04:28.000Z",
+          "updatedAt": "2026-10-21T20:04:28.000Z",
+          "uid": "35240-eccd5a3b-8d2c-41d6-8c6a-b5ec9d6d8f79"
+        },
+        {
+          "name": "unsubscribe_all",
+          "item": [
+            {
+              "name": "Get private unsubscribe all",
+              "id": "563a7009-9a3a-478c-b95d-de326c35e4e1",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 154,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/unsubscribe_all\",\n        \"params\": {}\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/private/unsubscribe_all",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "private",
+                    "unsubscribe_all"
+                  ]
+                },
+                "description": "Unsubscribe from all the channels subscribed so far. This method takes no parameters.\n\nTry in API console"
+              },
+              "response": [
+                {
+                  "id": "966ddb5d-d6fd-4ca9-ba35-db3325b90d97",
+                  "name": "Success response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 154,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/unsubscribe_all\",\n        \"params\": {}\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/private/unsubscribe_all",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "private",
+                        "unsubscribe_all"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"result\": \"ok\",\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-21T20:04:28.000Z",
+                  "updatedAt": "2026-10-21T20:04:28.000Z",
+                  "uid": "35240-966ddb5d-d6fd-4ca9-ba35-db3325b90d97"
+                }
+              ],
+              "createdAt": "2026-10-21T20:04:28.000Z",
+              "updatedAt": "2026-10-21T20:04:28.000Z",
+              "uid": "35240-563a7009-9a3a-478c-b95d-de326c35e4e1"
+            }
+          ],
+          "id": "31e11fbd-89bf-4d3c-898c-98481b773624",
+          "createdAt": "2026-10-21T20:04:28.000Z",
+          "updatedAt": "2026-10-21T20:04:28.000Z",
+          "uid": "35240-31e11fbd-89bf-4d3c-898c-98481b773624"
+        }
+      ],
+      "id": "a89d1a81-0011-446b-9ed5-a73cfc634752",
+      "createdAt": "2026-10-21T20:04:28.000Z",
+      "updatedAt": "2026-10-21T20:04:28.000Z",
+      "uid": "35240-a89d1a81-0011-446b-9ed5-a73cfc634752"
+    },
+    {
+      "name": "public",
+      "item": [
+        {
+          "name": "subscribe",
+          "item": [
+            {
+              "name": "Get public subscribe",
+              "id": "74849f60-2194-4366-ac36-deb382426300",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 3600,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"public/subscribe\",\n        \"params\": {\n          \"channels\": [\n            \"deribit_price_index.btc_usd\"\n          ]\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/public/subscribe?channels=<string>&channels=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "public",
+                    "subscribe"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) A list of channels to subscribe to. See [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications) for all available channels.",
+                      "key": "channels",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) A list of channels to subscribe to. See [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications) for all available channels.",
+                      "key": "channels",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Subscribe to one or more channels. This is the same method as `/private/subscribe`, but it can only be used for 'public' channels.\n\nFor a complete list of available subscription channels and their notification formats, see Notifications and Subscriptions.\n\n**Note - This method has distinct API rate limiting requirements:** Sustained rate: ~3.3 requests/second. For more information, see Rate Limits.\n\n**\ud83d\udcd6 Related Article:** Market Data Collection Best Practices\n\nTry in API console"
+              },
+              "response": [
+                {
+                  "id": "673b77e8-874d-44e6-8031-cd73356c0513",
+                  "name": "Success response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 3600,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"public/subscribe\",\n        \"params\": {\n          \"channels\": [\n            \"deribit_price_index.btc_usd\"\n          ]\n        }\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/public/subscribe?channels=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "public",
+                        "subscribe"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) A list of channels to subscribe to. See [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications) for all available channels.",
+                          "key": "channels",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"result\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-21T20:04:28.000Z",
+                  "updatedAt": "2026-10-21T20:04:28.000Z",
+                  "uid": "35240-673b77e8-874d-44e6-8031-cd73356c0513"
+                },
+                {
+                  "id": "04b74cc9-56ef-43b0-9f50-a443e75f8719",
+                  "name": "Success response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 3600,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"public/subscribe\",\n        \"params\": {\n          \"channels\": [\n            \"deribit_price_index.btc_usd\"\n          ]\n        }\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/public/subscribe?channels=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "public",
+                        "subscribe"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) A list of channels to subscribe to. See [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications) for all available channels.",
+                          "key": "channels",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"error\": \"<integer>\",\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-21T20:04:28.000Z",
+                  "updatedAt": "2026-10-21T20:04:28.000Z",
+                  "uid": "35240-04b74cc9-56ef-43b0-9f50-a443e75f8719"
+                }
+              ],
+              "createdAt": "2026-10-21T20:04:28.000Z",
+              "updatedAt": "2026-10-21T20:04:28.000Z",
+              "uid": "35240-74849f60-2194-4366-ac36-deb382426300"
+            }
+          ],
+          "id": "55f6a774-8a3e-4bba-805b-6f2fc10e1e42",
+          "createdAt": "2026-10-21T20:04:28.000Z",
+          "updatedAt": "2026-10-21T20:04:28.000Z",
+          "uid": "35240-55f6a774-8a3e-4bba-805b-6f2fc10e1e42"
+        },
+        {
+          "name": "unsubscribe",
+          "item": [
+            {
+              "name": "Get public unsubscribe",
+              "id": "74ef63e5-e1ff-46c6-8c57-77f33e4963ec",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 8691,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"public/unsubscribe\",\n        \"params\": {\n          \"channels\": [\n            \"deribit_price_index.btc_usd\"\n          ]\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/public/unsubscribe?channels=<string>&channels=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "public",
+                    "unsubscribe"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) A list of channels to unsubscribe from. Only successfully unsubscribed channels will be returned in the result. See [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications) for all available channels.",
+                      "key": "channels",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) A list of channels to unsubscribe from. Only successfully unsubscribed channels will be returned in the result. See [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications) for all available channels.",
+                      "key": "channels",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Unsubscribe from one or more channels. The response contains only the channels that were successfully unsubscribed in this request.\n\nFor a complete list of available subscription channels and their notification formats, see Notifications and Subscriptions.\n\n**Note:** The `result` field in the response contains only the channels that were successfully processed and unsubscribed from this specific request. It does not include all previously subscribed topics. If a channel in the request is invalid, not subscribed, or fails validation, it will not appear in the result.\n\nTry in API console"
+              },
+              "response": [
+                {
+                  "id": "135b62bf-b4b3-441f-9802-d71aaa90d872",
+                  "name": "Successfully unsubscribed from channels",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 8691,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"public/unsubscribe\",\n        \"params\": {\n          \"channels\": [\n            \"deribit_price_index.btc_usd\"\n          ]\n        }\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/public/unsubscribe?channels=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "public",
+                        "unsubscribe"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) A list of channels to unsubscribe from. Only successfully unsubscribed channels will be returned in the result. See [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications) for all available channels.",
+                          "key": "channels",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<integer>\",\n  \"jsonrpc\": \"<string>\",\n  \"result\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "createdAt": "2026-10-21T20:04:28.000Z",
+                  "updatedAt": "2026-10-21T20:04:28.000Z",
+                  "uid": "35240-135b62bf-b4b3-441f-9802-d71aaa90d872"
+                },
+                {
+                  "id": "60b7a007-c0fe-4f83-96a1-6f07037c54f6",
+                  "name": "Success response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 8691,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"public/unsubscribe\",\n        \"params\": {\n          \"channels\": [\n            \"deribit_price_index.btc_usd\"\n          ]\n        }\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/public/unsubscribe?channels=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "public",
+                        "unsubscribe"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) A list of channels to unsubscribe from. Only successfully unsubscribed channels will be returned in the result. See [Notifications and Subscriptions](https://docs.deribit.com/articles/notifications) for all available channels.",
+                          "key": "channels",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"error\": \"<integer>\",\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-21T20:04:28.000Z",
+                  "updatedAt": "2026-10-21T20:04:28.000Z",
+                  "uid": "35240-60b7a007-c0fe-4f83-96a1-6f07037c54f6"
+                }
+              ],
+              "createdAt": "2026-10-21T20:04:28.000Z",
+              "updatedAt": "2026-10-21T20:04:28.000Z",
+              "uid": "35240-74ef63e5-e1ff-46c6-8c57-77f33e4963ec"
+            }
+          ],
+          "id": "d43275be-446a-463e-903b-e664018a8457",
+          "createdAt": "2026-10-21T20:04:28.000Z",
+          "updatedAt": "2026-10-21T20:04:28.000Z",
+          "uid": "35240-d43275be-446a-463e-903b-e664018a8457"
+        },
+        {
+          "name": "unsubscribe_all",
+          "item": [
+            {
+              "name": "Get public unsubscribe all",
+              "id": "73967c92-16ac-4e64-a110-0ec40bf4fa76",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 153,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"public/unsubscribe_all\",\n        \"params\": {}\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/public/unsubscribe_all",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "public",
+                    "unsubscribe_all"
+                  ]
+                },
+                "description": "Unsubscribe from all the channels subscribed so far. This method takes no parameters.\n\nTry in API console"
+              },
+              "response": [
+                {
+                  "id": "50f26956-c8cd-4750-9a76-d7941d381d64",
+                  "name": "Success response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 153,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"public/unsubscribe_all\",\n        \"params\": {}\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/public/unsubscribe_all",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "public",
+                        "unsubscribe_all"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"result\": \"ok\",\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-21T20:04:28.000Z",
+                  "updatedAt": "2026-10-21T20:04:28.000Z",
+                  "uid": "35240-50f26956-c8cd-4750-9a76-d7941d381d64"
+                }
+              ],
+              "createdAt": "2026-10-21T20:04:28.000Z",
+              "updatedAt": "2026-10-21T20:04:28.000Z",
+              "uid": "35240-73967c92-16ac-4e64-a110-0ec40bf4fa76"
+            }
+          ],
+          "id": "71be8bcd-64c5-4517-863e-17f2d4486773",
+          "createdAt": "2026-10-21T20:04:28.000Z",
+          "updatedAt": "2026-10-21T20:04:28.000Z",
+          "uid": "35240-71be8bcd-64c5-4517-863e-17f2d4486773"
+        }
+      ],
+      "id": "b87b5280-f132-4995-90cd-60db0bc855d2",
+      "createdAt": "2026-10-21T20:04:28.000Z",
+      "updatedAt": "2026-10-21T20:04:28.000Z",
+      "uid": "35240-b87b5280-f132-4995-90cd-60db0bc855d2"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://drb.coinbase.com/api/v2"
+    }
+  ]
+}

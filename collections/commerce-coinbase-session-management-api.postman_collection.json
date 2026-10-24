@@ -1,0 +1,674 @@
+{
+  "info": {
+    "_postman_id": "0aebddc4-d1ae-4e43-b7f2-b959a1c2665f",
+    "name": "Coinbase Retail Advanced Trade (Deribit) Session Management\u2026",
+    "description": "Coinbase Retail Advanced Trade API for derivatives trading.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:04:21.000Z",
+    "updatedAt": "2026-10-21T20:04:21.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-0aebddc4-d1ae-4e43-b7f2-b959a1c2665f"
+  },
+  "item": [
+    {
+      "name": "private",
+      "item": [
+        {
+          "name": "disable_cancel_on_disconnect",
+          "item": [
+            {
+              "name": "Get private disable cancel on disconnect",
+              "id": "a8061545-1836-4960-bfe8-f605b742115d",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 1569,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/disable_cancel_on_disconnect\",\n        \"params\": {\n          \"scope\": \"account\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/private/disable_cancel_on_disconnect?scope=account",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "private",
+                    "disable_cancel_on_disconnect"
+                  ],
+                  "query": [
+                    {
+                      "description": "Specifies if Cancel On Disconnect change should be applied/checked for the current connection or the account (default - `connection`)<br/><br/> **NOTICE:** Scope `connection` can be used only when working via Websocket.",
+                      "key": "scope",
+                      "value": "account"
+                    }
+                  ]
+                },
+                "description": "Disable Cancel On Disconnect for the connection.\n\nWhen change is applied for the account, then every newly opened connection will start with **inactive** Cancel on Disconnect.\n\n**WebSocket Only:** This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in an error response.\n\nTry in API console"
+              },
+              "response": [
+                {
+                  "id": "54f7e5e9-3d65-496a-ab5d-bd0d9bc6ae9a",
+                  "name": "Success response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 1569,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/disable_cancel_on_disconnect\",\n        \"params\": {\n          \"scope\": \"account\"\n        }\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/private/disable_cancel_on_disconnect?scope=account",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "private",
+                        "disable_cancel_on_disconnect"
+                      ],
+                      "query": [
+                        {
+                          "description": "Specifies if Cancel On Disconnect change should be applied/checked for the current connection or the account (default - `connection`)<br/><br/> **NOTICE:** Scope `connection` can be used only when working via Websocket.",
+                          "key": "scope",
+                          "value": "account"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"result\": \"ok\",\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-21T20:04:22.000Z",
+                  "updatedAt": "2026-10-21T20:04:22.000Z",
+                  "uid": "35240-54f7e5e9-3d65-496a-ab5d-bd0d9bc6ae9a"
+                }
+              ],
+              "createdAt": "2026-10-21T20:04:22.000Z",
+              "updatedAt": "2026-10-21T20:04:22.000Z",
+              "uid": "35240-a8061545-1836-4960-bfe8-f605b742115d"
+            }
+          ],
+          "id": "76417c5a-a707-42a3-b0e5-fa5462d7aee1",
+          "createdAt": "2026-10-21T20:04:22.000Z",
+          "updatedAt": "2026-10-21T20:04:22.000Z",
+          "uid": "35240-76417c5a-a707-42a3-b0e5-fa5462d7aee1"
+        },
+        {
+          "name": "enable_cancel_on_disconnect",
+          "item": [
+            {
+              "name": "Get private enable cancel on disconnect",
+              "id": "f3af76e0-ae4f-4308-89b4-c65e4d76f900",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 7859,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/enable_cancel_on_disconnect\",\n        \"params\": {\n          \"scope\": \"account\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/private/enable_cancel_on_disconnect?scope=account",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "private",
+                    "enable_cancel_on_disconnect"
+                  ],
+                  "query": [
+                    {
+                      "description": "Specifies if Cancel On Disconnect change should be applied/checked for the current connection or the account (default - `connection`)<br/><br/> **NOTICE:** Scope `connection` can be used only when working via Websocket.",
+                      "key": "scope",
+                      "value": "account"
+                    }
+                  ]
+                },
+                "description": "Enable Cancel On Disconnect for the connection. After enabling, all orders created via this connection will be automatically cancelled when the connection is closed.\n\nCancel is triggered in the following cases: when the TCP connection is properly terminated, when the connection is closed due to 10 minutes of inactivity, or when a heartbeat detects a disconnection. To reduce the inactivity timeout, consider using public/set_heartbeat.\n\n**Note:** If the connection is gracefully closed using private/logout, cancel-on-disconnect will **not** be triggered.\n\n**Notice:** Cancel-on-Disconnect does not affect orders created by other connections - they will remain active! When change is applied on the `account` scope, then every newly opened connection will start with **active** Cancel on Disconnect.\n\n**WebSocket Only:** This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in an error response.\n\nTry in API console"
+              },
+              "response": [
+                {
+                  "id": "685e46b2-545d-4429-bfdb-01d2e42679a5",
+                  "name": "Success response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 7859,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/enable_cancel_on_disconnect\",\n        \"params\": {\n          \"scope\": \"account\"\n        }\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/private/enable_cancel_on_disconnect?scope=account",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "private",
+                        "enable_cancel_on_disconnect"
+                      ],
+                      "query": [
+                        {
+                          "description": "Specifies if Cancel On Disconnect change should be applied/checked for the current connection or the account (default - `connection`)<br/><br/> **NOTICE:** Scope `connection` can be used only when working via Websocket.",
+                          "key": "scope",
+                          "value": "account"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"result\": \"ok\",\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-21T20:04:22.000Z",
+                  "updatedAt": "2026-10-21T20:04:22.000Z",
+                  "uid": "35240-685e46b2-545d-4429-bfdb-01d2e42679a5"
+                }
+              ],
+              "createdAt": "2026-10-21T20:04:22.000Z",
+              "updatedAt": "2026-10-21T20:04:22.000Z",
+              "uid": "35240-f3af76e0-ae4f-4308-89b4-c65e4d76f900"
+            }
+          ],
+          "id": "4846b567-1e71-4665-886c-27975ebcf5a1",
+          "createdAt": "2026-10-21T20:04:22.000Z",
+          "updatedAt": "2026-10-21T20:04:22.000Z",
+          "uid": "35240-4846b567-1e71-4665-886c-27975ebcf5a1"
+        },
+        {
+          "name": "get_cancel_on_disconnect",
+          "item": [
+            {
+              "name": "Get private get cancel on disconnect",
+              "id": "ec996934-cd98-448e-b51d-0b07431ca5f6",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 220,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/get_cancel_on_disconnect\",\n        \"params\": {\n          \"scope\": \"account\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/private/get_cancel_on_disconnect?scope=account",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "private",
+                    "get_cancel_on_disconnect"
+                  ],
+                  "query": [
+                    {
+                      "description": "Specifies if Cancel On Disconnect change should be applied/checked for the current connection or the account (default - `connection`)<br/><br/> **NOTICE:** Scope `connection` can be used only when working via Websocket.",
+                      "key": "scope",
+                      "value": "account"
+                    }
+                  ]
+                },
+                "description": "Read current Cancel On Disconnect configuration for the account.\n\nTry in API console"
+              },
+              "response": [
+                {
+                  "id": "4c6f1d15-254e-40ae-9d73-b8b4502198a0",
+                  "name": "Success response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 220,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"private/get_cancel_on_disconnect\",\n        \"params\": {\n          \"scope\": \"account\"\n        }\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/private/get_cancel_on_disconnect?scope=account",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "private",
+                        "get_cancel_on_disconnect"
+                      ],
+                      "query": [
+                        {
+                          "description": "Specifies if Cancel On Disconnect change should be applied/checked for the current connection or the account (default - `connection`)<br/><br/> **NOTICE:** Scope `connection` can be used only when working via Websocket.",
+                          "key": "scope",
+                          "value": "account"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"result\": {\n    \"enabled\": \"<boolean>\",\n    \"scope\": \"account\"\n  },\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-21T20:04:22.000Z",
+                  "updatedAt": "2026-10-21T20:04:22.000Z",
+                  "uid": "35240-4c6f1d15-254e-40ae-9d73-b8b4502198a0"
+                }
+              ],
+              "createdAt": "2026-10-21T20:04:22.000Z",
+              "updatedAt": "2026-10-21T20:04:22.000Z",
+              "uid": "35240-ec996934-cd98-448e-b51d-0b07431ca5f6"
+            }
+          ],
+          "id": "bb7c6bb5-878f-470c-8036-e4ef9ac30b56",
+          "createdAt": "2026-10-21T20:04:22.000Z",
+          "updatedAt": "2026-10-21T20:04:22.000Z",
+          "uid": "35240-bb7c6bb5-878f-470c-8036-e4ef9ac30b56"
+        }
+      ],
+      "id": "292ae1b4-2065-4ae3-8365-d80dd9eca319",
+      "createdAt": "2026-10-21T20:04:22.000Z",
+      "updatedAt": "2026-10-21T20:04:22.000Z",
+      "uid": "35240-292ae1b4-2065-4ae3-8365-d80dd9eca319"
+    },
+    {
+      "name": "public",
+      "item": [
+        {
+          "name": "disable_heartbeat",
+          "item": [
+            {
+              "name": "Get public disable heartbeat",
+              "id": "4c2bdbcc-15f6-46ad-aaee-c663d0b0e82d",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 3562,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"public/disable_heartbeat\",\n        \"params\": {}\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/public/disable_heartbeat",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "public",
+                    "disable_heartbeat"
+                  ]
+                },
+                "description": "Stop sending heartbeat messages. This method takes no parameters.\n\n**WebSocket Only:** This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in an error response.\n\nTry in API console"
+              },
+              "response": [
+                {
+                  "id": "0b328d32-2f06-43ef-89c8-b6caf0f1d647",
+                  "name": "Success response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 3562,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"public/disable_heartbeat\",\n        \"params\": {}\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/public/disable_heartbeat",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "public",
+                        "disable_heartbeat"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"result\": \"ok\",\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-21T20:04:22.000Z",
+                  "updatedAt": "2026-10-21T20:04:22.000Z",
+                  "uid": "35240-0b328d32-2f06-43ef-89c8-b6caf0f1d647"
+                }
+              ],
+              "createdAt": "2026-10-21T20:04:22.000Z",
+              "updatedAt": "2026-10-21T20:04:22.000Z",
+              "uid": "35240-4c2bdbcc-15f6-46ad-aaee-c663d0b0e82d"
+            }
+          ],
+          "id": "239da52f-081d-4753-9b23-b0da9be9f9ea",
+          "createdAt": "2026-10-21T20:04:22.000Z",
+          "updatedAt": "2026-10-21T20:04:22.000Z",
+          "uid": "35240-239da52f-081d-4753-9b23-b0da9be9f9ea"
+        },
+        {
+          "name": "set_heartbeat",
+          "item": [
+            {
+              "name": "Get public set heartbeat",
+              "id": "fc16e3dd-6264-4a1a-8255-4c1b96477496",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 9098,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"public/set_heartbeat\",\n        \"params\": {\n          \"interval\": 30\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/public/set_heartbeat?interval=<number>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "public",
+                    "set_heartbeat"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The heartbeat interval in seconds, but not less than 10",
+                      "key": "interval",
+                      "value": "<number>"
+                    }
+                  ]
+                },
+                "description": "Signals the WebSocket connection to send and request heartbeats. Heartbeats can be used to detect stale connections.\n\nWhen heartbeats have been set up, the API server will send `heartbeat` messages and `test_request` messages. Your software should respond to `test_request` messages by sending a `/api/v2/public/test` request. If your software fails to do so, the API server will immediately close the connection. If your account is configured to cancel on disconnect, any orders opened over the connection will be cancelled.\n\n**WebSocket Only:** This method is designed exclusively for WebSocket connections. Attempting to use it via REST/HTTP will result in an error response.\n\nTry in API console"
+              },
+              "response": [
+                {
+                  "id": "20e4325e-fb9a-4df0-a90e-a4715631302f",
+                  "name": "Success response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 9098,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"public/set_heartbeat\",\n        \"params\": {\n          \"interval\": 30\n        }\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/public/set_heartbeat?interval=<number>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "public",
+                        "set_heartbeat"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The heartbeat interval in seconds, but not less than 10",
+                          "key": "interval",
+                          "value": "<number>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"result\": \"ok\",\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-21T20:04:22.000Z",
+                  "updatedAt": "2026-10-21T20:04:22.000Z",
+                  "uid": "35240-20e4325e-fb9a-4df0-a90e-a4715631302f"
+                }
+              ],
+              "createdAt": "2026-10-21T20:04:22.000Z",
+              "updatedAt": "2026-10-21T20:04:22.000Z",
+              "uid": "35240-fc16e3dd-6264-4a1a-8255-4c1b96477496"
+            }
+          ],
+          "id": "bd36e982-8ee5-4717-a5fb-8c6f97efb403",
+          "createdAt": "2026-10-21T20:04:22.000Z",
+          "updatedAt": "2026-10-21T20:04:22.000Z",
+          "uid": "35240-bd36e982-8ee5-4717-a5fb-8c6f97efb403"
+        }
+      ],
+      "id": "bd713fcd-cb82-4279-9432-3b53e1830bd4",
+      "createdAt": "2026-10-21T20:04:22.000Z",
+      "updatedAt": "2026-10-21T20:04:22.000Z",
+      "uid": "35240-bd713fcd-cb82-4279-9432-3b53e1830bd4"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://drb.coinbase.com/api/v2"
+    }
+  ]
+}

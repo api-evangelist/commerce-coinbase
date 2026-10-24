@@ -1,0 +1,495 @@
+{
+  "info": {
+    "_postman_id": "4ffaad6b-93bf-4527-a9e0-f169b42ae92e",
+    "name": "Coinbase Retail Advanced Trade (Deribit) Supporting API",
+    "description": "Coinbase Retail Advanced Trade API for derivatives trading.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:04:33.000Z",
+    "updatedAt": "2026-10-21T20:04:34.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-4ffaad6b-93bf-4527-a9e0-f169b42ae92e"
+  },
+  "item": [
+    {
+      "name": "public",
+      "item": [
+        {
+          "name": "get_time",
+          "item": [
+            {
+              "name": "Get public get time",
+              "id": "ae69bf12-8400-4228-8251-3d8dede851f7",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 7365,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"public/get_time\",\n        \"params\": {}\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/public/get_time",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "public",
+                    "get_time"
+                  ]
+                },
+                "description": "Retrieves the current time (in milliseconds). This API endpoint can be used to check the clock skew between your software and Deribit's systems.\n\nTry in API console"
+              },
+              "response": [
+                {
+                  "id": "62af2633-76c6-4de9-b444-151aea77e046",
+                  "name": "Success response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 7365,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"public/get_time\",\n        \"params\": {}\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/public/get_time",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "public",
+                        "get_time"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"result\": \"<integer>\",\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-21T20:04:34.000Z",
+                  "updatedAt": "2026-10-21T20:04:34.000Z",
+                  "uid": "35240-62af2633-76c6-4de9-b444-151aea77e046"
+                }
+              ],
+              "createdAt": "2026-10-21T20:04:34.000Z",
+              "updatedAt": "2026-10-21T20:04:34.000Z",
+              "uid": "35240-ae69bf12-8400-4228-8251-3d8dede851f7"
+            }
+          ],
+          "id": "6f0842c3-55c9-4375-8ede-768fb45b170a",
+          "createdAt": "2026-10-21T20:04:34.000Z",
+          "updatedAt": "2026-10-21T20:04:34.000Z",
+          "uid": "35240-6f0842c3-55c9-4375-8ede-768fb45b170a"
+        },
+        {
+          "name": "hello",
+          "item": [
+            {
+              "name": "Get public hello",
+              "id": "2ad029fe-a1ab-42ff-8416-c0e4e22dacce",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 2841,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"public/hello\",\n        \"params\": {\n          \"client_name\": \"My Trading Software\",\n          \"client_version\": \"1.0.2\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/public/hello?client_name=<string>&client_version=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "public",
+                    "hello"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Client software name",
+                      "key": "client_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Client software version",
+                      "key": "client_version",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Method used to introduce the client software connected to Deribit platform over websocket. Provided data may have an impact on the maintained connection and will be collected for internal statistical purposes. In response, Deribit will also introduce itself.\n\nTry in API console"
+              },
+              "response": [
+                {
+                  "id": "335e9cc3-4e3a-46d4-ad6f-df21c56b5ab2",
+                  "name": "Success response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 2841,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"public/hello\",\n        \"params\": {\n          \"client_name\": \"My Trading Software\",\n          \"client_version\": \"1.0.2\"\n        }\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/public/hello?client_name=<string>&client_version=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "public",
+                        "hello"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Client software name",
+                          "key": "client_name",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) Client software version",
+                          "key": "client_version",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"result\": {\n    \"version\": \"<string>\"\n  },\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-21T20:04:34.000Z",
+                  "updatedAt": "2026-10-21T20:04:34.000Z",
+                  "uid": "35240-335e9cc3-4e3a-46d4-ad6f-df21c56b5ab2"
+                }
+              ],
+              "createdAt": "2026-10-21T20:04:34.000Z",
+              "updatedAt": "2026-10-21T20:04:34.000Z",
+              "uid": "35240-2ad029fe-a1ab-42ff-8416-c0e4e22dacce"
+            }
+          ],
+          "id": "bee43103-b7a4-4bc2-8f58-5f3bfe8a8ad9",
+          "createdAt": "2026-10-21T20:04:34.000Z",
+          "updatedAt": "2026-10-21T20:04:34.000Z",
+          "uid": "35240-bee43103-b7a4-4bc2-8f58-5f3bfe8a8ad9"
+        },
+        {
+          "name": "status",
+          "item": [
+            {
+              "name": "Get public status",
+              "id": "1debfab5-4cf0-49cf-94b2-d042897394c8",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 55,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"public/status\",\n        \"params\": {}\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/public/status",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "public",
+                    "status"
+                  ]
+                },
+                "description": "Method used to get information about locked currencies\n\nTry in API console"
+              },
+              "response": [
+                {
+                  "id": "f292afd7-65f3-4bd9-b7f0-e07a2336a212",
+                  "name": "Success response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 55,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"public/status\",\n        \"params\": {}\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/public/status",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "public",
+                        "status"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"result\": {\n    \"locked\": \"<string>\",\n    \"locked_indices\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-21T20:04:34.000Z",
+                  "updatedAt": "2026-10-21T20:04:34.000Z",
+                  "uid": "35240-f292afd7-65f3-4bd9-b7f0-e07a2336a212"
+                }
+              ],
+              "createdAt": "2026-10-21T20:04:34.000Z",
+              "updatedAt": "2026-10-21T20:04:34.000Z",
+              "uid": "35240-1debfab5-4cf0-49cf-94b2-d042897394c8"
+            }
+          ],
+          "id": "a09c0308-726c-4589-8171-b1ec2a5b478f",
+          "createdAt": "2026-10-21T20:04:34.000Z",
+          "updatedAt": "2026-10-21T20:04:34.000Z",
+          "uid": "35240-a09c0308-726c-4589-8171-b1ec2a5b478f"
+        },
+        {
+          "name": "test",
+          "item": [
+            {
+              "name": "Get public test",
+              "id": "2b5294fe-ef00-44b7-8fdf-aaba948d644c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 8212,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"public/test\",\n        \"params\": {}\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/public/test?expected_result=exception",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "public",
+                    "test"
+                  ],
+                  "query": [
+                    {
+                      "description": "The value \"exception\" will trigger an error response. This may be useful for testing wrapper libraries.",
+                      "key": "expected_result",
+                      "value": "exception"
+                    }
+                  ]
+                },
+                "description": "Tests the connection to the API server, and returns its version. You can use this to make sure the API is reachable, and matches the expected version.\n\nTry in API console"
+              },
+              "response": [
+                {
+                  "id": "b6b8df4f-03e2-4d58-9bf7-b28f58074027",
+                  "name": "Success response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"examples\": {\n    \"request\": {\n      \"description\": \"JSON-RPC Request Example\",\n      \"value\": {\n        \"id\": 8212,\n        \"jsonrpc\": \"2.0\",\n        \"method\": \"public/test\",\n        \"params\": {}\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/public/test?expected_result=exception",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "public",
+                        "test"
+                      ],
+                      "query": [
+                        {
+                          "description": "The value \"exception\" will trigger an error response. This may be useful for testing wrapper libraries.",
+                          "key": "expected_result",
+                          "value": "exception"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"result\": {\n    \"version\": \"<string>\"\n  },\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"<integer>\"\n}",
+                  "createdAt": "2026-10-21T20:04:34.000Z",
+                  "updatedAt": "2026-10-21T20:04:34.000Z",
+                  "uid": "35240-b6b8df4f-03e2-4d58-9bf7-b28f58074027"
+                }
+              ],
+              "createdAt": "2026-10-21T20:04:34.000Z",
+              "updatedAt": "2026-10-21T20:04:34.000Z",
+              "uid": "35240-2b5294fe-ef00-44b7-8fdf-aaba948d644c"
+            }
+          ],
+          "id": "71199b91-db51-43bd-a346-9aa957cfe260",
+          "createdAt": "2026-10-21T20:04:34.000Z",
+          "updatedAt": "2026-10-21T20:04:34.000Z",
+          "uid": "35240-71199b91-db51-43bd-a346-9aa957cfe260"
+        }
+      ],
+      "id": "a114f299-5e4f-481f-a01c-326a4ce5462d",
+      "createdAt": "2026-10-21T20:04:34.000Z",
+      "updatedAt": "2026-10-21T20:04:34.000Z",
+      "uid": "35240-a114f299-5e4f-481f-a01c-326a4ce5462d"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://drb.coinbase.com/api/v2"
+    }
+  ]
+}
